@@ -1,0 +1,357 @@
+local HttpService = cloneref(game:GetService("HttpService"))
+local TeleportService = cloneref(game:GetService("TeleportService"))
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local VirtualUser = game:GetService("VirtualUser")
+local httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+local JobId = game.JobId
+local PlaceId = game.PlaceId
+local queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+
+-- IMAGE BUILDER
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Build A Boat For Treasure",
+    Icon = 85108798400826, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+    LoadingTitle = "Build A Boat For Treasure",
+    LoadingSubtitle = "Made With ❤️ by @thereal_asu",
+    Theme = "DarkBlue", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+ 
+    DisableRayfieldPrompts = false,
+    DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+ 
+    ConfigurationSaving = {
+       Enabled = false,
+       FolderName = nil, -- Create a custom folder for your hub/game
+       FileName = "Big Hub"
+    },
+ 
+    Discord = {
+       Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+       Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+ 
+    KeySystem = false, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "Untitled",
+       Subtitle = "Key System",
+       Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+    }
+}) -- 124144713366592
+
+local Global = Window:CreateTab("Global", 125428076789049)
+local ImageLoader = Window:CreateTab("Image Loader", 91865122737183)
+local AutoBuild = Window:CreateTab("Auto Build", 128207976113050)
+local BlockNeeded = Window:CreateTab("Block Needed", 138460602231983)
+local Information = Window:CreateTab("Information", 84130531909418)
+local Credit = Window:CreateTab("Credit", 103654977021797)
+local Label = Global:CreateLabel("Executing the script twice can make mistakes, consider re-joining if there are any problems", 134637165939940, Color3.fromRGB(204, 156, 0), true)
+
+local Section = Credit:CreateSection("Discord")
+local Section = Information:CreateSection("Discord")
+
+local Button = Credit:CreateButton({
+    Name = "Join the Community!",
+    Callback = function()
+        setclipboard("https://discord.gg/zrAB2m5gvz")
+        Rayfield:Notify({
+            Title = "Copied!",
+            Content = "the discord link has been successfully copied to the clipboard",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
+    end,
+ })
+
+ local Label = AutoBuild:CreateLabel("Comming Soon", 90856510472618, Color3.fromRGB(255, 255, 255), false)
+
+ local qzdqzd = Global:CreateDivider()
+local yjdtjf = Global:CreateButton({
+    Name = "Destroy Script",
+    Callback = function()
+        Rayfield:Destroy()
+    end,
+ })
+
+ local Section = Credit:CreateSection("Owner")
+
+local Labeld = Credit:CreateLabel("Owner: @thereal_asu", 93981953300699, Color3.fromRGB(255, 255, 255), true)
+
+local Paragraph = Credit:CreateParagraph({Title = "About this script", Content = "This script is one of my projects that I'm taking time to make, I'm leaving it open source to allow people to check if this script is trusted, but also to let people learn the different techniques used in this script to do specific things. Please don't be a bad “skid” and credit me if you use this script to create your own script. It's ok to copy and paste my work for your script or improve my script to your own style, to suggest different versions of it, but please respect me, respect my work and have fun."})
+
+ local aButton = Information:CreateButton({
+    Name = "Join the Community!",
+    Callback = function()
+        setclipboard("https://discord.gg/zrAB2m5gvz")
+        Rayfield:Notify({
+            Title = "Copied!",
+            Content = "the discord link has been successfully copied to the clipboard",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
+    end,
+ })
+
+local player = game.Players.LocalPlayer
+
+local characterConnection
+local connection
+
+local function enableAntiAFK()
+    if not connection then
+        connection = player.Idled:Connect(function()
+            if getgenv().afk6464 then
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new())
+            end
+        end)
+    end
+end
+
+local function disableAntiAFK()
+    if connection then
+        connection:Disconnect()
+        connection = nil
+    end
+end
+
+local function loop()
+    while true do
+        if getgenv().afk6464 then
+            enableAntiAFK()
+        else
+            disableAntiAFK()
+        end
+        wait(1)
+    end
+end
+
+spawn(loop)
+
+local Section = Global:CreateSection("Utilities")
+local Toggle = Global:CreateToggle({
+    Name = "Anti-Afk",
+    CurrentValue = false,
+    Flag = "",
+    Callback = function(Value)
+        getgenv().afk6464 = Value
+    end,
+})
+
+local Button = Global:CreateButton({
+    Name = "Load Infinite Yield",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    end,
+})
+
+local Button = Global:CreateButton({ -- From IY
+    Name = "Rejoin",
+    Callback = function()
+        Rayfield:Notify({
+            Title = "Rejoin",
+            Content = "hold on a sec",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
+         wait(0.2)
+        if #Players:GetPlayers() <= 1 then
+            Players.LocalPlayer:Kick("\nRejoining...")
+            wait()
+            TeleportService:Teleport(PlaceId, Players.LocalPlayer)
+        else
+            TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
+        end
+    end,
+})
+
+local Button = Global:CreateButton({ -- From IY by IY devs and NoobSploit
+    Name = "Server Hop",
+    Callback = function()
+        if httprequest then
+            Rayfield:Notify({
+                Title = "Server Hop",
+                Content = "hold on a sec",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
+             wait(0.2)
+            local servers = {}
+            local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", PlaceId)})
+            local body = HttpService:JSONDecode(req.Body)
+
+            if body and body.data then
+                for i, v in next, body.data do
+                    if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= JobId then
+                        table.insert(servers, 1, v.id)
+                    end
+                end
+            end
+
+            if #servers > 0 then
+                TeleportService:TeleportToPlaceInstance(PlaceId, servers[math.random(1, #servers)], Players.LocalPlayer)
+            else
+                Rayfield:Notify({
+                    Title = "Error",
+                    Content = "Couldn't find a server.",
+                    Duration = 6.5,
+                    Image = 124144713366592,
+                 })
+            end
+        end
+    end,
+})
+
+local Section = Global:CreateSection("Auto Farm - The most powerful one")
+local AutoFarm1 = Global:CreateToggle({
+    Name = "Auto Farm",
+    CurrentValue = false,
+    Flag = "",
+    Callback = function(Value)
+        getgenv().AF = Value
+        local isFarming = false
+
+        local function startAutoFarm()
+            if Value == false then return end
+
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+            local newPart = Instance.new("Part")
+            newPart.Size = Vector3.new(5, 1, 5)
+            newPart.Transparency = 1
+            newPart.CanCollide = true
+            newPart.Anchored = true
+            newPart.Parent = workspace
+
+            local decal = Instance.new("Decal")
+            decal.Texture = "rbxassetid://139953968294114"
+            decal.Face = Enum.NormalId.Top 
+            decal.Parent = newPart
+
+            local function teleportAndMovePart(iteration)
+                if Value == false then return end
+                if iteration == 5 then
+                    humanoidRootPart.CFrame = CFrame.new(-55.34379959106445, -362.25067138671875, 9487.841796875)
+                    wait(0.2)
+                    humanoidRootPart.CFrame = CFrame.new(-51, 65, 984 + (iteration - 1) * 770)
+                else
+                    humanoidRootPart.CFrame = CFrame.new(-51, 65, 984 + (iteration - 1) * 770)
+                end
+                newPart.Position = humanoidRootPart.Position - Vector3.new(0, 2, 0)
+
+                wait(2.3) -- if lower, it can't work every time
+
+                if iteration == 3 or iteration == 4 then
+                else
+                    workspace.ClaimRiverResultsGold:FireServer()
+                end
+            end
+
+            for i = 1, 10 do
+                if not Value then
+                    break
+                end
+                teleportAndMovePart(i)
+            end
+
+            newPart:Destroy()
+        end
+
+                local function onCharacterRespawned()
+                    if getgenv().AF == true then
+                    local player = game.Players.LocalPlayer
+                    local character = player.Character or player.CharacterAdded:Wait()
+                    character:WaitForChild("HumanoidRootPart")
+
+                    startAutoFarm()
+                    end
+                end
+
+        if Value then
+            Rayfield:Notify({
+                Title = "Auto Farm - enabled",
+                Content = "Isolation mode and Anti-afk is recommended",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
+            game.Players.LocalPlayer.Character:BreakJoints()
+            wait(1)
+            game.Players.LocalPlayer.CharacterAdded:Connect(onCharacterRespawned)
+        else
+            Rayfield:Notify({
+                Title = "Auto Farm - disabled",
+                Content = "Please, wait for the iteration to finish...",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
+            game.Players.LocalPlayer.CharacterAdded:Connect(function() end)
+        end
+    end,
+})
+
+local FStats = Global:CreateParagraph({Title = "Stats", Content = "Elapsed time: -".."\n".."GoldBlock Gained: -".."\n".."Gold Gained: -".."\n".."GoldBlock Gained: -".."\n".."Gold per hour: -"})
+
+local clockTime = 0
+local running = false
+local totalGoldGained = 0
+local lastGoldValue = game:GetService("Players").LocalPlayer.Data.Gold.Value
+local IGBLOCK = game:GetService("Players").LocalPlayer.Data.GoldBlock.Value
+
+local function formatTime(seconds)
+    local hours = math.floor(seconds / 3600)
+    local minutes = math.floor((seconds % 3600) / 60)
+    local sec = seconds % 60
+    return hours .. " hours " .. minutes .. " minutes " .. sec .. " seconds"
+end
+
+local function startClock()
+    if running then return end
+    running = true
+
+    while running do
+        if getgenv().AF then
+            clockTime = clockTime + 1
+        else
+            running = false
+        end
+        wait(1) 
+    end
+end
+
+game:GetService("RunService").Stepped:Connect(function()
+    if getgenv().AF and not running then
+        startClock()
+    end
+end)
+
+while true do
+    local FinalGold = game:GetService("Players").LocalPlayer.Data.Gold.Value
+    local Ftime = formatTime(clockTime)
+    local GoldGained = FinalGold - lastGoldValue
+    totalGoldGained = totalGoldGained + GoldGained
+    local FGBLOCK = game:GetService("Players").LocalPlayer.Data.GoldBlock.Value
+    local totalGoldBlock = FGBLOCK - IGBLOCK
+
+    local GoldPerHour = (totalGoldGained / clockTime) * 3600
+
+    FStats:Set({
+        Title = "Stats",
+        Content = "Elapsed time: " .. Ftime .. "\n" ..
+                  "GoldBlock Gained: " .. totalGoldBlock .. "\n" ..
+                  "Gold Gained: " .. totalGoldGained .. "\n" ..
+                  "Gold per hour: " .. math.floor(GoldPerHour),
+    })
+
+    lastGoldValue = FinalGold
+
+    wait(1)
+end
+-- queueteleport("-")
