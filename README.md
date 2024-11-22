@@ -5,4 +5,5 @@
 - Steal Build (wip)
 
 ```lua
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))()
 ```
