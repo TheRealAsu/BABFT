@@ -27,40 +27,41 @@ local httprequest = (syn and syn.request) or (http and http.request) or http_req
 local JobId = game.JobId
 local PlaceId = game.PlaceId
 local queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+local RunService = game:GetService("RunService")
 
 local Window = Rayfield:CreateWindow({
     Name = "Build A Boat For Treasure",
-    Icon = 85108798400826, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+    Icon = 85108798400826,
     LoadingTitle = "Build A Boat For Treasure",
     LoadingSubtitle = "Made With ❤️ by @thereal_asu",
-    Theme = "DarkBlue", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+    Theme = "DarkBlue",
  
     DisableRayfieldPrompts = false,
-    DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+    DisableBuildWarnings = false,
  
     ConfigurationSaving = {
        Enabled = false,
-       FolderName = nil, -- Create a custom folder for your hub/game
+       FolderName = nil,
        FileName = "Big Hub"
     },
  
     Discord = {
-       Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
-       Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+       Enabled = false,
+       Invite = "noinvitelink",
+       RememberJoins = true
     },
  
-    KeySystem = false, -- Set this to true to use our key system
+    KeySystem = false,
     KeySettings = {
        Title = "Untitled",
        Subtitle = "Key System",
-       Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
-       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-       Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+       Note = "No method of obtaining the key is provided",
+       FileName = "Key",
+       SaveKey = true,
+       GrabKeyFromSite = false,
+       Key = {"Hello"}
     }
-}) -- 124144713366592
+})
 
 local Global = Window:CreateTab("Global", 125428076789049)
 local ImageLoader = Window:CreateTab("Image Loader", 91865122737183)
@@ -127,6 +128,12 @@ local connection
 
 local function enableAntiAFK()
     if not connection then
+        Rayfield:Notify({
+            Title = "Anti-Afk | ON",
+            Content = "you won't get kicked after 20 minutes of inactivity",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
         connection = player.Idled:Connect(function()
             if getgenv().afk6464 then
                 VirtualUser:CaptureController()
@@ -140,6 +147,12 @@ local function disableAntiAFK()
     if connection then
         connection:Disconnect()
         connection = nil
+        Rayfield:Notify({
+            Title = "Anti-Afk | OFF",
+            Content = "you will be kicked after 20 minutes of inactivity",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
     end
 end
 
@@ -230,7 +243,6 @@ local Button = Global:CreateButton({ -- From IY by IY devs and NoobSploit
     end,
 })
 
--- AT THE END
 local Section = Global:CreateSection("Auto Farm - The most powerful one")
 local AutoFarm1 = Global:CreateToggle({
     Name = "Auto Farm",
@@ -417,7 +429,7 @@ function SendMessageEMBED(url, embed)
 end
 
 local WebHook = "a"
-local interval = 1800  -- Temps entre les messages (par défaut 1800 secondes)
+local interval = 1800
 
 function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
     local embed = {
@@ -517,8 +529,8 @@ local function updateImageFiles()
 end
 
 local Label = ImageLoader:CreateLabel("Please refer to the Information tab to use this feature", 134637165939940, Color3.fromRGB(204, 156, 0), true)
-local Label = ImageLoader:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
 
+--[[
 local Dropdownimg = ImageLoader:CreateDropdown({
     Name = "Files",
     Options = ImageFiles,
@@ -529,56 +541,386 @@ local Dropdownimg = ImageLoader:CreateDropdown({
         print(Options)
     end,
  })
+--]]
 
- local Toggle = ImageLoader:CreateToggle({
+local function LPTEAM()
+local teamName = player.Team.Name
+
+local zoneMapping = {
+    black = "BlackZone",
+    blue = "Really blueZone",
+    green = "CamoZone",
+    red = "Really redZone",
+    white = "WhiteZone",
+    yellow = "New YellerZone"
+}
+
+local selectedZoneName = zoneMapping[teamName]
+
+if selectedZoneName then
+    local zone = workspace:FindFirstChild(selectedZoneName)
+    if zone then
+        return zone.position + Vector3.new(-100, 150, 0)
+    else
+        print("Zone not found in workspace for:" .. selectedZoneName)
+    end
+else
+    print("Error: No Team")
+end
+
+end
+
+local imagePreviewFolder = workspace:FindFirstChild("ImagePreview") or Instance.new("Folder")
+imagePreviewFolder.Name = "ImagePreview"
+imagePreviewFolder.Parent = workspace
+
+local BlockType = "PlasticBlock"
+local blockSize = 1
+local startPosition = nil
+local PreviewPart = nil
+local kflxjdhgw = nil
+local currentConnection = nil
+local folderName = "ImagePreview"
+local FileImage = nil
+local HalfblockSize = blockSize / 2
+local cooloffset = Vector3.new(0, 0, 0)
+local Unit = 45
+local Bdepth = 1
+local ImgCenterimage = nil
+local Brainrot = 0
+local rotationCFrame = CFrame.Angles(0, 0, 0)
+local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
+previewFolder.Name = folderName
+
+local function readFile(filePath)
+    if not isfile(filePath) then
+        warn("Fichier introuvable: " .. filePath)
+        return nil
+    end
+    return readfile(filePath)
+end
+
+local function parseColors(fileContent)
+    local data = {}
+    for value in string.gmatch(fileContent, "[^,]+") do
+        value = value:match("^%s*(.-)%s*$")
+        table.insert(data, tonumber(value) or value)
+    end
+    return data
+end
+
+local function calculateFrameSize(data)
+    local width = 0
+    local height = 0
+    local currentWidth = 0
+
+    for i = 1, #data, 3 do
+        local r, g, b = data[i], data[i + 1], data[i + 2]
+
+        if r == "B" and g == "B" and b == "B" then
+            height += 1
+            width = math.max(width, currentWidth)
+            currentWidth = 0
+        elseif r == "R" and g == "R" and b == "R" then
+            currentWidth += 1
+        elseif type(r) == "number" and type(g) == "number" and type(b) == "number" then
+            currentWidth += 1
+        end
+    end
+    height += 1
+    width = math.max(width, currentWidth)
+    return Vector3.new(width * blockSize, height * blockSize, Bdepth)
+end
+
+local function previewFrame(frameSize, position, blockSize)
+    startPosition = LPTEAM()
+    if PreviewPart then
+        PreviewPart:Destroy()
+        PreviewPart = nil
+    end
+
+    PreviewPart = Instance.new("Part")
+    PreviewPart.Size = frameSize
+    PreviewPart.Position = position + Vector3.new(HalfblockSize - blockSize + frameSize.X / 2, HalfblockSize + blockSize - frameSize.Y / 2, 0) + cooloffset
+    PreviewPart.Transparency = 1
+    PreviewPart.Color = Color3.new(1, 1, 1)
+    PreviewPart.Anchored = true
+    PreviewPart.CanCollide = false
+    PreviewPart.Name = "PreviewSize"
+    PreviewPart.Parent = previewFolder
+
+    local textureId = "rbxassetid://133978572926918"
+
+    local function applyTextureToSurface(surface, sizeX, sizeY)
+        local texture = Instance.new("Texture")
+        texture.Texture = textureId
+        texture.Face = surface
+        texture.Parent = PreviewPart
+        texture.StudsPerTileU = blockSize
+        texture.StudsPerTileV = blockSize
+        texture.Transparency = 0.2
+    end
+
+    applyTextureToSurface(Enum.NormalId.Front, frameSize.X, frameSize.Y)
+    applyTextureToSurface(Enum.NormalId.Back, frameSize.X, frameSize.Y)
+    applyTextureToSurface(Enum.NormalId.Left, frameSize.Z, frameSize.Y)
+    applyTextureToSurface(Enum.NormalId.Right, frameSize.Z, frameSize.Y)
+    applyTextureToSurface(Enum.NormalId.Top, frameSize.X, frameSize.Z)
+    applyTextureToSurface(Enum.NormalId.Bottom, frameSize.X, frameSize.Z)
+end
+
+local function Centerimage(frameSize, position, blockSize)
+    startPosition = LPTEAM()
+    if kflxjdhgw then
+        kflxjdhgw:Destroy()
+        kflxjdhgw = nil
+    end
+
+    kflxjdhgw = Instance.new("Part")
+    kflxjdhgw.Size = frameSize
+    kflxjdhgw.Position = position + Vector3.new(HalfblockSize - blockSize + frameSize.X / 2, HalfblockSize + blockSize - frameSize.Y / 2, 0) + cooloffset
+    kflxjdhgw.Transparency = 1
+    kflxjdhgw.Color = Color3.new(1, 1, 1)
+    kflxjdhgw.Anchored = true
+    kflxjdhgw.CanCollide = false
+    kflxjdhgw.Name = "Centerimage"
+    kflxjdhgw.Parent = previewFolder
+    return kflxjdhgw.Position
+end
+
+local function buildImage(data, blockSize)
+    local filePath = "BABFT/Image/" .. (FileImage or "default.txt")
+    local fileContent = readFile(filePath)
+    local data = parseColors(fileContent)
+    local frameSize = calculateFrameSize(data)
+    startPosition = LPTEAM() + cooloffset
+    ImgCenterimage = Centerimage(frameSize, startPosition, blockSize)
+
+    local currentX = startPosition.X
+    local currentY = startPosition.Y
+    local currentZ = startPosition.Z
+    local initialX = startPosition.X
+    local dataIndex = 1
+    local batchSize = 750
+
+    if currentConnection then
+        currentConnection:Disconnect()
+    end
+
+    currentConnection = RunService.Heartbeat:Connect(function()
+        local finished = false
+        for _ = 1, batchSize do
+            if dataIndex > #data then
+                finished = true
+                break
+            end
+
+            local r, g, b = data[dataIndex], data[dataIndex + 1], data[dataIndex + 2]
+            if r == "B" and g == "B" and b == "B" then
+                currentX = initialX
+                currentY = currentY - blockSize
+            elseif r == "R" and g == "R" and b == "R" then
+                currentX = currentX + blockSize
+            elseif type(r) == "number" and type(g) == "number" and type(b) == "number" then
+                local block = Instance.new("Part")
+                block.Size = Vector3.new(blockSize, blockSize, Bdepth)
+                print(Bdepth)
+                block.Position = Vector3.new(currentX, currentY, currentZ)
+                block.Color = Color3.fromRGB(r, g, b)
+                block.Anchored = true
+                block.Material = "SmoothPlastic"
+                block.Parent = previewFolder
+                block.CastShadow = false
+                --block.CFrame = Brainrot TO FIX TO FIX TO FIX TO FIX TO FIX TO FIX TO FIX TO FIX TO FIX 
+
+                currentX = currentX + blockSize
+            end
+
+            dataIndex += 3
+        end
+
+        if finished then
+            currentConnection:Disconnect()
+            currentConnection = nil
+        end
+    end)
+end
+
+local Input = ImageLoader:CreateInput({
+    Name = "File",
+    CurrentValue = "",
+    PlaceholderText = "File name",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Text)
+        cooloffset = Vector3.new(0, 0, 0)
+        Brainrot = 0
+        rotationCFrame = CFrame.Angles(0, 0, 0)
+        local fileName = Text .. ".txt"
+        local filePath = "BABFT/Image/" .. fileName
+
+        if isfile(filePath) then
+            FileImage = fileName
+            Rayfield:Notify({
+                Title = "Success!",
+                Content = "file: "..fileName.." found!",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
+        else
+            FileImage = nil
+            Rayfield:Notify({
+                Title = "Error | File not found",
+                Content = "Make sure the file"..fileName.." exists, don't put '.txt' in the TextBox",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
+        end
+    end,
+})
+
+local TogglePreview = ImageLoader:CreateToggle({
     Name = "Preview",
     CurrentValue = false,
-    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
     Callback = function(Value)
-    -- The function that takes place when the toggle is pressed
-    -- The variable (Value) is a boolean on whether the toggle is true or false
+        if Value then
+            local filePath = "BABFT/Image/" .. (FileImage or "default.txt")
+            local fileContent = readFile(filePath)
+            if not fileContent then return end
+
+            local data = parseColors(fileContent)
+            buildImage(data, blockSize)
+        else
+            for _, skibidi in ipairs(previewFolder:GetChildren()) do
+                if skibidi.Name ~= "PreviewSize" then
+                    skibidi:Destroy()
+                end
+            end
+        end
     end,
- })
+})
+
+local ToggleGrid = ImageLoader:CreateToggle({
+    Name = "Grid",
+    CurrentValue = false,
+    Callback = function(Value)
+        if Value then
+            local filePath = "BABFT/Image/" .. (FileImage or "default.txt")
+            local fileContent = readFile(filePath)
+            if not fileContent then return end
+
+            local data = parseColors(fileContent)
+            local frameSize = calculateFrameSize(data)
+            startPosition = LPTEAM()
+            previewFrame(frameSize, startPosition, blockSize)
+        else
+            if PreviewPart then
+                PreviewPart:Destroy()
+                PreviewPart = nil
+            else
+                Rayfield:Notify({
+                    Title = "Error",
+                    Content = "No file or invalid file",
+                    Duration = 6.5,
+                    Image = 124144713366592,
+                 })
+            end
+        end
+    end,
+})
 
  local Divider = ImageLoader:CreateDivider()
 
  local Section = ImageLoader:CreateSection("modifiers")
- 
+
  local Dropdown = ImageLoader:CreateDropdown({
     Name = "Block Type",
-    Options = {"WoodBlock","Option 2"},
-    CurrentOption = {"WoodBlock"},
+    Options = {
+        "BrickBlock", 
+        "CoalBlock", 
+        "ConcreteBlock", 
+        "FabricBlock", 
+        "GlassBlock", 
+        "GoldBlock", 
+        "GrassBlock", 
+        "IceBlock", 
+        "MarbleBlock", 
+        "MetalBlock", 
+        "NeonBlock", 
+        "ObsidianBlock", 
+        "PlasticBlock", 
+        "RustedBlock", 
+        "SmoothWoodBlock", 
+        "StoneBlock", 
+        "TitaniumBlock", 
+        "ToyBlock", 
+        "WoodBlock"
+    },
+    CurrentOption = {"PlasticBlock"},
     MultipleOptions = false,
-    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Flag = "",
     Callback = function(Options)
-    -- The function that takes place when the selected option is changed
-    -- The variable (Options) is a table of strings for the current selected options
+        local BlockType = Options[1]
+        print(BlockType)
     end,
- })
+})
 
  local Slider = ImageLoader:CreateSlider({
     Name = "Move",
-    Range = {0, 90},
-    Increment = 1,
+    Range = {0, 100},
+    Increment = 0.1,
     Suffix = "stud",
     CurrentValue = 45,
-    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Flag = "",
     Callback = function(Value)
-    -- The function that takes place when the slider changes
-    -- The variable (Value) is a number which correlates to the value the slider is currently at
+        Unit = Value
     end,
  })
 
- local Slider = ImageLoader:CreateSlider({
+local originalCFrames = {}
+
+local Input = ImageLoader:CreateInput({
     Name = "Rotate",
-    Range = {0, 360},
-    Increment = 1,
-    Suffix = "degree",
-    CurrentValue = 0,
-    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-    Callback = function(Value)
-    -- The function that takes place when the slider changes
-    -- The variable (Value) is a number which correlates to the value the slider is currently at
+    CurrentValue = "0",
+    PlaceholderText = "0 - 360",
+    RemoveTextAfterFocusLost = false,
+    Flag = "",
+    Callback = function(Text)
+        local angleY = tonumber(Text)
+        local centerImage = workspace.ImagePreview.Centerimage
+        local centerCFrame = centerImage.CFrame
+        rotationCFrame = CFrame.Angles(0, math.rad(angleY), 0)
+
+        Brainrot = centerCFrame * rotationCFrame
+
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            if skibidi:IsA("BasePart") and skibidi ~= centerImage then
+                if not originalCFrames[skibidi] then
+                    originalCFrames[skibidi] = skibidi.CFrame
+                end
+
+                local originalCFrame = originalCFrames[skibidi]
+                local relativeCFrame = centerCFrame:ToObjectSpace(originalCFrame)
+
+                local newCFrame = centerCFrame * rotationCFrame * relativeCFrame
+
+                skibidi.CFrame = newCFrame
+            end
+        end
+    end,
+})
+
+ local Input = ImageLoader:CreateInput({
+    Name = "Block Depth",
+    CurrentValue = "1",
+    PlaceholderText = "Value",
+    RemoveTextAfterFocusLost = false,
+    Flag = "",
+    Callback = function(Text)
+        Bdepth = tonumber(Text)
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            skibidi.Size = Vector3.new(skibidi.Size.X, skibidi.Size.Y, Bdepth)
+            end
     end,
  })
 
@@ -588,42 +930,75 @@ local Dropdownimg = ImageLoader:CreateDropdown({
     Increment = 0.1,
     Suffix = "x",
     CurrentValue = 1,
-    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Flag = "",
     Callback = function(Value)
-    -- The function that takes place when the slider changes
-    -- The variable (Value) is a number which correlates to the value the slider is currently at
+        blockSize = Value
     end,
  })
 
  local Button = ImageLoader:CreateButton({
-    Name = "Move Left",
+    Name = "Move +X",
     Callback = function()
-    -- The function that takes place when the button is pressed
+    for _, skibidi in ipairs(previewFolder:GetChildren()) do
+        skibidi.Position = skibidi.Position + Vector3.new(Unit, 0, 0)
+        end
+        cooloffset = cooloffset + Vector3.new(Unit, 0, 0)
     end,
  })
 
  local Button = ImageLoader:CreateButton({
-    Name = "Move Right",
+    Name = "Move -X",
     Callback = function()
-    -- The function that takes place when the button is pressed
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            skibidi.Position = skibidi.Position + Vector3.new(-Unit, 0, 0)
+            end
+            cooloffset = cooloffset + Vector3.new(-Unit, 0, 0)
     end,
  })
 
  local Button = ImageLoader:CreateButton({
-    Name = "Move Forward",
+    Name = "Move +Y",
     Callback = function()
-    -- The function that takes place when the button is pressed
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            skibidi.Position = skibidi.Position + Vector3.new(0, Unit, 0)
+            end
+            cooloffset = cooloffset + Vector3.new(0, Unit, 0)
     end,
  })
 
  local Button = ImageLoader:CreateButton({
-    Name = "Move BackWard",
+    Name = "Move -Y",
     Callback = function()
-    -- The function that takes place when the button is pressed
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            skibidi.Position = skibidi.Position + Vector3.new(0, -Unit, 0)
+            end
+            cooloffset = cooloffset + Vector3.new(0, -Unit, 0)
     end,
  })
 
- local Divider = ImageLoader:CreateDivider()
+ local Button = ImageLoader:CreateButton({
+    Name = "Move +Z",
+    Callback = function()
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            skibidi.Position = skibidi.Position + Vector3.new(0, 0, Unit)
+            end
+            cooloffset = cooloffset + Vector3.new(0, 0, Unit)
+    end,
+ })
+
+ local Button = ImageLoader:CreateButton({
+    Name = "Move -Z",
+    Callback = function()
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            skibidi.Position = skibidi.Position + Vector3.new(0, 0, -Unit)
+            end
+            cooloffset = cooloffset + Vector3.new(0, 0, -Unit)
+    end,
+ })
+
+local Divider = ImageLoader:CreateDivider()
+
+ local Label = ImageLoader:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
 
  local Toggle = ImageLoader:CreateToggle({
     Name = "Safe Mode",
@@ -646,7 +1021,6 @@ local Dropdownimg = ImageLoader:CreateDropdown({
         wait(1)
     end
 end
-
 
 --AUTO BUILD
 local Label = AutoBuild:CreateLabel("Please refer to the Information tab to use this feature", 134637165939940, Color3.fromRGB(204, 156, 0), true)
@@ -731,12 +1105,8 @@ local Dropdown = AutoBuild:CreateDropdown({
 
  local Paragraph = BlockNeeded:CreateParagraph({Title = "nothing at the moment", Content = "this tab will show you the blocks you need to make an image or load a build"})
 
--- Initit
---SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
+-- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))())
 
+-- Initi
 initclock()
 initimgfiles()
-
-
-
--- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))())
