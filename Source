@@ -1,3 +1,23 @@
+---@diagnostic disable: undefined-global
+
+if game.PlaceId ~= 537413528 then
+    return
+end
+
+if not isfolder("BABFT") then
+    makefolder("BABFT")
+end
+
+if not isfolder("BABFT/Image") then
+    makefolder("BABFT/Image")
+end
+
+if not isfolder("BABFT/Build") then
+    makefolder("BABFT/Build")
+end
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
 local HttpService = cloneref(game:GetService("HttpService"))
 local TeleportService = cloneref(game:GetService("TeleportService"))
 local Players = game:GetService("Players")
@@ -7,9 +27,6 @@ local httprequest = (syn and syn.request) or (http and http.request) or http_req
 local JobId = game.JobId
 local PlaceId = game.PlaceId
 local queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
-
--- IMAGE BUILDER
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
     Name = "Build A Boat For Treasure",
@@ -69,8 +86,6 @@ local Button = Credit:CreateButton({
     end,
  })
 
- local Label = AutoBuild:CreateLabel("Comming Soon", 90856510472618, Color3.fromRGB(255, 255, 255), false)
-
  local qzdqzd = Global:CreateDivider()
 local yjdtjf = Global:CreateButton({
     Name = "Destroy Script",
@@ -79,7 +94,7 @@ local yjdtjf = Global:CreateButton({
     end,
  })
 
- local Section = Credit:CreateSection("Owner")
+local Section = Credit:CreateSection("Owner")
 
 local Labeld = Credit:CreateLabel("Owner: @thereal_asu", 93981953300699, Color3.fromRGB(255, 255, 255), true)
 
@@ -97,6 +112,13 @@ local Paragraph = Credit:CreateParagraph({Title = "About this script", Content =
          })
     end,
  })
+
+local Section = Information:CreateSection("Auto Farm")
+local Paragraph = Information:CreateParagraph({Title = "Information", Content = "I think this is the most efficient auto farm in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 20K/hour\n - With x1.25: 25K/hour\n - With x2: 40K/hour\n - With Both: 50k/hour"})
+local Section = Information:CreateSection("Image Loader")
+local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "images are created from files that contain special data, to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down loading speed.\n\n- Preview: displays a preview of the image, making it easier to use modifiers or to see how the image will look."})
+local Section = Information:CreateSection("Auto Build")
+local Paragraph = Information:CreateParagraph({Title = "Information", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down loading speed.\n\n - Preview: displays a preview of the build."})
 
 local player = game.Players.LocalPlayer
 
@@ -208,6 +230,7 @@ local Button = Global:CreateButton({ -- From IY by IY devs and NoobSploit
     end,
 })
 
+-- AT THE END
 local Section = Global:CreateSection("Auto Farm - The most powerful one")
 local AutoFarm1 = Global:CreateToggle({
     Name = "Auto Farm",
@@ -297,11 +320,14 @@ local AutoFarm1 = Global:CreateToggle({
     end,
 })
 
-local FStats = Global:CreateParagraph({Title = "Stats", Content = "Elapsed time: -".."\n".."GoldBlock Gained: -".."\n".."Gold Gained: -".."\n".."GoldBlock Gained: -".."\n".."Gold per hour: -"})
+local FStats = Global:CreateParagraph({Title = "Stats", Content = "Elapsed time: -".."\n".."GoldBlock Gained: -".."\n".."Gold Gained: -".."\n".."\n".."Gold per hour: -"})
 
 local clockTime = 0
 local running = false
 local totalGoldGained = 0
+local Ftime = 0 
+local totalGoldBlock = 0
+local GoldPerHour = 0
 local lastGoldValue = game:GetService("Players").LocalPlayer.Data.Gold.Value
 local IGBLOCK = game:GetService("Players").LocalPlayer.Data.GoldBlock.Value
 
@@ -332,15 +358,16 @@ game:GetService("RunService").Stepped:Connect(function()
     end
 end)
 
+function initclock()
 while true do
     local FinalGold = game:GetService("Players").LocalPlayer.Data.Gold.Value
-    local Ftime = formatTime(clockTime)
+    Ftime = formatTime(clockTime)
     local GoldGained = FinalGold - lastGoldValue
     totalGoldGained = totalGoldGained + GoldGained
     local FGBLOCK = game:GetService("Players").LocalPlayer.Data.GoldBlock.Value
-    local totalGoldBlock = FGBLOCK - IGBLOCK
+    totalGoldBlock = FGBLOCK - IGBLOCK
 
-    local GoldPerHour = (totalGoldGained / clockTime) * 3600
+    GoldPerHour = (totalGoldGained / clockTime) * 3600
 
     FStats:Set({
         Title = "Stats",
@@ -354,4 +381,362 @@ while true do
 
     wait(1)
 end
--- queueteleport("-")
+end
+
+GoldPerHour = 0
+
+function SendMessageEMBED(url, embed)
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["embeds"] = {
+            {
+                ["title"] = embed.title,
+                ["description"] = embed.description,
+                ["color"] = embed.color,
+                ["fields"] = embed.fields,
+                ["footer"] = {
+                    ["text"] = embed.footer.text
+                },
+                ["thumbnail"] = {
+                    ["url"] = embed.thumbnail_url
+                }
+            }
+        }
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+    print("yay")
+end
+
+local WebHook = "a"
+local interval = 1800  -- Temps entre les messages (par défaut 1800 secondes)
+
+function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
+    local embed = {
+        ["title"] = "BABFT | Auto Farm",
+        ["description"] = "Stats",
+        ["color"] = 16777215,
+        ["fields"] = {
+            {
+                ["name"] = "Time Elapsed",
+                ["value"] = Ftime or 0
+            },
+            {
+                ["name"] = "GoldBlock Gained:",
+                ["value"] = tostring(totalGoldBlock) or 0
+            },
+            {
+                ["name"] = "Gold Gained:",
+                ["value"] = tostring(totalGoldGained) or 0
+            },
+            {
+                ["name"] = "Gold per hour:",
+                ["value"] = tostring(math.floor(GoldPerHour)) or 0
+            }
+        },
+        ["footer"] = {
+            ["text"] = "Script by @thereal_asu"
+        },
+        ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
+    }
+
+    if WebHook then
+        SendMessageEMBED(WebHook, embed)
+    else
+        warn("Webhook URL not set. Please enter it in the input.")
+    end
+end
+
+local InputWebHook = Global:CreateInput({
+    Name = "Discord Webhook URL:",
+    CurrentValue = "",
+    PlaceholderText = "URL",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Text)
+        WebHook = Text
+    end,
+})
+
+local InputInterval = Global:CreateInput({
+    Name = "Time between messages:",
+    CurrentValue = "1800",
+    PlaceholderText = "Seconds",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input2",
+    Callback = function(Text)
+        interval = tonumber(Text)
+    end,
+})
+
+local Toggle = Global:CreateToggle({
+    Name = "Use WebHook",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        getgenv().WBhook = Value
+    end,
+})
+
+coroutine.wrap(function()
+    while true do
+        if getgenv().WBhook and getgenv().AF and not getgenv().intervalLock then
+            getgenv().intervalLock = true
+            SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
+            wait(interval)
+            getgenv().intervalLock = false
+        end
+        wait(1)
+    end
+end)()
+
+-- Image Loader
+
+local ImageFiles = {}
+
+local function updateImageFiles()
+
+    local files = listfiles("BABFT/Image")
+
+    ImageFiles = {}
+
+    for _, file in ipairs(files) do
+        if isfile(file) then
+            table.insert(ImageFiles, file)
+        end
+    end
+
+end
+
+local Label = ImageLoader:CreateLabel("Please refer to the Information tab to use this feature", 134637165939940, Color3.fromRGB(204, 156, 0), true)
+local Label = ImageLoader:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
+
+local Dropdownimg = ImageLoader:CreateDropdown({
+    Name = "Files",
+    Options = ImageFiles,
+    CurrentOption = {""},
+    MultipleOptions = false,
+    Flag = "",
+    Callback = function(Options)
+        print(Options)
+    end,
+ })
+
+ local Toggle = ImageLoader:CreateToggle({
+    Name = "Preview",
+    CurrentValue = false,
+    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+    -- The function that takes place when the toggle is pressed
+    -- The variable (Value) is a boolean on whether the toggle is true or false
+    end,
+ })
+
+ local Divider = ImageLoader:CreateDivider()
+
+ local Section = ImageLoader:CreateSection("modifiers")
+ 
+ local Dropdown = ImageLoader:CreateDropdown({
+    Name = "Block Type",
+    Options = {"WoodBlock","Option 2"},
+    CurrentOption = {"WoodBlock"},
+    MultipleOptions = false,
+    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Options)
+    -- The function that takes place when the selected option is changed
+    -- The variable (Options) is a table of strings for the current selected options
+    end,
+ })
+
+ local Slider = ImageLoader:CreateSlider({
+    Name = "Move",
+    Range = {0, 90},
+    Increment = 1,
+    Suffix = "stud",
+    CurrentValue = 45,
+    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+    -- The function that takes place when the slider changes
+    -- The variable (Value) is a number which correlates to the value the slider is currently at
+    end,
+ })
+
+ local Slider = ImageLoader:CreateSlider({
+    Name = "Rotate",
+    Range = {0, 360},
+    Increment = 1,
+    Suffix = "degree",
+    CurrentValue = 0,
+    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+    -- The function that takes place when the slider changes
+    -- The variable (Value) is a number which correlates to the value the slider is currently at
+    end,
+ })
+
+ local Slider = ImageLoader:CreateSlider({
+    Name = "Size",
+    Range = {0.1, 10},
+    Increment = 0.1,
+    Suffix = "x",
+    CurrentValue = 1,
+    Flag = "", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+    -- The function that takes place when the slider changes
+    -- The variable (Value) is a number which correlates to the value the slider is currently at
+    end,
+ })
+
+ local Button = ImageLoader:CreateButton({
+    Name = "Move Left",
+    Callback = function()
+    -- The function that takes place when the button is pressed
+    end,
+ })
+
+ local Button = ImageLoader:CreateButton({
+    Name = "Move Right",
+    Callback = function()
+    -- The function that takes place when the button is pressed
+    end,
+ })
+
+ local Button = ImageLoader:CreateButton({
+    Name = "Move Forward",
+    Callback = function()
+    -- The function that takes place when the button is pressed
+    end,
+ })
+
+ local Button = ImageLoader:CreateButton({
+    Name = "Move BackWard",
+    Callback = function()
+    -- The function that takes place when the button is pressed
+    end,
+ })
+
+ local Divider = ImageLoader:CreateDivider()
+
+ local Toggle = ImageLoader:CreateToggle({
+    Name = "Safe Mode",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+
+    end,
+ })
+
+ local Button = ImageLoader:CreateButton({
+    Name = "Load Image",
+    Callback = function()
+    end,
+ })
+
+ function initimgfiles()
+    while true do
+        updateImageFiles()
+        wait(1)
+    end
+end
+
+
+--AUTO BUILD
+local Label = AutoBuild:CreateLabel("Please refer to the Information tab to use this feature", 134637165939940, Color3.fromRGB(204, 156, 0), true)
+local Label = AutoBuild:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
+
+local Divider = AutoBuild:CreateDivider()
+
+local Section = AutoBuild:CreateSection("Steal Build")
+
+local Dropdown = AutoBuild:CreateDropdown({
+    Name = "Target Player",
+    Options = {"Option 1","Option 2"},
+    CurrentOption = {"Option 1"},
+    MultipleOptions = false,
+    Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Options)
+    -- The function that takes place when the selected option is changed
+    -- The variable (Options) is a table of strings for the current selected options
+    end,
+ })
+
+ local Input = AutoBuild:CreateInput({
+    Name = "Build Name",
+    CurrentValue = "",
+    PlaceholderText = "Name",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Text)
+    -- The function that takes place when the input is changed
+    -- The variable (Text) is a string for the value in the text box
+    end,
+ })
+
+ local Button = AutoBuild:CreateButton({
+    Name = "Save",
+    Callback = function()
+    -- The function that takes place when the button is pressed
+    end,
+ })
+
+ local Divider = AutoBuild:CreateDivider()
+ local Section = AutoBuild:CreateSection("Auto Build")
+
+ local Dropdown = AutoBuild:CreateDropdown({
+    Name = "Build File",
+    Options = {"Option 1","Option 2"},
+    CurrentOption = {"Option 1"},
+    MultipleOptions = false,
+    Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Options)
+    -- The function that takes place when the selected option is changed
+    -- The variable (Options) is a table of strings for the current selected options
+    end,
+ })
+
+ local Toggle = AutoBuild:CreateToggle({
+    Name = "Preview",
+    CurrentValue = false,
+    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+    -- The function that takes place when the toggle is pressed
+    -- The variable (Value) is a boolean on whether the toggle is true or false
+    end,
+ })
+
+ local Toggle = AutoBuild:CreateToggle({
+    Name = "Safe Mode",
+    CurrentValue = false,
+    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+    -- The function that takes place when the toggle is pressed
+    -- The variable (Value) is a boolean on whether the toggle is true or false
+    end,
+ })
+
+ local Button = AutoBuild:CreateButton({
+    Name = "Load",
+    Callback = function()
+    -- The function that takes place when the button is pressed
+    end,
+ })
+
+ local Paragraph = BlockNeeded:CreateParagraph({Title = "nothing at the moment", Content = "this tab will show you the blocks you need to make an image or load a build"})
+
+-- Initit
+--SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
+
+initclock()
+initimgfiles()
+
+
+
+-- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))())
