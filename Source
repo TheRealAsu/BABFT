@@ -425,7 +425,6 @@ function SendMessageEMBED(url, embed)
         Headers = headers,
         Body = body
     })
-    print("yay")
 end
 
 local WebHook = "a"
@@ -586,9 +585,11 @@ local HalfblockSize = blockSize / 2
 local cooloffset = Vector3.new(0, 0, 0)
 local Unit = 45
 local Bdepth = 1
+local angleY = 0
 local ImgCenterimage = nil
-local Brainrot = 0
+local Brainrot = CFrame.identity
 local rotationCFrame = CFrame.Angles(0, 0, 0)
+local batchSize = 750
 local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
 previewFolder.Name = folderName
 
@@ -648,6 +649,7 @@ local function previewFrame(frameSize, position, blockSize)
     PreviewPart.CanCollide = false
     PreviewPart.Name = "PreviewSize"
     PreviewPart.Parent = previewFolder
+    PreviewPart.Rotation = Vector3.new(0, angleY - 90, 0)
 
     local textureId = "rbxassetid://133978572926918"
 
@@ -678,7 +680,7 @@ local function Centerimage(frameSize, position, blockSize)
 
     kflxjdhgw = Instance.new("Part")
     kflxjdhgw.Size = frameSize
-    kflxjdhgw.Position = position + Vector3.new(HalfblockSize - blockSize + frameSize.X / 2, HalfblockSize + blockSize - frameSize.Y / 2, 0) + cooloffset
+    kflxjdhgw.Position = position + Vector3.new(HalfblockSize - blockSize + frameSize.X / 2, HalfblockSize + blockSize - frameSize.Y / 2, 0)
     kflxjdhgw.Transparency = 1
     kflxjdhgw.Color = Color3.new(1, 1, 1)
     kflxjdhgw.Anchored = true
@@ -689,19 +691,31 @@ local function Centerimage(frameSize, position, blockSize)
 end
 
 local function buildImage(data, blockSize)
-    local filePath = "BABFT/Image/" .. (FileImage or "default.txt")
-    local fileContent = readFile(filePath)
-    local data = parseColors(fileContent)
     local frameSize = calculateFrameSize(data)
     startPosition = LPTEAM() + cooloffset
     ImgCenterimage = Centerimage(frameSize, startPosition, blockSize)
+    local centerImage = workspace.ImagePreview.Centerimage
+    if not centerImage then
+        warn("Centerimage not found.")
+        return
+    end
 
+    rotationCFrame = CFrame.Angles(0, math.rad(angleY - 90), 0)
+
+    Brainrot = centerImage.CFrame * rotationCFrame
     local currentX = startPosition.X
     local currentY = startPosition.Y
     local currentZ = startPosition.Z
     local initialX = startPosition.X
     local dataIndex = 1
-    local batchSize = 750
+
+    local centerImage = workspace.ImagePreview.Centerimage
+    if not centerImage then
+        warn("Centerimage not found.")
+        return
+    end
+
+    local centerCFrame = centerImage.CFrame
 
     if currentConnection then
         currentConnection:Disconnect()
@@ -722,16 +736,18 @@ local function buildImage(data, blockSize)
             elseif r == "R" and g == "R" and b == "R" then
                 currentX = currentX + blockSize
             elseif type(r) == "number" and type(g) == "number" and type(b) == "number" then
+
                 local block = Instance.new("Part")
                 block.Size = Vector3.new(blockSize, blockSize, Bdepth)
-                print(Bdepth)
-                block.Position = Vector3.new(currentX, currentY, currentZ)
                 block.Color = Color3.fromRGB(r, g, b)
                 block.Anchored = true
-                block.Material = "SmoothPlastic"
-                block.Parent = previewFolder
+                block.Material = Enum.Material.SmoothPlastic
                 block.CastShadow = false
-                --block.CFrame = Brainrot TO FIX TO FIX TO FIX TO FIX TO FIX TO FIX TO FIX TO FIX TO FIX 
+                block.Parent = previewFolder
+
+                local blockPosition = Vector3.new(currentX, currentY, currentZ) + cooloffset
+                local relativeCFrame = centerCFrame:ToObjectSpace(CFrame.new(blockPosition))
+                block.CFrame = Brainrot * relativeCFrame
 
                 currentX = currentX + blockSize
             end
@@ -754,7 +770,7 @@ local Input = ImageLoader:CreateInput({
     Flag = "Input1",
     Callback = function(Text)
         cooloffset = Vector3.new(0, 0, 0)
-        Brainrot = 0
+        Brainrot = CFrame.identity
         rotationCFrame = CFrame.Angles(0, 0, 0)
         local fileName = Text .. ".txt"
         local filePath = "BABFT/Image/" .. fileName
@@ -829,6 +845,18 @@ local ToggleGrid = ImageLoader:CreateToggle({
     end,
 })
 
+local Slider = ImageLoader:CreateSlider({
+    Name = "Preview loading speed",
+    Range = {100, 1500},
+    Increment = 10,
+    Suffix = "block/sec",
+    CurrentValue = 750,
+    Flag = "",
+    Callback = function(Value)
+        batchSize = Value
+    end,
+ })
+
  local Divider = ImageLoader:CreateDivider()
 
  local Section = ImageLoader:CreateSection("modifiers")
@@ -860,7 +888,7 @@ local ToggleGrid = ImageLoader:CreateToggle({
     MultipleOptions = false,
     Flag = "",
     Callback = function(Options)
-        local BlockType = Options[1]
+        BlockType = Options[1]
         print(BlockType)
     end,
 })
@@ -886,15 +914,27 @@ local Input = ImageLoader:CreateInput({
     RemoveTextAfterFocusLost = false,
     Flag = "",
     Callback = function(Text)
-        local angleY = tonumber(Text)
-        local centerImage = workspace.ImagePreview.Centerimage
-        local centerCFrame = centerImage.CFrame
-        rotationCFrame = CFrame.Angles(0, math.rad(angleY), 0)
+        angleY = tonumber(Text)
+        if not angleY then
+            warn("Invalid input for rotation.")
+            return
+        end
 
-        Brainrot = centerCFrame * rotationCFrame
+        local centerImage = workspace.ImagePreview.Centerimage
+        if not centerImage then
+            warn("Centerimage not found.")
+            return
+        end
+
+        local rotationCFrame = CFrame.Angles(0, math.rad(angleY), 0)
+
+        Brainrot = centerImage.CFrame * rotationCFrame
 
         for _, skibidi in ipairs(previewFolder:GetChildren()) do
             if skibidi:IsA("BasePart") and skibidi ~= centerImage then
+
+                local centerCFrame = centerImage.CFrame
+
                 if not originalCFrames[skibidi] then
                     originalCFrames[skibidi] = skibidi.CFrame
                 end
@@ -902,9 +942,8 @@ local Input = ImageLoader:CreateInput({
                 local originalCFrame = originalCFrames[skibidi]
                 local relativeCFrame = centerCFrame:ToObjectSpace(originalCFrame)
 
-                local newCFrame = centerCFrame * rotationCFrame * relativeCFrame
-
-                skibidi.CFrame = newCFrame
+                local ghaaa = centerCFrame * rotationCFrame * relativeCFrame
+                skibidi.CFrame = ghaaa
             end
         end
     end,
@@ -943,6 +982,7 @@ local Input = ImageLoader:CreateInput({
         skibidi.Position = skibidi.Position + Vector3.new(Unit, 0, 0)
         end
         cooloffset = cooloffset + Vector3.new(Unit, 0, 0)
+        print(cooloffset)
     end,
  })
 
