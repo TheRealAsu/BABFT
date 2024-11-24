@@ -1160,7 +1160,7 @@ local Dropdown = AutoBuild:CreateDropdown({
 
  local Paragraph = BlockNeeded:CreateParagraph({Title = "nothing at the moment", Content = "this tab will show you the blocks you need to make an image or load a build"})
 
-queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))())
+-- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))())
 
 -- Initi
 initclock()
