@@ -1341,7 +1341,7 @@ local Dropdown = AutoBuild:CreateDropdown({
  local LblBlockNeeded = BlockNeeded:CreateLabel("No block found", 72272740678757, Color3.fromRGB(255, 255, 255), true)
  local Divider = BlockNeeded:CreateDivider()
  local Section = BlockNeeded:CreateSection("Auto Build")
- local Label = AutoBuild:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
+ local Label = BlockNeeded:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
  local Divider = BlockNeeded:CreateDivider()
   -- BLOCK NEEDED
   local NbBlockneeded = 0
