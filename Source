@@ -203,6 +203,13 @@ local Button = Global:CreateButton({ -- From IY
         else
             TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
         end
+        wait(5)
+        Rayfield:Notify({
+            Title = "Rejoin may have failed",
+            Content = "try with infinite yield",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
     end,
 })
 
@@ -239,6 +246,13 @@ local Button = Global:CreateButton({ -- From IY by IY devs and NoobSploit
                     Image = 124144713366592,
                  })
             end
+            wait(5)
+            Rayfield:Notify({
+                Title = "Server Hop may have failed",
+                Content = "try with infinite yield",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
         end
     end,
 })
@@ -771,6 +785,7 @@ local Input = ImageLoader:CreateInput({
     Callback = function(Text)
         cooloffset = Vector3.new(0, 0, 0)
         Brainrot = CFrame.identity
+        angleY = 0
         rotationCFrame = CFrame.Angles(0, 0, 0)
         local fileName = Text .. ".txt"
         local filePath = "BABFT/Image/" .. fileName
@@ -1145,7 +1160,7 @@ local Dropdown = AutoBuild:CreateDropdown({
 
  local Paragraph = BlockNeeded:CreateParagraph({Title = "nothing at the moment", Content = "this tab will show you the blocks you need to make an image or load a build"})
 
--- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))())
+queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))())
 
 -- Initi
 initclock()
