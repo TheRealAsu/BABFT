@@ -122,6 +122,7 @@ local Section = Information:CreateSection("Auto Build")
 local Paragraph = Information:CreateParagraph({Title = "Information", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down loading speed.\n\n - Preview: displays a preview of the build."})
 
 local player = game.Players.LocalPlayer
+local Nplayer = game.Players.LocalPlayer.Name
 
 local characterConnection
 local connection
@@ -746,7 +747,62 @@ if selectedZoneName then
 else
     print("Error: No Team")
 end
+end
 
+local function LPTEAM3()
+    local teamName = player.Team.Name
+    
+    local zoneMapping = {
+        black = "BlackZone",
+        blue = "Really blueZone",
+        green = "CamoZone",
+        red = "Really redZone",
+        white = "WhiteZone",
+        yellow = "New YellerZone"
+    }
+    
+    local selectedZoneName = zoneMapping[teamName]
+    
+    if selectedZoneName then
+        local zone = workspace:FindFirstChild(selectedZoneName)
+        if zone then
+            return zone.position
+        else
+            print("Zone not found in workspace for:" .. selectedZoneName)
+        end
+    else
+        print("Error: No Team")
+    end
+    end
+
+local function LPTEAM2()
+    local teamName = player.Team.Name
+    
+    local zoneMapping = {
+        black = "BlackZone",
+        blue = "Really blueZone",
+        green = "CamoZone",
+        red = "Really redZone",
+        white = "WhiteZone",
+        yellow = "New YellerZone"
+    }
+    
+    local selectedZoneName = zoneMapping[teamName]
+    
+    if selectedZoneName then
+        local zone = workspace:FindFirstChild(selectedZoneName)
+        if zone then
+            return zone.Name
+        else
+            print("Zone not found in workspace for:" .. selectedZoneName)
+        end
+    else
+        print("Error: No Team")
+    end
+end
+
+function BuildingTool()
+    game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer("WoodBlock",58,workspace.BlackZone,CFrame.new(0, 6, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1),true,CFrame.new(),false)
 end
 
 local imagePreviewFolder = workspace:FindFirstChild("ImagePreview") or Instance.new("Folder")
@@ -757,7 +813,7 @@ local UserBlockList = {}
 local dataFolder = game:GetService("Players").LocalPlayer.Data
 local BlockType = "PlasticBlock"
 local LPBlockvalue = UserBlockList[BlockType]
-local blockSize = 1
+local blockSize = 2
 local startPosition = nil
 local PreviewPart = nil
 local kflxjdhgw = nil
@@ -767,12 +823,12 @@ local FileImage = nil
 local HalfblockSize = blockSize / 2
 local cooloffset = Vector3.new(0, 0, 0)
 local Unit = 45
-local Bdepth = 1
+local Bdepth = 2
 local angleY = 0
 local ImgCenterimage = nil
 local Brainrot = CFrame.identity
 local rotationCFrame = CFrame.Angles(0, 0, 0)
-local batchSize = 750
+local batchSize = 700
 local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
 previewFolder.Name = folderName
 
@@ -881,13 +937,100 @@ local function Centerimage(frameSize, position, blockSize)
     return kflxjdhgw.Position
 end
 
-local function buildImage(data, blockSize)
+function RenameTemp()
+    local Bfolder = workspace.Blocks:FindFirstChild("AUTO_BABFT")
+    if Bfolder then
+        for _, child in ipairs(Bfolder:GetChildren()) do
+            child.Name = "Temp"
+        end
+    end
+end
+
+local function buildImage()
+    local folder = workspace:FindFirstChild("ImagePreview")
+    if not folder then
+        return
+    end
+
+    for _, part in ipairs(folder:GetChildren()) do
+        if part:IsA("BasePart") and part.Name == "Part" then
+            part.Transparency = 0.8
+        end
+    end
+
+    local placedPositions = {}
+
+    local ZonzPos = LPTEAM3()
+
+    for _, part in ipairs(folder:GetChildren()) do
+        if part:IsA("BasePart") and part.Name == "Part" then
+            local relativePosition = part.Position - ZonzPos
+            local rightVector = part.CFrame.RightVector
+            local upVector = part.CFrame.UpVector
+            local lookVector = part.CFrame.LookVector
+
+            print("Block relative position: " .. tostring(relativePosition))
+            print("RightVector: " .. tostring(rightVector))
+            print("UpVrector: " .. tostring(upVector))
+            print("LookVector: " .. tostring(lookVector))
+
+            local positionKey = tostring(relativePosition)
+            if placedPositions[positionKey] then
+                warn("Block already placed at position:", relativePosition)
+                continue
+            end
+
+            placedPositions[positionKey] = true
+
+            local color = part.Color
+            local convr = color.R
+            local convg = color.G
+            local convb = color.B
+            local colorconvr = Color3.new(convr, convg, convb)
+
+            UUserBlockList()
+            local uszLPBlockvalue = UserBlockList[BlockType]
+            local Zonesss = LPTEAM2()
+
+            local newCFrame = CFrame.new(relativePosition, relativePosition + lookVector)
+
+            game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(
+                BlockType,
+                uszLPBlockvalue,
+                workspace:FindFirstChild(Zonesss),
+                newCFrame, 
+                true,
+                CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0),
+                false
+            )
+
+            game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer({
+                {workspace.Blocks:FindFirstChild(Nplayer):FindFirstChild(BlockType), colorconvr}
+            })
+            RenameTemp()
+
+            part:Destroy()
+        end
+    end
+    UUserBlockList()
+    local uszLPBlockvalue = UserBlockList[BlockType]
+    local Bfolder = workspace.Blocks:FindFirstChild("AUTO_BABFT")
+    if Bfolder then
+        for _, child in ipairs(Bfolder:GetChildren()) do
+            child.Name = tostring(uszLPBlockvalue)
+        end
+    end
+    print("FINISHH")
+end
+
+
+local function buildImagePREVIEW(data, blockSize)
     local frameSize = calculateFrameSize(data)
     startPosition = LPTEAM() + cooloffset
     ImgCenterimage = Centerimage(frameSize, startPosition, blockSize)
     local centerImage = workspace.ImagePreview.Centerimage
     if not centerImage then
-        warn("Centerimage not found.")
+        warn("Centerimage not founzqd")
         return
     end
 
@@ -902,7 +1045,7 @@ local function buildImage(data, blockSize)
 
     local centerImage = workspace.ImagePreview.Centerimage
     if not centerImage then
-        warn("Centerimage not found.")
+        warn("Centerimage not founzqd")
         return
     end
 
@@ -939,7 +1082,6 @@ local function buildImage(data, blockSize)
                 local blockPosition = Vector3.new(currentX, currentY, currentZ) + cooloffset
                 local relativeCFrame = centerCFrame:ToObjectSpace(CFrame.new(blockPosition))
                 block.CFrame = Brainrot * relativeCFrame
-
                 currentX = currentX + blockSize
             end
 
@@ -997,7 +1139,7 @@ local TogglePreview = ImageLoader:CreateToggle({
             if not fileContent then return end
 
             local data = parseColors(fileContent)
-            buildImage(data, blockSize)
+            buildImagePREVIEW(data, blockSize)
         else
             for _, skibidi in ipairs(previewFolder:GetChildren()) do
                 if skibidi.Name ~= "PreviewSize" then
@@ -1108,13 +1250,13 @@ local Input = ImageLoader:CreateInput({
     Callback = function(Text)
         angleY = tonumber(Text)
         if not angleY then
-            warn("Invalid input for rotation.")
+            warn("Invalid input for rota")
             return
         end
 
         local centerImage = workspace.ImagePreview.Centerimage
         if not centerImage then
-            warn("Centerimage not found.")
+            warn("Centerimage not founzqd")
             return
         end
 
@@ -1142,8 +1284,8 @@ local Input = ImageLoader:CreateInput({
 })
 
  local Input = ImageLoader:CreateInput({
-    Name = "Block Depth",
-    CurrentValue = "1",
+    Name = "Block Depth [WIP] do not use",
+    CurrentValue = "2",
     PlaceholderText = "Value",
     RemoveTextAfterFocusLost = false,
     Flag = "",
@@ -1156,15 +1298,27 @@ local Input = ImageLoader:CreateInput({
  })
 
  local Slider = ImageLoader:CreateSlider({
-    Name = "Size",
+    Name = "Size [WIP] do not use",
     Range = {0.1, 10},
     Increment = 0.1,
     Suffix = "x",
-    CurrentValue = 1,
+    CurrentValue = 2,
     Flag = "",
     Callback = function(Value)
         blockSize = Value
     end,
+ })
+
+ local Button = ImageLoader:CreateButton({
+    Name = "testblock",
+    Callback = function()
+        UUserBlockList()
+        local uszLPBlockvalue = UserBlockList[BlockType]
+        local Zonesss = LPTEAM2()
+    game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(BlockType,uszLPBlockvalue,workspace:FindFirstChild(Zonesss),CFrame.new(0, 6.1, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0),true,CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0),false)
+    game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer({{workspace.Blocks.AUTO_BABFT:FindFirstChild(BlockType),Color3.new(0.619607, 0.549019, 0.933333)}})
+    end,
+
  })
 
  local Button = ImageLoader:CreateButton({
@@ -1230,10 +1384,11 @@ local Input = ImageLoader:CreateInput({
 
 local Divider = ImageLoader:CreateDivider()
 
- local Label = ImageLoader:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
+ local Label = ImageLoader:CreateLabel(" This feature is unstable, it works but is still in progress", 134637165939940, Color3.fromRGB(204, 31, 0), true)
 
+ local Label = AutoBuild:CreateLabel("Preview must be enabled", 134637165939940, Color3.fromRGB(28, 28, 28), false)
  local Toggle = ImageLoader:CreateToggle({
-    Name = "Safe Mode",
+    Name = "Safe Mode [WIP]",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
@@ -1244,8 +1399,18 @@ local Divider = ImageLoader:CreateDivider()
  local Button = ImageLoader:CreateButton({
     Name = "Load Image",
     Callback = function()
+        Rayfield:Notify({
+            Title = "Load Image",
+            Content = "construction will start in a few seconds, so don't open your inventory unless you want to abort it",
+            Duration = 10,
+            Image = 124144713366592,
+         })
+            RenameTemp()
+            buildImage()
     end,
  })
+
+local Paragraph = ImageLoader:CreateParagraph({Title = "Stats [WIP]", Content = "End in: nan\nblock remaining to place: nan/nan"})
 
  function initimgfiles()
     while true do
