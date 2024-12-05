@@ -69,7 +69,7 @@ local AutoBuild = Window:CreateTab("Auto Build", 128207976113050)
 local BlockNeeded = Window:CreateTab("Block Needed", 138460602231983)
 local Information = Window:CreateTab("Information", 84130531909418)
 local Credit = Window:CreateTab("Credit", 103654977021797)
-local Label = Global:CreateLabel("Executing the script twice can make mistakes, consider re-joining if there are any problems", 134637165939940, Color3.fromRGB(204, 156, 0), true)
+--local Label = Global:CreateLabel("Executing the script twice can make mistakes, consider re-joining if there are any problems", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
 local Section = Credit:CreateSection("Discord")
 local Section = Information:CreateSection("Discord")
@@ -87,13 +87,14 @@ local Button = Credit:CreateButton({
     end,
  })
 
- local qzdqzd = Global:CreateDivider()
 local yjdtjf = Global:CreateButton({
     Name = "Destroy Script",
     Callback = function()
         Rayfield:Destroy()
     end,
  })
+
+local qzdqzd = Global:CreateDivider()
 
 local Section = Credit:CreateSection("Owner")
 
@@ -115,11 +116,11 @@ local Paragraph = Credit:CreateParagraph({Title = "About this script", Content =
  })
 
 local Section = Information:CreateSection("Auto Farm")
-local Paragraph = Information:CreateParagraph({Title = "Information", Content = "I think this is the most efficient auto farm in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 20K/hour\n - With x1.25: 25K/hour\n - With x2: 40K/hour\n - With Both: 50k/hour"})
+local Paragraph = Information:CreateParagraph({Title = "Information", Content = "let me know if you've ever seen an auto farm more powerful than this one in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 20K/hour\n - With x1.25: 25K/hour\n - With x2: 40K/hour\n - With Both: 50k/hour"})
 local Section = Information:CreateSection("Image Loader")
-local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "images are created from files that contain special data, to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down loading speed.\n\n- Preview: displays a preview of the image, making it easier to use modifiers or to see how the image will look."})
+local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down Image Build speed.\n\n- Preview: displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image."})
 local Section = Information:CreateSection("Auto Build")
-local Paragraph = Information:CreateParagraph({Title = "Information", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down loading speed.\n\n - Preview: displays a preview of the build."})
+local Paragraph = Information:CreateParagraph({Title = "Information", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down build speed.\n\n - Preview: displays a preview of the build."})
 
 local player = game.Players.LocalPlayer
 local Nplayer = game.Players.LocalPlayer.Name
@@ -171,7 +172,7 @@ end
 spawn(loop)
 
 local Section = Global:CreateSection("Utilities")
-local Toggle = Global:CreateToggle({
+local AFKToggle = Global:CreateToggle({
     Name = "Anti-Afk",
     CurrentValue = false,
     Flag = "",
@@ -179,6 +180,10 @@ local Toggle = Global:CreateToggle({
         getgenv().afk6464 = Value
     end,
 })
+
+if getgenv().afk6464 == true then
+    AFKToggle:Set(true)
+end
 
 local Button = Global:CreateButton({
     Name = "Load Infinite Yield",
@@ -320,14 +325,14 @@ local AutoFarm1 = Global:CreateToggle({
                     local player = game.Players.LocalPlayer
                     local character = player.Character or player.CharacterAdded:Wait()
                     character:WaitForChild("HumanoidRootPart")
-
+                       -- wait(2)
                     startAutoFarm()
                     end
                 end
 
         if Value then
             Rayfield:Notify({
-                Title = "Auto Farm - enabled",
+                Title = "Auto Farm - Enabled",
                 Content = "Isolation mode and Anti-afk is recommended",
                 Duration = 6.5,
                 Image = 124144713366592,
@@ -337,7 +342,7 @@ local AutoFarm1 = Global:CreateToggle({
             game.Players.LocalPlayer.CharacterAdded:Connect(onCharacterRespawned)
         else
             Rayfield:Notify({
-                Title = "Auto Farm - disabled",
+                Title = "Auto Farm - Disabled",
                 Content = "Please, wait for the iteration to finish...",
                 Duration = 6.5,
                 Image = 124144713366592,
@@ -708,10 +713,10 @@ local function updateImageFiles()
 
 end
 
-local Label = ImageLoader:CreateLabel("Please refer to the Information tab to use this feature", 134637165939940, Color3.fromRGB(204, 156, 0), true)
+local Label = ImageLoader:CreateLabel("Check the Information tab to use this feature", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
 --[[
-local Dropdownimg = ImageLoader:CreateDropdown({
+local Dropdownimg = ImageLoader:CreateDropdown({ --When shlex adds a script to refresh the dropdown
     Name = "Files",
     Options = ImageFiles,
     CurrentOption = {""},
@@ -732,7 +737,8 @@ local zoneMapping = {
     green = "CamoZone",
     red = "Really redZone",
     white = "WhiteZone",
-    yellow = "New YellerZone"
+    yellow = "New YellerZone",
+    magenta = "MagentaZone"
 }
 
 local selectedZoneName = zoneMapping[teamName]
@@ -758,7 +764,8 @@ local function LPTEAM3()
         green = "CamoZone",
         red = "Really redZone",
         white = "WhiteZone",
-        yellow = "New YellerZone"
+        yellow = "New YellerZone",
+        magenta = "MagentaZone"
     }
     
     local selectedZoneName = zoneMapping[teamName]
@@ -784,7 +791,8 @@ local function LPTEAM2()
         green = "CamoZone",
         red = "Really redZone",
         white = "WhiteZone",
-        yellow = "New YellerZone"
+        yellow = "New YellerZone",
+        magenta = "MagentaZone"
     }
     
     local selectedZoneName = zoneMapping[teamName]
@@ -831,6 +839,10 @@ local rotationCFrame = CFrame.Angles(0, 0, 0)
 local batchSize = 700
 local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
 previewFolder.Name = folderName
+
+for _, skibidi in ipairs(previewFolder:GetChildren()) do
+        skibidi:Destroy()
+end
 
 local function UUserBlockList()
     UserBlockList = {}
@@ -958,30 +970,22 @@ local function buildImage()
         end
     end
 
-    local placedPositions = {}
-
     local ZonzPos = LPTEAM3()
 
     for _, part in ipairs(folder:GetChildren()) do
         if part:IsA("BasePart") and part.Name == "Part" then
-            local relativePosition = part.Position - ZonzPos
+            local relativePosition = ZonzPos
+            local WORLDPOS = part.Position
+            local partRot = part.CFrame - part.Position
             local rightVector = part.CFrame.RightVector
             local upVector = part.CFrame.UpVector
             local lookVector = part.CFrame.LookVector
-
+--[[
             print("Block relative position: " .. tostring(relativePosition))
             print("RightVector: " .. tostring(rightVector))
             print("UpVrector: " .. tostring(upVector))
             print("LookVector: " .. tostring(lookVector))
-
-            local positionKey = tostring(relativePosition)
-            if placedPositions[positionKey] then
-                warn("Block already placed at position:", relativePosition)
-                continue
-            end
-
-            placedPositions[positionKey] = true
-
+]]
             local color = part.Color
             local convr = color.R
             local convg = color.G
@@ -992,7 +996,8 @@ local function buildImage()
             local uszLPBlockvalue = UserBlockList[BlockType]
             local Zonesss = LPTEAM2()
 
-            local newCFrame = CFrame.new(relativePosition, relativePosition + lookVector)
+            local newCFrame = CFrame.new(0, 0, 0)
+            local newwCFrame = CFrame.new(WORLDPOS) * partRot * CFrame.Angles(0, math.rad(90), 0)
 
             game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(
                 BlockType,
@@ -1007,6 +1012,13 @@ local function buildImage()
             game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer({
                 {workspace.Blocks:FindFirstChild(Nplayer):FindFirstChild(BlockType), colorconvr}
             })
+
+            game.Players.LocalPlayer.Backpack.ScalingTool.RF:InvokeServer(
+                workspace.Blocks:FindFirstChild(Nplayer):FindFirstChild(BlockType), 
+                Vector3.new(Bdepth, blockSize, blockSize), 
+                newwCFrame
+                )
+
             RenameTemp()
 
             part:Destroy()
@@ -1014,13 +1026,19 @@ local function buildImage()
     end
     UUserBlockList()
     local uszLPBlockvalue = UserBlockList[BlockType]
-    local Bfolder = workspace.Blocks:FindFirstChild("AUTO_BABFT")
+    local Bfolder = workspace.Blocks:FindFirstChild(Nplayer)
     if Bfolder then
         for _, child in ipairs(Bfolder:GetChildren()) do
             child.Name = tostring(uszLPBlockvalue)
         end
     end
-    print("FINISHH")
+    --print("FINISHH")
+    Rayfield:Notify({
+        Title = "Image successfully loaded",
+        Content = "You can now use your inventory again",
+        Duration = 6.5,
+        Image = 124144713366592,
+     })
 end
 
 
@@ -1284,7 +1302,7 @@ local Input = ImageLoader:CreateInput({
 })
 
  local Input = ImageLoader:CreateInput({
-    Name = "Block Depth [WIP] do not use",
+    Name = "Block Depth",
     CurrentValue = "2",
     PlaceholderText = "Value",
     RemoveTextAfterFocusLost = false,
@@ -1298,7 +1316,7 @@ local Input = ImageLoader:CreateInput({
  })
 
  local Slider = ImageLoader:CreateSlider({
-    Name = "Size [WIP] do not use",
+    Name = "Size",
     Range = {0.1, 10},
     Increment = 0.1,
     Suffix = "x",
@@ -1307,18 +1325,6 @@ local Input = ImageLoader:CreateInput({
     Callback = function(Value)
         blockSize = Value
     end,
- })
-
- local Button = ImageLoader:CreateButton({
-    Name = "testblock",
-    Callback = function()
-        UUserBlockList()
-        local uszLPBlockvalue = UserBlockList[BlockType]
-        local Zonesss = LPTEAM2()
-    game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(BlockType,uszLPBlockvalue,workspace:FindFirstChild(Zonesss),CFrame.new(0, 6.1, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0),true,CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0),false)
-    game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer({{workspace.Blocks.AUTO_BABFT:FindFirstChild(BlockType),Color3.new(0.619607, 0.549019, 0.933333)}})
-    end,
-
  })
 
  local Button = ImageLoader:CreateButton({
@@ -1384,9 +1390,8 @@ local Input = ImageLoader:CreateInput({
 
 local Divider = ImageLoader:CreateDivider()
 
- local Label = ImageLoader:CreateLabel(" This feature is unstable, it works but is still in progress", 134637165939940, Color3.fromRGB(204, 31, 0), true)
+local Label = ImageLoader:CreateLabel("Build speed will depend on your ping", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
- local Label = AutoBuild:CreateLabel("Preview must be enabled", 134637165939940, Color3.fromRGB(28, 28, 28), false)
  local Toggle = ImageLoader:CreateToggle({
     Name = "Safe Mode [WIP]",
     CurrentValue = false,
@@ -1397,11 +1402,11 @@ local Divider = ImageLoader:CreateDivider()
  })
 
  local Button = ImageLoader:CreateButton({
-    Name = "Load Image",
+    Name = "Load Image | Preview must be enabled",
     Callback = function()
         Rayfield:Notify({
             Title = "Load Image",
-            Content = "construction will start in a few seconds, so don't open your inventory unless you want to abort it",
+            Content = "Tip: open your inventory for aborting",
             Duration = 10,
             Image = 124144713366592,
          })
@@ -1420,8 +1425,8 @@ local Paragraph = ImageLoader:CreateParagraph({Title = "Stats [WIP]", Content = 
 end
 
 --AUTO BUILD
-local Label = AutoBuild:CreateLabel("Please refer to the Information tab to use this feature", 134637165939940, Color3.fromRGB(204, 156, 0), true)
-local Label = AutoBuild:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
+local Label = AutoBuild:CreateLabel("Check the Information tab to use this feature", 134637165939940, Color3.fromRGB(204, 156, 0), true)
+local Label = AutoBuild:CreateLabel("THIS FEATURE IS IN WIP - it's not working right now", 134637165939940, Color3.fromRGB(204, 31, 0), true)
 
 local Divider = AutoBuild:CreateDivider()
 
@@ -1500,7 +1505,8 @@ local Dropdown = AutoBuild:CreateDropdown({
     end,
  })
 
- local Paragraph = BlockNeeded:CreateParagraph({Title = "Important", Content = "Preview mode must be enabled"})
+ -- OTHER
+ local Paragraph = BlockNeeded:CreateParagraph({Title = "Important", Content = "Preview mode must be enabled to calculate the number of blocks required"})
  local Divider = BlockNeeded:CreateDivider()
  local Section = BlockNeeded:CreateSection("Image Loader")
  local LblBlockNeeded = BlockNeeded:CreateLabel("No block found", 72272740678757, Color3.fromRGB(255, 255, 255), true)
@@ -1535,7 +1541,7 @@ local Dropdown = AutoBuild:CreateDropdown({
           if NbBlockmissing < 0 then
             NbBlockmissing = 0
           end
-          LblBlockNeeded:Set("Need " .. tostring(NbBlockneeded) .. " " .. BlockType .. " and " .. tostring(NbBlockmissing) .. " block missing", blocktypeID, Color3.fromRGB(255, 255, 255), true)
+          LblBlockNeeded:Set("Need " .. tostring(NbBlockneeded) .. " " .. BlockType .. " and " .. tostring(NbBlockmissing) .. " blocks are missing", blocktypeID, Color3.fromRGB(255, 255, 255), true)
       end,
   })
 
