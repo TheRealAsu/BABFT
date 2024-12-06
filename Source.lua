@@ -118,9 +118,9 @@ local Paragraph = Credit:CreateParagraph({Title = "About this script", Content =
 local Section = Information:CreateSection("Auto Farm")
 local Paragraph = Information:CreateParagraph({Title = "Information", Content = "let me know if you've ever seen an auto farm more powerful than this one in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 20K/hour\n - With x1.25: 25K/hour\n - With x2: 40K/hour\n - With Both: 50k/hour"})
 local Section = Information:CreateSection("Image Loader")
-local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down Image Build speed.\n\n- Preview: displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image."})
+local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Build Speed: You can choose the speed at which the image is built. If you have a slow internet connection, set the speed to low. Do not set it to max for large images\n\n- Preview: Displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image.\n\n- Change Speed: Stop the current process by opening your inventory and checking if no more blocks are being placed. Change the speed and press 'Load Image' again. It should automatically resume from where it stopped."})
 local Section = Information:CreateSection("Auto Build")
-local Paragraph = Information:CreateParagraph({Title = "Information", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down build speed.\n\n - Preview: displays a preview of the build."})
+local Paragraph = Information:CreateParagraph({Title = "Information - [AUTO BUILD IS IN WORK IN PROGRESS]", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down build speed.\n\n - Preview: displays a preview of the build."})
 
 local player = game.Players.LocalPlayer
 local Nplayer = game.Players.LocalPlayer.Name
@@ -837,6 +837,7 @@ local ImgCenterimage = nil
 local Brainrot = CFrame.identity
 local rotationCFrame = CFrame.Angles(0, 0, 0)
 local batchSize = 700
+local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
 local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
 previewFolder.Name = folderName
 
@@ -949,13 +950,14 @@ local function Centerimage(frameSize, position, blockSize)
     return kflxjdhgw.Position
 end
 
-function RenameTemp()
-    local Bfolder = workspace.Blocks:FindFirstChild("AUTO_BABFT")
-    if Bfolder then
-        for _, child in ipairs(Bfolder:GetChildren()) do
-            child.Name = "Temp"
-        end
+local ImgBlockSec = 8
+local currentCoroutines = {}
+local function stopCoroutines()
+    for _, co in ipairs(currentCoroutines) do
+        --oh fk i need to do this
     end
+
+    currentCoroutines = {}
 end
 
 local function buildImage()
@@ -970,22 +972,38 @@ local function buildImage()
         end
     end
 
-    local ZonzPos = LPTEAM3()
-
+    local parts = {}
     for _, part in ipairs(folder:GetChildren()) do
         if part:IsA("BasePart") and part.Name == "Part" then
+            table.insert(parts, part)
+        end
+    end
+
+    if #parts == 0 then
+        return
+    end
+
+    stopCoroutines()
+
+    local sectionCount = math.min(#parts, ImgBlockSec)
+    local sectionSize = math.ceil(#parts / sectionCount)
+
+    local function processSection(startIndex, endIndex)
+        local ZonzPos = LPTEAM3()
+
+        for i = startIndex, endIndex do
+            if getgenv().COCO == false then
+                return
+            end
+
+            local part = parts[i]
             local relativePosition = ZonzPos
             local WORLDPOS = part.Position
             local partRot = part.CFrame - part.Position
             local rightVector = part.CFrame.RightVector
             local upVector = part.CFrame.UpVector
             local lookVector = part.CFrame.LookVector
---[[
-            print("Block relative position: " .. tostring(relativePosition))
-            print("RightVector: " .. tostring(rightVector))
-            print("UpVrector: " .. tostring(upVector))
-            print("LookVector: " .. tostring(lookVector))
-]]
+
             local color = part.Color
             local convr = color.R
             local convg = color.G
@@ -1009,38 +1027,54 @@ local function buildImage()
                 false
             )
 
+            local blocks = workspace.Blocks:FindFirstChild(Nplayer):GetChildren()
+            TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong + 1
+            local targetBlock = blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong]
+
             game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer({
-                {workspace.Blocks:FindFirstChild(Nplayer):FindFirstChild(BlockType), colorconvr}
+                {targetBlock, colorconvr}
             })
 
             game.Players.LocalPlayer.Backpack.ScalingTool.RF:InvokeServer(
-                workspace.Blocks:FindFirstChild(Nplayer):FindFirstChild(BlockType), 
+                targetBlock,
                 Vector3.new(Bdepth, blockSize, blockSize), 
                 newwCFrame
-                )
-
-            RenameTemp()
+            )
 
             part:Destroy()
         end
     end
-    UUserBlockList()
-    local uszLPBlockvalue = UserBlockList[BlockType]
-    local Bfolder = workspace.Blocks:FindFirstChild(Nplayer)
-    if Bfolder then
-        for _, child in ipairs(Bfolder:GetChildren()) do
-            child.Name = tostring(uszLPBlockvalue)
-        end
+
+    local coroutines = {}
+    for i = 1, sectionCount do
+        local startIndex = (i - 1) * sectionSize + 1
+        local endIndex = math.min(i * sectionSize, #parts)
+
+        table.insert(coroutines, coroutine.wrap(function()
+            processSection(startIndex, endIndex)
+        end))
     end
-    --print("FINISHH")
+
+    for _, co in ipairs(coroutines) do
+        co()
+    end
+
+    currentCoroutines = coroutines
+
     Rayfield:Notify({
         Title = "Image successfully loaded",
         Content = "You can now use your inventory again",
         Duration = 6.5,
         Image = 124144713366592,
-     })
+    })
 end
 
+function onImgBlockSecChanged()
+    getgenv().COCO = false
+    wait(0.1)
+    getgenv().COCO = true
+    buildImage()
+end
 
 local function buildImagePREVIEW(data, blockSize)
     local frameSize = calculateFrameSize(data)
@@ -1241,7 +1275,7 @@ local Slider = ImageLoader:CreateSlider({
     Flag = "",
     Callback = function(Options)
         BlockType = Options[1]
-        print(BlockType)
+        --print(BlockType)
     end,
 })
 
@@ -1334,7 +1368,7 @@ local Input = ImageLoader:CreateInput({
         skibidi.Position = skibidi.Position + Vector3.new(Unit, 0, 0)
         end
         cooloffset = cooloffset + Vector3.new(Unit, 0, 0)
-        print(cooloffset)
+        --print(cooloffset)
     end,
  })
 
@@ -1390,8 +1424,9 @@ local Input = ImageLoader:CreateInput({
 
 local Divider = ImageLoader:CreateDivider()
 
-local Label = ImageLoader:CreateLabel("Build speed will depend on your ping", 134637165939940, Color3.fromRGB(204, 156, 0), true)
+local Label = ImageLoader:CreateLabel("Building speed will also depend on your ping. You can crash if your wifi speed is too slow.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
+--[[
  local Toggle = ImageLoader:CreateToggle({
     Name = "Safe Mode [WIP]",
     CurrentValue = false,
@@ -1400,6 +1435,7 @@ local Label = ImageLoader:CreateLabel("Build speed will depend on your ping", 13
 
     end,
  })
+]]
 
  local Button = ImageLoader:CreateButton({
     Name = "Load Image | Preview must be enabled",
@@ -1410,10 +1446,47 @@ local Label = ImageLoader:CreateLabel("Build speed will depend on your ping", 13
             Duration = 10,
             Image = 124144713366592,
          })
-            RenameTemp()
+
+TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
+local blocksFolder = workspace:FindFirstChild("Blocks")
+if blocksFolder then
+    local blockssFolder = blocksFolder:FindFirstChild(Nplayer)
+    if blockssFolder then
+        TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = #blockssFolder:GetChildren()
+
+    else
+            Rayfield:Notify({
+                Title = "Error",
+                Content = "Folder not found, try rejoin",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
+    end
+else
+        Rayfield:Notify({
+            Title = "Error",
+            Content = "Folder not found, try rejoin",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
+end
             buildImage()
     end,
  })
+
+ local Slider = ImageLoader:CreateSlider({
+    Name = "Build Speed",
+    Range = {1, 50},
+    Increment = 1,
+    Suffix = "Block/sec",
+    CurrentValue = 8,
+    Flag = "Slider1",
+    Callback = function(Value)
+        ImgBlockSec = Value
+    end,
+ })
+
+local Label = ImageLoader:CreateLabel("inventory must be closed during the entire process for it to work. open inventory to stop the process.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
 local Paragraph = ImageLoader:CreateParagraph({Title = "Stats [WIP]", Content = "End in: nan\nblock remaining to place: nan/nan"})
 
@@ -1545,10 +1618,8 @@ local Dropdown = AutoBuild:CreateDropdown({
       end,
   })
 
--- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source'))())
+-- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source.lua'))())
 
--- Initi
+-- Init
 initclock()
 initimgfiles()
-
---  Label:Set("Label Example", 4483362458, Color3.fromRGB(255, 255, 255), false)
