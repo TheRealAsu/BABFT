@@ -67,6 +67,7 @@ local Global = Window:CreateTab("Global", 125428076789049)
 local ImageLoader = Window:CreateTab("Image Loader", 91865122737183)
 local AutoBuild = Window:CreateTab("Auto Build", 128207976113050)
 local BlockNeeded = Window:CreateTab("Block Needed", 138460602231983)
+local Miscellaneous = Window:CreateTab("Miscellaneous", 90305619538335)
 local Information = Window:CreateTab("Information", 84130531909418)
 local Credit = Window:CreateTab("Credit", 103654977021797)
 --local Label = Global:CreateLabel("Executing the script twice can make mistakes, consider re-joining if there are any problems", 134637165939940, Color3.fromRGB(204, 156, 0), true)
@@ -1618,6 +1619,100 @@ local Dropdown = AutoBuild:CreateDropdown({
       end,
   })
 
+local Section = Miscellaneous:CreateSection("Teleportation")
+
+local Button = Miscellaneous:CreateButton({
+    Name = "White",
+    Callback = function()
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-49.8510132, -9.7000021, -520.37085, -1, 0, 0, 0, 1, 0, 0, 0, -1))
+    end,
+ })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Black",
+    Callback = function()
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-503.82843, -9.7000021, -69.433342, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+    end,
+ })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Red",
+    Callback = function()
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(396.697418, -9.7000021, -64.7801361, 0, 0, 1, 0, 1, -0, -1, 0, 0))
+    end,
+ })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Blue",
+    Callback = function()
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(396.697418, -9.7000021, 300.219849, 0, 0, 1, 0, 1, -0, -1, 0, 0))
+    end,
+ })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Magenta",
+    Callback = function()
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(396.697418, -9.7000021, 647.219849, 0, 0, 1, 0, 1, -0, -1, 0, 0))
+    end,
+ })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Yellow",
+    Callback = function()
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-503.82843, -9.7000021, 640.56665, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+    end,
+ })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Green",
+    Callback = function()
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(-503.82843, -9.7000021, 293.56665, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+    end,
+ })
+
+local Section = Miscellaneous:CreateSection("Troll")
+local Button = Miscellaneous:CreateButton({
+    Name = "Force Share Mode",
+    Callback = function()
+        local args = {
+            [1] = "ShareBlocks",
+            [2] = true
+        }
+        workspace.SettingFunction:InvokeServer(unpack(args))
+    end,
+ })
+
+ local spoofSpeed = 40
+
+ local Section = Miscellaneous:CreateSection("Spoofer")
+ local Slider = Miscellaneous:CreateSlider({
+    Name = "Wheel Speed",
+    Range = {10, 1000},
+    Increment = 10,
+    Suffix = " - MaxSpeed",
+    CurrentValue = 40,
+    Flag = "Slider1",
+    Callback = function(Value)
+        spoofSpeed = Value
+    end,
+ })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Spoof speed",
+    Callback = function()
+        local itcihmsoeoesoes = workspace.Blocks:FindFirstChild(Nplayer)
+        if itcihmsoeoesoes then
+    for _, model in ipairs(itcihmsoeoesoes:GetChildren()) do
+        if model:IsA("Model") then
+            local maxSpeed = model:FindFirstChild("MaxSpeed")
+            if maxSpeed and maxSpeed:IsA("NumberValue") then
+                maxSpeed.Value = spoofSpeed
+            end
+        end
+    end
+end
+    end,
+ })
 -- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source.lua'))())
 
 -- Init
