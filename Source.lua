@@ -1713,6 +1713,31 @@ local Button = Miscellaneous:CreateButton({
 end
     end,
  })
+
+ local Section = Miscellaneous:CreateSection("Teleport to Place")
+ local Button = Miscellaneous:CreateButton({
+    Name = "Inner Cloud",
+    Callback = function()
+        TeleportService:Teleport(1930863474, game.Players.LocalPlayer)
+    end,
+ })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Christmas",
+    Callback = function()
+        TeleportService:Teleport(1930866268, game.Players.LocalPlayer)
+    end,
+ })
+
+ --[[
+local Button = Miscellaneous:CreateButton({
+    Name = "Halloween",
+    Callback = function()
+        TeleportService:Teleport(1930665568, game.Players.LocalPlayer) -- WARNING: YOU WILL GET KICKED WHEN YOU JOIN IT, need to try with a client-sided anti kick
+    end,
+ })
+]]
+
 -- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source.lua'))())
 
 -- Init
