@@ -119,7 +119,7 @@ local Paragraph = Credit:CreateParagraph({Title = "About this script", Content =
 local Section = Information:CreateSection("Auto Farm")
 local Paragraph = Information:CreateParagraph({Title = "Information", Content = "let me know if you've ever seen an auto farm more powerful than this one in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 20K/hour\n - With x1.25: 25K/hour\n - With x2: 40K/hour\n - With Both: 50k/hour"})
 local Section = Information:CreateSection("Image Loader")
-local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Build Speed: You can choose the speed at which the image is built. If you have a slow internet connection, set the speed to low. Do not set it to max for large images\n\n- Preview: Displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image.\n\n- Change Speed: Stop the current process by opening your inventory and checking if no more blocks are being placed. Change the speed and press 'Load Image' again. It should automatically resume from where it stopped."})
+local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Build Speed: You can choose the speed at which the image is built. If you have a slow internet connection, set the speed to low. Do not set it to max for large images\n\n- Preview: Displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image.\n\n- Change Speed: Stop the current process by opening your inventory and checking if no more blocks are being placed. Change the speed and press 'Load Image' again. It should automatically resume from where it stopped.\n\n- Optimize Mode: Allows even the weakest PCs or those without a good connection to load images."})
 local Section = Information:CreateSection("Auto Build")
 local Paragraph = Information:CreateParagraph({Title = "Information - [AUTO BUILD IS IN WORK IN PROGRESS]", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down build speed.\n\n - Preview: displays a preview of the build."})
 
@@ -1015,7 +1015,7 @@ local function buildImage()
             local uszLPBlockvalue = UserBlockList[BlockType]
             local Zonesss = LPTEAM2()
 
-            local newCFrame = CFrame.new(0, 0, 0)
+            local newCFrame = CFrame.new(math.random(-69, 69), math.random(120000, 2200000), math.random(-69, 69)) -- prevents the client from rendering them (above 100K blocks), prevents blocks from hitting each other (less lag)
             local newwCFrame = CFrame.new(WORLDPOS) * partRot * CFrame.Angles(0, math.rad(90), 0)
 
             game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(
@@ -1061,13 +1061,101 @@ local function buildImage()
     end
 
     currentCoroutines = coroutines
-
+--[[
     Rayfield:Notify({
         Title = "Image successfully loaded",
         Content = "You can now use your inventory again",
         Duration = 6.5,
         Image = 124144713366592,
     })
+]]
+end
+
+local function buildImageFAST()
+    local folder = workspace:FindFirstChild("ImagePreview")
+    if not folder then
+        return
+    end
+
+    for _, part in ipairs(folder:GetChildren()) do
+        if part:IsA("BasePart") and part.Name == "Part" then
+            part.Transparency = 0.8
+        end
+    end
+
+    local parts = {}
+    for _, part in ipairs(folder:GetChildren()) do
+        if part:IsA("BasePart") and part.Name == "Part" then
+            table.insert(parts, part)
+        end
+    end
+
+    if #parts == 0 then
+        return
+    end
+
+    stopCoroutines()
+
+    local processingIndex = 1
+    local ZonzPos = LPTEAM3()
+
+    local heartbeatConnection
+    heartbeatConnection = RunService.Heartbeat:Connect(function()
+        if processingIndex > #parts then
+            heartbeatConnection:Disconnect()
+
+            -- Notification de fin
+            Rayfield:Notify({
+                Title = "Image successfully loaded",
+                Content = "You can now use your inventory again",
+                Duration = 6.5,
+                Image = 124144713366592,
+            })
+            return
+        end
+
+        local part = parts[processingIndex]
+        processingIndex += 1
+
+        local WORLDPOS = part.Position
+        local partRot = part.CFrame - part.Position
+        local color = part.Color
+        local convr, convg, convb = color.R, color.G, color.B
+        local colorconvr = Color3.new(convr, convg, convb)
+
+        UUserBlockList()
+        local uszLPBlockvalue = UserBlockList[BlockType]
+        local Zonesss = LPTEAM2()
+
+        local newCFrame = CFrame.new(math.random(-69, 69), math.random(120000, 2200000), math.random(-69, 69)) -- prevents the client from rendering them (above 100K blocks), prevents blocks from hitting each other (less lag)
+        local newwCFrame = CFrame.new(WORLDPOS) * partRot * CFrame.Angles(0, math.rad(90), 0)
+
+        game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(
+            BlockType,
+            uszLPBlockvalue,
+            workspace:FindFirstChild(Zonesss),
+            newCFrame,
+            true,
+            CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0),
+            false
+        )
+
+        local blocks = workspace.Blocks:FindFirstChild(Nplayer):GetChildren()
+        TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong += 1
+        local targetBlock = blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong]
+
+        game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer({
+            {targetBlock, colorconvr}
+        })
+
+        game.Players.LocalPlayer.Backpack.ScalingTool.RF:InvokeServer(
+            targetBlock,
+            Vector3.new(Bdepth, blockSize, blockSize), 
+            newwCFrame
+        )
+
+        part:Destroy()
+    end)
 end
 
 function onImgBlockSecChanged()
@@ -1234,8 +1322,8 @@ local ToggleGrid = ImageLoader:CreateToggle({
 
 local Slider = ImageLoader:CreateSlider({
     Name = "Preview loading speed",
-    Range = {100, 1500},
-    Increment = 10,
+    Range = {100, 4000},
+    Increment = 25,
     Suffix = "block/sec",
     CurrentValue = 750,
     Flag = "",
@@ -1429,7 +1517,7 @@ local Label = ImageLoader:CreateLabel("Building speed will also depend on your p
 
 --[[
  local Toggle = ImageLoader:CreateToggle({
-    Name = "Safe Mode [WIP]",
+    Name = "Safe Mode,
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
@@ -1477,7 +1565,7 @@ end
 
  local Slider = ImageLoader:CreateSlider({
     Name = "Build Speed",
-    Range = {1, 50},
+    Range = {1, 150},
     Increment = 1,
     Suffix = "Block/sec",
     CurrentValue = 8,
@@ -1487,9 +1575,46 @@ end
     end,
  })
 
+ local Button = ImageLoader:CreateButton({
+    Name = "⚡Optimized mode⚡",
+    Callback = function()
+        Rayfield:Notify({
+            Title = "Load Image",
+            Content = "Tip: open your inventory for aborting",
+            Duration = 10,
+            Image = 124144713366592,
+         })
+
+TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
+local blocksFolder = workspace:FindFirstChild("Blocks")
+if blocksFolder then
+    local blockssFolder = blocksFolder:FindFirstChild(Nplayer)
+    if blockssFolder then
+        TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = #blockssFolder:GetChildren()
+
+    else
+            Rayfield:Notify({
+                Title = "Error",
+                Content = "Folder not found, try rejoin",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
+    end
+else
+        Rayfield:Notify({
+            Title = "Error",
+            Content = "Folder not found, try rejoin",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
+end
+        task.spawn(buildImageFAST)
+    end,
+ })
+ 
 local Label = ImageLoader:CreateLabel("inventory must be closed during the entire process for it to work. open inventory to stop the process.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
-local Paragraph = ImageLoader:CreateParagraph({Title = "Stats [WIP]", Content = "End in: nan\nblock remaining to place: nan/nan"})
+local ImgStatsP = ImageLoader:CreateParagraph({Title = "Stats [WIP]", Content = "Elapsed Time:\nEnd in: nan\nblock remaining to place: nan/nan"})
 
  function initimgfiles()
     while true do
