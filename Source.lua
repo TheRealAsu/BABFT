@@ -16,6 +16,15 @@ if not isfolder("BABFT/Build") then
     makefolder("BABFT/Build")
 end
 
+local FcMaster = true
+local folderName = "ImagePreview"
+local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
+previewFolder.Name = folderName
+
+for _, skibidi in ipairs(previewFolder:GetChildren()) do
+        skibidi:Destroy()
+end
+
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local HttpService = cloneref(game:GetService("HttpService"))
@@ -91,6 +100,10 @@ local Button = Credit:CreateButton({
 local yjdtjf = Global:CreateButton({
     Name = "Destroy Script",
     Callback = function()
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            skibidi:Destroy()
+    end
+        FcMaster = false
         Rayfield:Destroy()
     end,
  })
@@ -827,7 +840,6 @@ local startPosition = nil
 local PreviewPart = nil
 local kflxjdhgw = nil
 local currentConnection = nil
-local folderName = "ImagePreview"
 local FileImage = nil
 local HalfblockSize = blockSize / 2
 local cooloffset = Vector3.new(0, 0, 0)
@@ -839,12 +851,6 @@ local Brainrot = CFrame.identity
 local rotationCFrame = CFrame.Angles(0, 0, 0)
 local batchSize = 700
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
-local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
-previewFolder.Name = folderName
-
-for _, skibidi in ipairs(previewFolder:GetChildren()) do
-        skibidi:Destroy()
-end
 
 local function UUserBlockList()
     UserBlockList = {}
@@ -1806,6 +1812,77 @@ local Button = Miscellaneous:CreateButton({
         workspace.SettingFunction:InvokeServer(unpack(args))
     end,
  })
+
+ local function removeLock()
+    local Teams = {"BlackZone", "CamoZone", "MagentaZone", "New YellerZone", "Really BlueZone", "Really RedZone", "WhiteZone"}
+
+    for _, teamName in ipairs(Teams) do
+        local teamPart = workspace:FindFirstChild(teamName)
+        if teamPart then
+            local lockFolder = teamPart:FindFirstChild("Lock")
+            if lockFolder then
+                lockFolder:Destroy()
+            end
+        end
+    end
+end
+
+local previousPosition = nil
+local counterIsoMODE = false
+
+local function trackPlayerPosition()
+    while FcMaster == true do
+        if counterIsoMODE then
+            removeLock()
+            local character = player.Character
+            if character then
+                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                if humanoidRootPart then
+                    previousPosition = humanoidRootPart.CFrame
+                end
+            end
+        end
+        task.wait(0.4)
+    end
+end
+
+local function onCharacterAdded(character)
+    if counterIsoMODE then
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+        if previousPosition then
+            humanoidRootPart.CFrame = previousPosition
+        end
+    end
+end
+
+player.CharacterAdded:Connect(onCharacterAdded)
+task.spawn(trackPlayerPosition)
+
+local Toggle = Miscellaneous:CreateToggle({
+    Name = "Counter Isolation Mode",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        counterIsoMODE = Value
+        if counterIsoMODE then
+            Rayfield:Notify({
+                Title = "Counter Isolation Mode",
+                Content = "you will reappear where you died",
+                Duration = 6.5,
+                Image = 124144713366592,
+             })
+            else
+                Rayfield:Notify({
+                    Title = "Counter Isolation Mode",
+                    Content = "you will no longer reappear where you died",
+                    Duration = 6.5,
+                    Image = 124144713366592,
+                 })
+        end
+    end,
+})
+
 
  local spoofSpeed = 40
 
