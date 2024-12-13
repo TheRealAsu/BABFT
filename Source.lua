@@ -132,7 +132,7 @@ local Paragraph = Credit:CreateParagraph({Title = "About this script", Content =
 local Section = Information:CreateSection("Auto Farm")
 local Paragraph = Information:CreateParagraph({Title = "Information", Content = "let me know if you've ever seen an auto farm more powerful than this one in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 20K/hour\n - With x1.25: 25K/hour\n - With x2: 40K/hour\n - With Both: 50k/hour"})
 local Section = Information:CreateSection("Image Loader")
-local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Build Speed: You can choose the speed at which the image is built. If you have a slow internet connection, set the speed to low. Do not set it to max for large images\n\n- Preview: Displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image.\n\n- Change Speed: Stop the current process by opening your inventory and checking if no more blocks are being placed. Change the speed and press 'Load Image' again. It should automatically resume from where it stopped.\n\n- Optimize Mode: Allows even the weakest PCs or those without a good connection to load images."})
+local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "Paste the image URL in the textbox and let the server convert the image, the server can't access certain images (it's not a coding problem) OR you can convert the image yourself: (more images are supported) Images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script (open source) that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Build Speed: You can choose the speed at which the image is built. If you have a slow internet connection, set the speed to low. Do not set it to max for large images\n\n- Preview: Displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image.\n\n- Change Speed: Stop the current process by opening your inventory and checking if no more blocks are being placed. Change the speed and press 'Load Image' again. It should automatically resume from where it stopped.\n\n- Optimize Mode: Allows even the weakest PCs or those without a good connection to load images."})
 local Section = Information:CreateSection("Auto Build")
 local Paragraph = Information:CreateParagraph({Title = "Information - [AUTO BUILD IS IN WORK IN PROGRESS]", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down build speed.\n\n - Preview: displays a preview of the build."})
 
@@ -851,6 +851,8 @@ local Brainrot = CFrame.identity
 local rotationCFrame = CFrame.Angles(0, 0, 0)
 local batchSize = 700
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
+local USEURL = nil
+local TempData = {}
 
 local function UUserBlockList()
     UserBlockList = {}
@@ -870,6 +872,7 @@ end
 
 local function parseColors(fileContent)
     local data = {}
+
     for value in string.gmatch(fileContent, "[^,]+") do
         value = value:match("^%s*(.-)%s*$")
         table.insert(data, tonumber(value) or value)
@@ -1110,7 +1113,6 @@ local function buildImageFAST()
         if processingIndex > #parts then
             heartbeatConnection:Disconnect()
 
-            -- Notification de fin
             Rayfield:Notify({
                 Title = "Image successfully loaded",
                 Content = "You can now use your inventory again",
@@ -1242,13 +1244,21 @@ local function buildImagePREVIEW(data, blockSize)
     end)
 end
 
+local Section = ImageLoader:CreateSection("Import Image")
+
+local ImageLoaderFile = ImageLoader:CreateLabel("Details will be displayed here", 72272740678757, Color3.fromRGB(121, 188, 226), false)
+
+local URL_RESO_VALUE = 4
+
 local Input = ImageLoader:CreateInput({
-    Name = "File",
+    Name = "File or Url",
     CurrentValue = "",
-    PlaceholderText = "File name",
-    RemoveTextAfterFocusLost = false,
+    PlaceholderText = "File/Url",
+    RemoveTextAfterFocusLost = true,
     Flag = "Input1",
     Callback = function(Text)
+        TempData = {}
+        USEURL= nil
         cooloffset = Vector3.new(0, 0, 0)
         Brainrot = CFrame.identity
         angleY = 0
@@ -1256,25 +1266,147 @@ local Input = ImageLoader:CreateInput({
         local fileName = Text .. ".txt"
         local filePath = "BABFT/Image/" .. fileName
 
-        if isfile(filePath) then
-            FileImage = fileName
-            Rayfield:Notify({
-                Title = "Success!",
-                Content = "file: "..fileName.." found!",
-                Duration = 6.5,
-                Image = 124144713366592,
-             })
+        ImageLoaderFile:Set("Fetching...", 72272740678757, Color3.fromRGB(121, 188, 226), false)
+        wait(0.22)
+
+        if string.sub(Text, 1, 5) == "https" then
+            ImageLoaderFile:Set("Method: URL | Status: Fetching...", 110690411966110, Color3.fromRGB(121, 188, 226), false)
+
+            local url = "https://therealasu.pythonanywhere.com/process_image" -- It is useless to DDOS it, all you're going to do is DDOS pythonanywhere which are protected against that, and the server doesn't cost me anything, it's free
+            local headers = {
+                ["Content-Type"] = "application/json"
+            }
+
+            local function getImageData(imageUrl, resolution)
+                local body = HttpService:JSONEncode({
+                    image_url = imageUrl,
+                    resolution = resolution
+                })
+
+                local success, result = pcall(function()
+                    return request({
+                        Url = url,
+                        Method = "POST",
+                        Headers = headers,
+                        Body = body
+                    })
+                end)
+
+                if success then
+                    if result.StatusCode == 200 then
+                        local responseData = result.Body
+                        return responseData
+                    else
+                        ImageLoaderFile:Set("Method: URL | Status: Error", 110690411966110, Color3.fromRGB(255, 66, 41), false)
+                        return nil
+                    end
+                else
+                    ImageLoaderFile:Set("Method: URL | Status: Error", 110690411966110, Color3.fromRGB(255, 66, 41), false)
+                    Rayfield:Notify({
+                        Title = "Error ",
+                        Content = "Could not Fetch data",
+                        Duration = 6.5,
+                        Image = 124144713366592,
+                    })
+                    return nil
+                end
+            end
+
+            local response = getImageData(Text, URL_RESO_VALUE)
+
+            if response then
+                local success, result = pcall(function()
+                    return HttpService:JSONDecode(response)
+                end)
+                if success and result then
+                    if result.error then
+                        ImageLoaderFile:Set("Method: URL | Status: Error", 110690411966110, Color3.fromRGB(255, 66, 41), false)
+                        Rayfield:Notify({
+                            Title = "Error",
+                            Content = "API Error: Url not supported",
+                            Duration = 6.5,
+                            Image = 124144713366592,
+                        })
+                    else
+                        USEURL = true
+                        TempData = response
+                        ImageLoaderFile:Set("Method: URL | Status: Fetched | You can enable preview", 110690411966110, Color3.fromRGB(133, 230, 138), false)
+                        Rayfield:Notify({
+                            Title = "Success!",
+                            Content = "Your URL has been converted and is ready to use",
+                            Duration = 6.5,
+                            Image = 124144713366592,
+                        })
+                    end
+                else
+                    --print(response)
+                    TempData = response
+                    USEURL = true
+                    ImageLoaderFile:Set("Method: URL | Status: Fetched | You can enable preview", 110690411966110, Color3.fromRGB(133, 230, 138), false) -- how the fk
+                    Rayfield:Notify({
+                        Title = "Success!",
+                        Content = "Your URL has been converted and is ready to use",
+                        Duration = 6.5,
+                        Image = 124144713366592,
+                    })
+                    --[[
+                    ImageLoaderFile:Set("Method: URL | Status: Error", 110690411966110, Color3.fromRGB(255, 66, 41), false)
+                    Rayfield:Notify({
+                        Title = "Error",
+                        Content = "Failed to decode the server response. The url may not be supported or valid",
+                        Duration = 6.5,
+                        Image = 124144713366592,
+                    })
+                    ]]
+                end
+            else
+                ImageLoaderFile:Set("Method: URL | Status: Error", 110690411966110, Color3.fromRGB(255, 66, 41), false)
+                Rayfield:Notify({
+                    Title = "Error",
+                    Content = "The API may be overloaded, there's an alternative in the Discord server",
+                    Duration = 6.5,
+                    Image = 124144713366592,
+                })
+            end
         else
-            FileImage = nil
-            Rayfield:Notify({
-                Title = "Error | File not found",
-                Content = "Make sure the file"..fileName.." exists, don't put '.txt' in the TextBox",
-                Duration = 6.5,
-                Image = 124144713366592,
-             })
+            USEURL = false
+            if isfile(filePath) then
+                FileImage = fileName
+                ImageLoaderFile:Set("Method: File | Status: Sucess | You can enable preview", 81435876451920, Color3.fromRGB(133, 230, 138), false)
+                Rayfield:Notify({
+                    Title = "Success!",
+                    Content = "file: " .. fileName .. " found!",
+                    Duration = 6.5,
+                    Image = 124144713366592,
+                })
+            else
+                FileImage = nil
+                ImageLoaderFile:Set("Method: File | Status: Error", 81435876451920, Color3.fromRGB(255, 66, 41), false)
+                Rayfield:Notify({
+                    Title = "Error | File not found",
+                    Content = "Make sure the file " .. fileName .. " exists or the URL is valid, do not put '.txt' in the TextBox",
+                    Duration = 6.5,
+                    Image = 124144713366592,
+                })
+            end
         end
     end,
 })
+
+local Input = ImageLoader:CreateInput({
+    Name = "Resolution [only for URL]",
+    CurrentValue = "4",
+    PlaceholderText = "Number",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Nb)
+        URL_RESO_VALUE = tostring(Nb)
+    end,
+})
+
+local Divider = ImageLoader:CreateDivider()
+
+local Section = ImageLoader:CreateSection("Preview")
 
 local TogglePreview = ImageLoader:CreateToggle({
     Name = "Preview",
@@ -1282,10 +1414,16 @@ local TogglePreview = ImageLoader:CreateToggle({
     Callback = function(Value)
         if Value then
             local filePath = "BABFT/Image/" .. (FileImage or "default.txt")
-            local fileContent = readFile(filePath)
+            local fileContent = {}
+            if USEURL == false then
+                fileContent = readFile(filePath)
+            else
+                fileContent = TempData
+                --print(fileContent)
+            end
             if not fileContent then return end
-
-            local data = parseColors(fileContent)
+            local data
+                data = parseColors(fileContent)
             buildImagePREVIEW(data, blockSize)
         else
             for _, skibidi in ipairs(previewFolder:GetChildren()) do
@@ -1814,7 +1952,7 @@ local Button = Miscellaneous:CreateButton({
  })
 
  local function removeLock()
-    local Teams = {"BlackZone", "CamoZone", "MagentaZone", "New YellerZone", "Really BlueZone", "Really RedZone", "WhiteZone"}
+    local Teams = {"BlackZone", "CamoZone", "MagentaZone", "New YellerZone", "Really BlueZone", "Really redZone", "WhiteZone"}
 
     for _, teamName in ipairs(Teams) do
         local teamPart = workspace:FindFirstChild(teamName)
@@ -1842,7 +1980,7 @@ local function trackPlayerPosition()
                 end
             end
         end
-        task.wait(0.4)
+        task.wait(.1)
     end
 end
 
