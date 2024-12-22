@@ -133,6 +133,18 @@ local Section = Information:CreateSection("Auto Farm")
 local Paragraph = Information:CreateParagraph({Title = "Information", Content = "let me know if you've ever seen an auto farm more powerful than this one in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 20K/hour\n - With x1.25: 25K/hour\n - With x2: 40K/hour\n - With Both: 50k/hour"})
 local Section = Information:CreateSection("Image Loader")
 local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "Paste the image URL in the textbox and let the server convert the image, the server can't access certain images (it's not a coding problem) OR you can convert the image yourself: (more images are supported) Images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script (open source) that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Build Speed: You can choose the speed at which the image is built. If you have a slow internet connection, set the speed to low. Do not set it to max for large images\n\n- Preview: Displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image.\n\n- Change Speed: Stop the current process by opening your inventory and checking if no more blocks are being placed. Change the speed and press 'Load Image' again. It should automatically resume from where it stopped.\n\n- Optimize Mode: Allows even the weakest PCs or those without a good connection to load images."})
+local Button = Information:CreateButton({
+    Name = "copy the list of working sites",
+    Callback = function()
+        setclipboard("https://www.pythonanywhere.com/whitelist/")
+        Rayfield:Notify({
+            Title = "Copied!",
+            Content = "past the link in your browser to see which sites work",
+            Duration = 6.5,
+            Image = 124144713366592,
+         })
+    end,
+ })
 local Section = Information:CreateSection("Auto Build")
 local Paragraph = Information:CreateParagraph({Title = "Information - [AUTO BUILD IS IN WORK IN PROGRESS]", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down build speed.\n\n - Preview: displays a preview of the build."})
 
@@ -960,6 +972,7 @@ local function Centerimage(frameSize, position, blockSize)
     return kflxjdhgw.Position
 end
 
+--[[
 local ImgBlockSec = 8
 local currentCoroutines = {}
 local function stopCoroutines()
@@ -1070,22 +1083,21 @@ local function buildImage()
     end
 
     currentCoroutines = coroutines
---[[
     Rayfield:Notify({
         Title = "Image successfully loaded",
         Content = "You can now use your inventory again",
         Duration = 6.5,
         Image = 124144713366592,
     })
-]]
 end
+]]
 
 local function buildImageFAST()
     local folder = workspace:FindFirstChild("ImagePreview")
     if not folder then
         return
     end
-
+    
     for _, part in ipairs(folder:GetChildren()) do
         if part:IsA("BasePart") and part.Name == "Part" then
             part.Transparency = 0.8
@@ -1103,15 +1115,30 @@ local function buildImageFAST()
         return
     end
 
-    stopCoroutines()
-
     local processingIndex = 1
-    local ZonzPos = LPTEAM3()
+    local batchSize = 30
+    local paintData = {}
+    local blocksPlaced = {}
+    local totalProcessed = 0
+
+    UUserBlockList()
+    local uszLPBlockvalue = UserBlockList[BlockType]
+    local Zonesss = LPTEAM2()
+
+    local function sendPaintDataAsync(data)
+        if #data > 0 then
+            task.delay(2, function()
+                game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(data)
+            end)
+        end
+    end
 
     local heartbeatConnection
     heartbeatConnection = RunService.Heartbeat:Connect(function()
         if processingIndex > #parts then
             heartbeatConnection:Disconnect()
+            task.wait(3)
+            sendPaintDataAsync(paintData)
 
             Rayfield:Notify({
                 Title = "Image successfully loaded",
@@ -1122,49 +1149,59 @@ local function buildImageFAST()
             return
         end
 
-        local part = parts[processingIndex]
-        processingIndex += 1
+        for i = 1, batchSize do
+            if processingIndex > #parts then
+                break
+            end
 
-        local WORLDPOS = part.Position
-        local partRot = part.CFrame - part.Position
-        local color = part.Color
-        local convr, convg, convb = color.R, color.G, color.B
-        local colorconvr = Color3.new(convr, convg, convb)
+            local part = parts[processingIndex]
+            processingIndex += 1
 
-        UUserBlockList()
-        local uszLPBlockvalue = UserBlockList[BlockType]
-        local Zonesss = LPTEAM2()
+            local WORLDPOS = part.Position
+            local partRot = part.CFrame - part.Position
+            local newCFrame = CFrame.new(math.random(-69, 69), math.random(120000, 2200000), math.random(-69, 69))
+            local newwCFrame = CFrame.new(WORLDPOS) * partRot * CFrame.Angles(0, math.rad(90), 0)
 
-        local newCFrame = CFrame.new(math.random(-69, 69), math.random(120000, 2200000), math.random(-69, 69)) -- prevents the client from rendering them (above 100K blocks), prevents blocks from hitting each other (less lag)
-        local newwCFrame = CFrame.new(WORLDPOS) * partRot * CFrame.Angles(0, math.rad(90), 0)
+            game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(
+                BlockType,
+                uszLPBlockvalue,
+                workspace:FindFirstChild(Zonesss),
+                newCFrame,
+                true
+            )
 
-        game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(
-            BlockType,
-            uszLPBlockvalue,
-            workspace:FindFirstChild(Zonesss),
-            newCFrame,
-            true,
-            CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0),
-            false
-        )
+            local blocks = workspace.Blocks:FindFirstChild(Nplayer):GetChildren()
+            TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong += 1
+            local targetBlock = blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong]
+            table.insert(blocksPlaced, targetBlock)
 
-        local blocks = workspace.Blocks:FindFirstChild(Nplayer):GetChildren()
-        TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong += 1
-        local targetBlock = blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong]
+            game.Players.LocalPlayer.Backpack.ScalingTool.RF:InvokeServer(
+                targetBlock,
+                Vector3.new(Bdepth, blockSize, blockSize),
+                newwCFrame
+            )
 
-        game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer({
-            {targetBlock, colorconvr}
-        })
+            local color = part.Color
+            table.insert(paintData, {targetBlock, Color3.new(color.R, color.G, color.B)})
 
-        game.Players.LocalPlayer.Backpack.ScalingTool.RF:InvokeServer(
-            targetBlock,
-            Vector3.new(Bdepth, blockSize, blockSize), 
-            newwCFrame
-        )
+            part:Destroy()
 
-        part:Destroy()
+            totalProcessed += 1
+            if totalProcessed % 50 == 0 then
+                sendPaintDataAsync(paintData)
+                paintData = {}
+            end
+        end
+    end)
+
+    task.delay(5, function()
+        if #paintData > 0 then
+            sendPaintDataAsync(paintData)
+        end
     end)
 end
+
+
 
 function onImgBlockSecChanged()
     getgenv().COCO = false
@@ -1249,6 +1286,9 @@ local Section = ImageLoader:CreateSection("Import Image")
 local ImageLoaderFile = ImageLoader:CreateLabel("Details will be displayed here", 72272740678757, Color3.fromRGB(121, 188, 226), false)
 
 local URL_RESO_VALUE = 4
+local TBLOCK = 0
+local BLKLD = 0
+local FI = 0
 
 local Input = ImageLoader:CreateInput({
     Name = "File or Url",
@@ -1257,6 +1297,8 @@ local Input = ImageLoader:CreateInput({
     RemoveTextAfterFocusLost = true,
     Flag = "Input1",
     Callback = function(Text)
+        TBLOCK = 0
+        BLKLD = 0
         TempData = {}
         USEURL= nil
         cooloffset = Vector3.new(0, 0, 0)
@@ -1372,7 +1414,7 @@ local Input = ImageLoader:CreateInput({
             USEURL = false
             if isfile(filePath) then
                 FileImage = fileName
-                ImageLoaderFile:Set("Method: File | Status: Sucess | You can enable preview", 81435876451920, Color3.fromRGB(133, 230, 138), false)
+                ImageLoaderFile:Set("Method: File | Status: Success | You can enable preview", 81435876451920, Color3.fromRGB(133, 230, 138), false)
                 Rayfield:Notify({
                     Title = "Success!",
                     Content = "file: " .. fileName .. " found!",
@@ -1413,6 +1455,8 @@ local TogglePreview = ImageLoader:CreateToggle({
     CurrentValue = false,
     Callback = function(Value)
         if Value then
+            BLKLD = 0
+            TBLOCK = 0
             local filePath = "BABFT/Image/" .. (FileImage or "default.txt")
             local fileContent = {}
             if USEURL == false then
@@ -1441,9 +1485,14 @@ local ToggleGrid = ImageLoader:CreateToggle({
     Callback = function(Value)
         if Value then
             local filePath = "BABFT/Image/" .. (FileImage or "default.txt")
-            local fileContent = readFile(filePath)
+            local fileContent = {}
+            if USEURL == false then
+                fileContent = readFile(filePath)
+            else
+                fileContent = TempData
+                --print(fileContent)
+            end
             if not fileContent then return end
-
             local data = parseColors(fileContent)
             local frameSize = calculateFrameSize(data)
             startPosition = LPTEAM()
@@ -1670,6 +1719,7 @@ local Label = ImageLoader:CreateLabel("Building speed will also depend on your p
  })
 ]]
 
+--[[
  local Button = ImageLoader:CreateButton({
     Name = "Load Image | Preview must be enabled",
     Callback = function()
@@ -1718,9 +1768,13 @@ end
         ImgBlockSec = Value
     end,
  })
+]]
+
+local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneChangeLol = 0
+local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol = 0
 
  local Button = ImageLoader:CreateButton({
-    Name = "⚡Optimized mode⚡",
+    Name = "Build Image | Preview must be enabled",
     Callback = function()
         Rayfield:Notify({
             Title = "Load Image",
@@ -1729,13 +1783,23 @@ end
             Image = 124144713366592,
          })
 
+         TBLOCK = 0
 TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
+
 local blocksFolder = workspace:FindFirstChild("Blocks")
 if blocksFolder then
     local blockssFolder = blocksFolder:FindFirstChild(Nplayer)
     if blockssFolder then
         TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = #blockssFolder:GetChildren()
-
+        TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol = #blockssFolder:GetChildren()
+        local parts = {}
+        local folder = workspace:FindFirstChild("ImagePreview")
+        for _, part in ipairs(folder:GetChildren()) do
+            if part:IsA("BasePart") and part.Name == "Part" then
+                table.insert(parts, part)
+            end
+        end
+        TBLOCK = #parts
     else
             Rayfield:Notify({
                 Title = "Error",
@@ -1758,10 +1822,33 @@ end
  
 local Label = ImageLoader:CreateLabel("inventory must be closed during the entire process for it to work. open inventory to stop the process.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
-local ImgStatsP = ImageLoader:CreateParagraph({Title = "Stats [WIP]", Content = "Elapsed Time:\nEnd in: nan\nblock remaining to place: nan/nan"})
 
- function initimgfiles()
+local ImgStatsP = ImageLoader:CreateParagraph({Title = "Stats", Content = "Block Loaded:\nBlock Placed:\nBlock colored:\nFinish in:"})
+
+function ImgStats()
+    local startTime = tick()
     while true do
+        local blocksFolder = workspace:FindFirstChild("Blocks")
+        local blockssFolder = blocksFolder:FindFirstChild(Nplayer)
+        local totalBlocks = #blockssFolder:GetChildren()
+        local BLKLD = totalBlocks - TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol
+        local elapsedTime = tick() - startTime
+        local blocksPerSecond = BLKLD / elapsedTime
+        local blocksRemaining = TBLOCK - BLKLD
+        local timeRemaining = blocksRemaining / blocksPerSecond
+        local FI = math.max(timeRemaining, 0)
+        ImgStatsP:Set({
+            Title = "Stats",
+            Content = "Block Loaded: "..BLKLD.."/"..TBLOCK..
+                      "\nFinish in: " .. math.floor(FI) .. "s"
+        })
+        task.wait(1.2)
+    end
+end
+
+local initimgfilesbool = false
+ function initimgfiles()
+    while initimgfilesbool == true do
         updateImageFiles()
         wait(1)
     end
@@ -2069,6 +2156,15 @@ end
     end,
  })
 
+local function Init()
+local initclock = coroutine.create(initclock)
+local ImgStats = coroutine.create(ImgStats)
+local initimgfiles = coroutine.create(initimgfiles)
+
+coroutine.resume(initclock)
+coroutine.resume(ImgStats)
+coroutine.resume(initimgfiles)
+end
  --[[
 local Button = Miscellaneous:CreateButton({
     Name = "Halloween",
@@ -2080,6 +2176,19 @@ local Button = Miscellaneous:CreateButton({
 
 -- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source.lua'))())
 
--- Init
-initclock()
-initimgfiles()
+--[[
+
+▀█████████▄  ▄██   ▄           ▄████████    ▄████████ ███    █▄  
+  ███    ███ ███   ██▄        ███    ███   ███    ███ ███    ███ 
+  ███    ███ ███▄▄▄███        ███    ███   ███    █▀  ███    ███ 
+ ▄███▄▄▄██▀  ▀▀▀▀▀▀███        ███    ███   ███        ███    ███ 
+▀▀███▀▀▀██▄  ▄██   ███      ▀███████████ ▀███████████ ███    ███ 
+  ███    ██▄ ███   ███        ███    ███          ███ ███    ███ 
+  ███    ███ ███   ███        ███    ███    ▄█    ███ ███    ███ 
+▄█████████▀   ▀█████▀         ███    █▀   ▄████████▀  ████████▀  
+
+@thereal_asu | Build A Boat For Treasure
+
+discord server: https://discord.gg/zrAB2m5gvz
+]]
+Init()
