@@ -98,7 +98,7 @@ local Button = Credit:CreateButton({
  })
 
 local yjdtjf = Global:CreateButton({
-    Name = "Destroy Script",
+    Name = "Unload Script",
     Callback = function()
         for _, skibidi in ipairs(previewFolder:GetChildren()) do
             skibidi:Destroy()
@@ -497,7 +497,11 @@ function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
             {
                 ["name"] = "Gold per hour:",
                 ["value"] = tostring(math.floor(GoldPerHour)) or 0
-            }
+            },
+            {
+                ["name"] = "Total Gold:",
+                ["value"] = game:GetService("Players").LocalPlayer.Data.Gold.Value or 0
+            },
         },
         ["footer"] = {
             ["text"] = "Script by @thereal_asu"
