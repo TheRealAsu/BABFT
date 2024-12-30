@@ -812,33 +812,6 @@ local function LPTEAM3()
     end
     end
 
-local function LPTEAM2()
-    local teamName = player.Team.Name
-    
-    local zoneMapping = {
-        black = "BlackZone",
-        blue = "Really blueZone",
-        green = "CamoZone",
-        red = "Really redZone",
-        white = "WhiteZone",
-        yellow = "New YellerZone",
-        magenta = "MagentaZone"
-    }
-    
-    local selectedZoneName = zoneMapping[teamName]
-    
-    if selectedZoneName then
-        local zone = workspace:FindFirstChild(selectedZoneName)
-        if zone then
-            return zone.Name
-        else
-            print("Zone not found in workspace for:" .. selectedZoneName)
-        end
-    else
-        print("Error: No Team")
-    end
-end
-
 function BuildingTool()
     game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer("WoodBlock",58,workspace.BlackZone,CFrame.new(0, 6, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1),true,CFrame.new(),false)
 end
@@ -869,6 +842,33 @@ local batchSize = 700
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
 local USEURL = nil
 local TempData = {}
+
+local function LPTEAM2()
+    local teamName = player.Team.Name
+    
+    local zoneMapping = {
+        black = "BlackZone",
+        blue = "Really blueZone",
+        green = "CamoZone",
+        red = "Really redZone",
+        white = "WhiteZone",
+        yellow = "New YellerZone",
+        magenta = "MagentaZone"
+    }
+    
+    local selectedZoneName = zoneMapping[teamName]
+    
+    if selectedZoneName then
+        local zone = workspace:FindFirstChild(selectedZoneName)
+        if zone then
+            return zone.Name
+        else
+            print("Zone not found in workspace for:" .. selectedZoneName)
+        end
+    else
+        print("Error: No Team")
+    end
+end
 
 local function UUserBlockList()
     UserBlockList = {}
@@ -1101,7 +1101,7 @@ local function buildImageFAST()
     if not folder then
         return
     end
-    
+
     for _, part in ipairs(folder:GetChildren()) do
         if part:IsA("BasePart") and part.Name == "Part" then
             part.Transparency = 0.8
@@ -1136,6 +1136,21 @@ local function buildImageFAST()
             end)
         end
     end
+
+    local LNplayer = nil
+
+    if game:GetService("Players").LocalPlayer.Settings.ShareBlocks.Value == false then
+        LNplayer = Nplayer
+    else
+        local playerteam = player.Team.Name
+        local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
+        LNplayer = blocktoget
+    end
+
+    print(uszLPBlockvalue)
+    print(BlockType)
+    print(Zonesss)
+    print(LNplayer)
 
     local heartbeatConnection
     heartbeatConnection = RunService.Heartbeat:Connect(function()
@@ -1174,7 +1189,7 @@ local function buildImageFAST()
                 true
             )
 
-            local blocks = workspace.Blocks:FindFirstChild(Nplayer):GetChildren()
+            local blocks = workspace.Blocks:FindFirstChild(LNplayer):GetChildren()
             TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong += 1
             local targetBlock = blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong]
             table.insert(blocksPlaced, targetBlock)
@@ -1313,7 +1328,7 @@ local Input = ImageLoader:CreateInput({
         local filePath = "BABFT/Image/" .. fileName
 
         ImageLoaderFile:Set("Fetching...", 72272740678757, Color3.fromRGB(121, 188, 226), false)
-        wait(0.22)
+        --wait(0.22)
 
         if string.sub(Text, 1, 5) == "https" then
             ImageLoaderFile:Set("Method: URL | Status: Fetching...", 110690411966110, Color3.fromRGB(121, 188, 226), false)
@@ -1820,6 +1835,7 @@ else
             Image = 124144713366592,
          })
 end
+        workspace.ImagePreview.Centerimage:Destroy()
         task.spawn(buildImageFAST)
     end,
  })
@@ -1968,7 +1984,6 @@ local Dropdown = AutoBuild:CreateDropdown({
             end
         end
             UUserBlockList()
-
           LPBlockvalue = UserBlockList[BlockType]
           NbBlockneeded = math.ceil(NbBlockneeded / 8)
           NbBlockmissing = NbBlockneeded - LPBlockvalue
