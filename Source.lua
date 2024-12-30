@@ -2071,6 +2071,11 @@ local Button = Miscellaneous:CreateButton({
  local Button = Miscellaneous:CreateButton({
     Name = "Color all blocks",
     Callback = function()
+        local args = {
+            [1] = "ShareBlocks",
+            [2] = true
+        }
+        workspace.SettingFunction:InvokeServer(unpack(args))
         local playerteam = player.Team.Name
         local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
         print(blocktoget)
@@ -2103,7 +2108,54 @@ local Button = Miscellaneous:CreateButton({
     end,
 })
 
- local FStats = Miscellaneous:CreateParagraph({Title = "Info", Content = "The button above will colors all the player's blocks in sharing mode with random colors"})
+local Toggle = Miscellaneous:CreateToggle({
+    Name = "Loop Color all blocks",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        local args = {
+            [1] = "ShareBlocks",
+            [2] = true
+        }
+        workspace.SettingFunction:InvokeServer(unpack(args))
+while Value do
+    if Value then
+    local playerteam = player.Team.Name
+    local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
+    print(blocktoget)
+    local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
+    local paintData = {}
+    local totalBlocks = #playerFolder:GetChildren()
+    print(totalBlocks)
+
+    for _, block in ipairs(playerFolder:GetChildren()) do
+        local color = Color3.new(
+            math.random(0, 1000) / 1000,
+            math.random(0, 1000) / 1000,
+            math.random(0, 1000) / 1000
+        )
+
+        table.insert(paintData, {
+            block,
+            color
+        })
+
+        if #paintData >= 10000 then
+            game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
+            paintData = {}
+        end
+    end
+
+    if #paintData > 0 then
+        game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
+    end
+    task.wait()
+end
+end
+    end,
+ })
+
+ local FStats = Miscellaneous:CreateParagraph({Title = "Info", Content = "The button above will colors all the player's blocks in sharing mode with random colors (it will color the team leader's blocks, it also works when you are the leader), if it doesn't stop, use the paint tool, it will stop the script"})
 
  local function removeLock()
     local Teams = {"BlackZone", "CamoZone", "MagentaZone", "New YellerZone", "Really BlueZone", "Really redZone", "WhiteZone"}
