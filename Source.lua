@@ -1147,10 +1147,10 @@ local function buildImageFAST()
         LNplayer = blocktoget
     end
 
-    print(uszLPBlockvalue)
-    print(BlockType)
-    print(Zonesss)
-    print(LNplayer)
+    --print(uszLPBlockvalue)
+    --print(BlockType)
+    --print(Zonesss)
+    --print(LNplayer)
 
     local heartbeatConnection
     heartbeatConnection = RunService.Heartbeat:Connect(function()
@@ -2047,6 +2047,17 @@ local Button = Miscellaneous:CreateButton({
 
 local Section = Miscellaneous:CreateSection("Troll")
 local Button = Miscellaneous:CreateButton({
+    Name = "Disable Maximum click detector distance",
+    Callback = function()
+        for _, object in ipairs(game:GetDescendants()) do
+            if object:IsA("ClickDetector") then
+                object.MaxActivationDistance = 9995649849899589
+            end
+        end
+    end,
+ })
+
+local Button = Miscellaneous:CreateButton({
     Name = "Force Share Mode",
     Callback = function()
         local args = {
@@ -2056,6 +2067,43 @@ local Button = Miscellaneous:CreateButton({
         workspace.SettingFunction:InvokeServer(unpack(args))
     end,
  })
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Color all blocks",
+    Callback = function()
+        local playerteam = player.Team.Name
+        local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
+        print(blocktoget)
+        local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
+        local paintData = {}
+        local totalBlocks = #playerFolder:GetChildren()
+        print(totalBlocks)
+
+        for _, block in ipairs(playerFolder:GetChildren()) do
+            local color = Color3.new(
+                math.random(0, 1000) / 1000,
+                math.random(0, 1000) / 1000,
+                math.random(0, 1000) / 1000
+            )
+
+            table.insert(paintData, {
+                block,
+                color
+            })
+
+            if #paintData >= 10000 then
+                game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
+                paintData = {}
+            end
+        end
+
+        if #paintData > 0 then
+            game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
+        end
+    end,
+})
+
+ local FStats = Miscellaneous:CreateParagraph({Title = "Info", Content = "The button above will colors all the player's blocks in sharing mode with random colors"})
 
  local function removeLock()
     local Teams = {"BlackZone", "CamoZone", "MagentaZone", "New YellerZone", "Really BlueZone", "Really redZone", "WhiteZone"}
