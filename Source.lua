@@ -2158,7 +2158,7 @@ end
  local FStats = Miscellaneous:CreateParagraph({Title = "Info", Content = "The button above will colors all the player's blocks in sharing mode with random colors (it will color the team leader's blocks, it also works when you are the leader), if it doesn't stop, use the paint tool, it will stop the script"})
 
  local function removeLock()
-    local Teams = {"BlackZone", "CamoZone", "MagentaZone", "New YellerZone", "Really BlueZone", "Really redZone", "WhiteZone"}
+    local Teams = {"BlackZone", "CamoZone", "MagentaZone", "New YellerZone", "Really blueZone", "Really redZone", "WhiteZone"}
 
     for _, teamName in ipairs(Teams) do
         local teamPart = workspace:FindFirstChild(teamName)
@@ -2284,14 +2284,14 @@ coroutine.resume(initclock)
 coroutine.resume(ImgStats)
 coroutine.resume(initimgfiles)
 end
- --[[
+
 local Button = Miscellaneous:CreateButton({
-    Name = "Halloween",
+    Name = "Halloween [maybe need an anti-kick]",
     Callback = function()
         TeleportService:Teleport(1930665568, game.Players.LocalPlayer) -- WARNING: YOU WILL GET KICKED WHEN YOU JOIN IT, need to try with a client-sided anti kick
     end,
  })
-]]
+
 
 -- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source.lua'))())
 
