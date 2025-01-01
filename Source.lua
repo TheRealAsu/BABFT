@@ -1,3 +1,5 @@
+-- BABFT SCRIPT
+
 ---@diagnostic disable: undefined-global
 
 if game.PlaceId ~= 537413528 then
@@ -976,126 +978,6 @@ local function Centerimage(frameSize, position, blockSize)
     return kflxjdhgw.Position
 end
 
---[[
-local ImgBlockSec = 8
-local currentCoroutines = {}
-local function stopCoroutines()
-    for _, co in ipairs(currentCoroutines) do
-        --oh fk i need to do this
-    end
-
-    currentCoroutines = {}
-end
-
-local function buildImage()
-    local folder = workspace:FindFirstChild("ImagePreview")
-    if not folder then
-        return
-    end
-
-    for _, part in ipairs(folder:GetChildren()) do
-        if part:IsA("BasePart") and part.Name == "Part" then
-            part.Transparency = 0.8
-        end
-    end
-
-    local parts = {}
-    for _, part in ipairs(folder:GetChildren()) do
-        if part:IsA("BasePart") and part.Name == "Part" then
-            table.insert(parts, part)
-        end
-    end
-
-    if #parts == 0 then
-        return
-    end
-
-    stopCoroutines()
-
-    local sectionCount = math.min(#parts, ImgBlockSec)
-    local sectionSize = math.ceil(#parts / sectionCount)
-
-    local function processSection(startIndex, endIndex)
-        local ZonzPos = LPTEAM3()
-
-        for i = startIndex, endIndex do
-            if getgenv().COCO == false then
-                return
-            end
-
-            local part = parts[i]
-            local relativePosition = ZonzPos
-            local WORLDPOS = part.Position
-            local partRot = part.CFrame - part.Position
-            local rightVector = part.CFrame.RightVector
-            local upVector = part.CFrame.UpVector
-            local lookVector = part.CFrame.LookVector
-
-            local color = part.Color
-            local convr = color.R
-            local convg = color.G
-            local convb = color.B
-            local colorconvr = Color3.new(convr, convg, convb)
-
-            UUserBlockList()
-            local uszLPBlockvalue = UserBlockList[BlockType]
-            local Zonesss = LPTEAM2()
-
-            local newCFrame = CFrame.new(math.random(-69, 69), math.random(120000, 2200000), math.random(-69, 69)) -- prevents the client from rendering them (above 100K blocks), prevents blocks from hitting each other (less lag)
-            local newwCFrame = CFrame.new(WORLDPOS) * partRot * CFrame.Angles(0, math.rad(90), 0)
-
-            game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(
-                BlockType,
-                uszLPBlockvalue,
-                workspace:FindFirstChild(Zonesss),
-                newCFrame, 
-                true,
-                CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, -1, 0, 1, 0),
-                false
-            )
-
-            local blocks = workspace.Blocks:FindFirstChild(Nplayer):GetChildren()
-            TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong + 1
-            local targetBlock = blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong]
-
-            game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer({
-                {targetBlock, colorconvr}
-            })
-
-            game.Players.LocalPlayer.Backpack.ScalingTool.RF:InvokeServer(
-                targetBlock,
-                Vector3.new(Bdepth, blockSize, blockSize), 
-                newwCFrame
-            )
-
-            part:Destroy()
-        end
-    end
-
-    local coroutines = {}
-    for i = 1, sectionCount do
-        local startIndex = (i - 1) * sectionSize + 1
-        local endIndex = math.min(i * sectionSize, #parts)
-
-        table.insert(coroutines, coroutine.wrap(function()
-            processSection(startIndex, endIndex)
-        end))
-    end
-
-    for _, co in ipairs(coroutines) do
-        co()
-    end
-
-    currentCoroutines = coroutines
-    Rayfield:Notify({
-        Title = "Image successfully loaded",
-        Content = "You can now use your inventory again",
-        Duration = 6.5,
-        Image = 124144713366592,
-    })
-end
-]]
-
 local function buildImageFAST()
     local folder = workspace:FindFirstChild("ImagePreview")
     if not folder then
@@ -1119,26 +1001,13 @@ local function buildImageFAST()
         return
     end
 
-    local processingIndex = 1
-    local batchSize = 30
     local paintData = {}
-    local blocksPlaced = {}
-    local totalProcessed = 0
 
     UUserBlockList()
     local uszLPBlockvalue = UserBlockList[BlockType]
     local Zonesss = LPTEAM2()
 
-    local function sendPaintDataAsync(data)
-        if #data > 0 then
-            task.delay(2, function()
-                game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(data)
-            end)
-        end
-    end
-
     local LNplayer = nil
-
     if game:GetService("Players").LocalPlayer.Settings.ShareBlocks.Value == false then
         LNplayer = Nplayer
     else
@@ -1147,39 +1016,16 @@ local function buildImageFAST()
         LNplayer = blocktoget
     end
 
-    --print(uszLPBlockvalue)
-    --print(BlockType)
-    --print(Zonesss)
-    --print(LNplayer)
-
-    local heartbeatConnection
-    heartbeatConnection = RunService.Heartbeat:Connect(function()
-        if processingIndex > #parts then
-            heartbeatConnection:Disconnect()
-            task.wait(3)
-            sendPaintDataAsync(paintData)
-
-            Rayfield:Notify({
-                Title = "Image successfully loaded",
-                Content = "You can now use your inventory again",
-                Duration = 6.5,
-                Image = 124144713366592,
-            })
-            return
-        end
-
-        for i = 1, batchSize do
-            if processingIndex > #parts then
-                break
+    for i = 1, #parts do
+        task.spawn(function()
+            local part = parts[i]
+            if not part then
+                return
             end
-
-            local part = parts[processingIndex]
-            processingIndex += 1
 
             local WORLDPOS = part.Position
             local partRot = part.CFrame - part.Position
             local newCFrame = CFrame.new(math.random(-69, 69), math.random(120000, 2200000), math.random(-69, 69))
-            local newwCFrame = CFrame.new(WORLDPOS) * partRot * CFrame.Angles(0, math.rad(90), 0)
 
             game:GetService("Players").LocalPlayer.Backpack.BuildingTool.RF:InvokeServer(
                 BlockType,
@@ -1188,39 +1034,60 @@ local function buildImageFAST()
                 newCFrame,
                 true
             )
+        end)
+    end
 
-            local blocks = workspace.Blocks:FindFirstChild(LNplayer):GetChildren()
-            TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong += 1
-            local targetBlock = blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong]
-            table.insert(blocksPlaced, targetBlock)
+    local blocks = workspace.Blocks:FindFirstChild(LNplayer):GetChildren()
+
+    while #blocks ~= #parts do
+        task.wait(0.15)
+        blocks = workspace.Blocks:FindFirstChild(LNplayer):GetChildren()
+    end
+
+    for i = 1, #parts do
+        task.spawn(function()
+            local part = parts[i]
+            if not part then
+                return
+            end
+
+            local WORLDPOS = part.Position
+            local partRot = part.CFrame - part.Position
+            local newwCFrame = CFrame.new(WORLDPOS) * partRot * CFrame.Angles(0, math.rad(90), 0)
+            local targetBlock = blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong + i]
 
             game.Players.LocalPlayer.Backpack.ScalingTool.RF:InvokeServer(
                 targetBlock,
                 Vector3.new(Bdepth, blockSize, blockSize),
                 newwCFrame
             )
+        end)
+    end
 
-            local color = part.Color
-            table.insert(paintData, {targetBlock, Color3.new(color.R, color.G, color.B)})
+    ImgParts = workspace.ImagePreview:GetChildren()
+    for i = 1, #parts do
+        local color = ImgParts[i].Color
+        table.insert(paintData, {
+            blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong + i],
+            Color3.new(color.R, color.G, color.B)
+        })
+    end
+    
+    game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
 
-            part:Destroy()
+    for _, part in ipairs(folder:GetChildren()) do
+        part:destroy()
+    end
 
-            totalProcessed += 1
-            if totalProcessed % 50 == 0 then
-                sendPaintDataAsync(paintData)
-                paintData = {}
-            end
-        end
-    end)
-
-    task.delay(5, function()
-        if #paintData > 0 then
-            sendPaintDataAsync(paintData)
-        end
+    task.delay(1, function()
+        Rayfield:Notify({
+            Title = "Image successfully loaded",
+            Content = "You can now use your inventory again",
+            Duration = 6.5,
+            Image = 124144713366592,
+        })
     end)
 end
-
-
 
 function onImgBlockSecChanged()
     getgenv().COCO = false
@@ -1727,68 +1594,6 @@ local Divider = ImageLoader:CreateDivider()
 
 local Label = ImageLoader:CreateLabel("Building speed will also depend on your ping. You can crash if your wifi speed is too slow.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
---[[
- local Toggle = ImageLoader:CreateToggle({
-    Name = "Safe Mode,
-    CurrentValue = false,
-    Flag = "Toggle1",
-    Callback = function(Value)
-
-    end,
- })
-]]
-
---[[
- local Button = ImageLoader:CreateButton({
-    Name = "Load Image | Preview must be enabled",
-    Callback = function()
-        Rayfield:Notify({
-            Title = "Load Image",
-            Content = "Tip: open your inventory for aborting",
-            Duration = 10,
-            Image = 124144713366592,
-         })
-
-TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
-local blocksFolder = workspace:FindFirstChild("Blocks")
-if blocksFolder then
-    local blockssFolder = blocksFolder:FindFirstChild(Nplayer)
-    if blockssFolder then
-        TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = #blockssFolder:GetChildren()
-
-    else
-            Rayfield:Notify({
-                Title = "Error",
-                Content = "Folder not found, try rejoin",
-                Duration = 6.5,
-                Image = 124144713366592,
-             })
-    end
-else
-        Rayfield:Notify({
-            Title = "Error",
-            Content = "Folder not found, try rejoin",
-            Duration = 6.5,
-            Image = 124144713366592,
-         })
-end
-            buildImage()
-    end,
- })
-
- local Slider = ImageLoader:CreateSlider({
-    Name = "Build Speed",
-    Range = {1, 150},
-    Increment = 1,
-    Suffix = "Block/sec",
-    CurrentValue = 8,
-    Flag = "Slider1",
-    Callback = function(Value)
-        ImgBlockSec = Value
-    end,
- })
-]]
-
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneChangeLol = 0
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol = 0
 
@@ -1835,7 +1640,6 @@ else
             Image = 124144713366592,
          })
 end
-        workspace.ImagePreview.Centerimage:Destroy()
         task.spawn(buildImageFAST)
     end,
  })
