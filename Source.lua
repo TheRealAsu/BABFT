@@ -1065,10 +1065,10 @@ local function buildImageFAST()
     end
 
     ImgParts = workspace.ImagePreview:GetChildren()
-    for i = 1, #parts do
+    for i = 1, #parts + 1 do
         local color = ImgParts[i].Color
         table.insert(paintData, {
-            blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong + i],
+            blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong + i - 1],
             Color3.new(color.R, color.G, color.B)
         })
     end
@@ -1322,7 +1322,7 @@ local Input = ImageLoader:CreateInput({
 })
 
 local Input = ImageLoader:CreateInput({
-    Name = "Resolution [only for URL]",
+    Name = "Resolution [only for URL] [Higher = less blocks]",
     CurrentValue = "4",
     PlaceholderText = "Number",
     RemoveTextAfterFocusLost = false,
