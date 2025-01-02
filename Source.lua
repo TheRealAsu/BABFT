@@ -291,6 +291,8 @@ local Button = Global:CreateButton({ -- From IY by IY devs and NoobSploit
     end,
 })
 
+local Silent = false
+
 local Section = Global:CreateSection("Auto Farm - The most powerful one")
 local AutoFarm1 = Global:CreateToggle({
     Name = "Auto Farm",
@@ -320,9 +322,10 @@ local AutoFarm1 = Global:CreateToggle({
             decal.Parent = newPart
 
             local function teleportAndMovePart(iteration)
+            if not Silent then
                 if Value == false then return end
                 if iteration == 5 then
-                    humanoidRootPart.CFrame = CFrame.new(-55.34379959106445, -362.25067138671875, 9487.841796875)
+                    firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger, 0)
                     wait(0.2)
                     humanoidRootPart.CFrame = CFrame.new(-51, 65, 984 + (iteration - 1) * 770)
                 else
@@ -336,6 +339,26 @@ local AutoFarm1 = Global:CreateToggle({
                 else
                     workspace.ClaimRiverResultsGold:FireServer()
                 end
+            else
+                if Value == false then return end
+                if iteration == 1 then
+                    humanoidRootPart.CFrame = CFrame.new(160.16104125976562, 29.595888137817383, 973.813720703125)
+                elseif iteration == 5 then
+                    firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger, 0)
+                    wait(0.2)
+                    humanoidRootPart.CFrame = CFrame.new(70.02417755126953, 138.9026336669922, 1371.6341552734375 + (iteration - 2) * 770)
+                else
+                    humanoidRootPart.CFrame = CFrame.new(70.02417755126953, 138.9026336669922, 1371.6341552734375 + (iteration - 2) * 770)
+                end
+                newPart.Position = humanoidRootPart.Position - Vector3.new(0, 2, 0)
+
+                wait(2.3) -- if lower, it can't work every time
+
+                if iteration == 3 or iteration == 4 then
+                else
+                    workspace.ClaimRiverResultsGold:FireServer()
+                end
+            end
             end
 
             for i = 1, 10 do
@@ -380,6 +403,15 @@ local AutoFarm1 = Global:CreateToggle({
     end,
 })
 
+local Toggle = Global:CreateToggle({
+    Name = "Make it Silent",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        Silent = Value
+    end,
+ })
+
 local FStats = Global:CreateParagraph({Title = "Stats", Content = "Elapsed time: -".."\n".."GoldBlock Gained: -".."\n".."Gold Gained: -".."\n".."\n".."Gold per hour: -"})
 
 local clockTime = 0
@@ -408,12 +440,13 @@ local function startClock()
         else
             running = false
         end
-        wait(1) 
+        task.wait(1) 
     end
 end
 
 game:GetService("RunService").Stepped:Connect(function()
     if getgenv().AF and not running then
+        wait(5)
         startClock()
     end
 end)
