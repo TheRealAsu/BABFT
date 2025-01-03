@@ -1,4 +1,5 @@
 -- BABFT SCRIPT
+
 ---@diagnostic disable: undefined-global
 
 if game.PlaceId ~= 537413528 then
@@ -2124,7 +2125,7 @@ local Button = Miscellaneous:CreateButton({
  })
 
  local Toggle = Miscellaneous:CreateToggle({
-    Name = "Delete the useless part",
+    Name = "Hide useless parts",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
@@ -2137,7 +2138,7 @@ local Button = Miscellaneous:CreateButton({
  })
 
  local Toggle = Miscellaneous:CreateToggle({
-    Name = "Remove players blocks",
+    Name = "Hide players blocks",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
