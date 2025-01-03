@@ -321,7 +321,7 @@ local AutoFarm1 = Global:CreateToggle({
             decal.Face = Enum.NormalId.Top 
             decal.Parent = newPart
 
-            local function teleportAndMovePart(iteration)
+            local function TPAF(iteration)
             if not Silent then
                 if Value == false then return end
                 if iteration == 5 then
@@ -365,7 +365,7 @@ local AutoFarm1 = Global:CreateToggle({
                 if not Value then
                     break
                 end
-                teleportAndMovePart(i)
+                TPAF(i)
             end
 
             newPart:Destroy()
@@ -547,9 +547,20 @@ function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
     if WebHook then
         SendMessageEMBED(WebHook, embed)
     else
-        warn("Webhook URL not set. Please enter it in the input.")
+        warn("Webhook required")
     end
 end
+
+local embed2 = { -- Hello, this webhook is just for me to know how many people execute this script, everything is anonymous
+    ["title"] = "Build A Boat For Treasure",
+    ["description"] = "Script Executed!",
+    ["color"] = 16777215,
+    ["footer"] = {
+        ["text"] = "Script by @thereal_asu"
+    },
+    ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
+}
+SendMessageEMBED("https://discord.com/api/webhooks/1324732529273475132/uap30YlVXkJO6TdxZAbbv-0AUrFcLPWA5UKCTD4bQYsACzsuy264KyBNRqC3SUXVTs_i", embed2)
 
 local InputWebHook = Global:CreateInput({
     Name = "Discord Webhook URL:",
@@ -594,11 +605,7 @@ coroutine.wrap(function()
     end
 end)()
 
--- Image Loader
-
---BlockId table
 --loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/BlockId'))()
-
 local BlockId = {
     BalloonBlock = 1916437856,
     BalloonStarBlock = 1973706944,
@@ -1111,7 +1118,7 @@ local function buildImageFAST()
     for _, part in ipairs(folder:GetChildren()) do
         part:destroy()
     end
-
+    
     task.delay(1, function()
         Rayfield:Notify({
             Title = "Image successfully loaded",
@@ -1228,7 +1235,6 @@ local Input = ImageLoader:CreateInput({
         local filePath = "BABFT/Image/" .. fileName
 
         ImageLoaderFile:Set("Fetching...", 72272740678757, Color3.fromRGB(121, 188, 226), false)
-        --wait(0.22)
 
         if string.sub(Text, 1, 5) == "https" then
             ImageLoaderFile:Set("Method: URL | Status: Fetching...", 110690411966110, Color3.fromRGB(121, 188, 226), false)
@@ -1300,7 +1306,6 @@ local Input = ImageLoader:CreateInput({
                         })
                     end
                 else
-                    --print(response)
                     TempData = response
                     USEURL = true
                     ImageLoaderFile:Set("Method: URL | Status: Fetched | You can enable preview", 110690411966110, Color3.fromRGB(133, 230, 138), false) -- how the fk
@@ -1679,8 +1684,7 @@ end
  
 local Label = ImageLoader:CreateLabel("inventory must be closed during the entire process for it to work. open inventory to stop the process.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
-
-local ImgStatsP = ImageLoader:CreateParagraph({Title = "Stats", Content = "Block Loaded:\nBlock Placed:\nBlock colored:\nFinish in:"})
+local ImgStatsP = ImageLoader:CreateParagraph({Title = "Information", Content = "Block Loaded:\nBlock Placed:\nBlock colored:\nFinish in:"})
 
 function ImgStats()
     local startTime = tick()
@@ -1695,7 +1699,7 @@ function ImgStats()
         local timeRemaining = blocksRemaining / blocksPerSecond
         local FI = math.max(timeRemaining, 0)
         ImgStatsP:Set({
-            Title = "Stats",
+            Title = "Information",
             Content = "Block Loaded: "..BLKLD.."/"..TBLOCK..
                       "\nFinish in: " .. math.floor(FI) .. "s"
         })
@@ -1792,7 +1796,6 @@ local Dropdown = AutoBuild:CreateDropdown({
     end,
  })
 
- -- OTHER
  local Paragraph = BlockNeeded:CreateParagraph({Title = "Important", Content = "Preview mode must be enabled to calculate the number of blocks required"})
  local Divider = BlockNeeded:CreateDivider()
  local Section = BlockNeeded:CreateSection("Image Loader")
@@ -1801,7 +1804,6 @@ local Dropdown = AutoBuild:CreateDropdown({
  local Section = BlockNeeded:CreateSection("Auto Build")
  local Label = BlockNeeded:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
  local Divider = BlockNeeded:CreateDivider()
-  -- BLOCK NEEDED
   local NbBlockneeded = 0
   local NbBlockmissing = 0
   local Button = BlockNeeded:CreateButton({
@@ -1891,6 +1893,12 @@ local Button = Miscellaneous:CreateButton({
                 object.MaxActivationDistance = 9995649849899589
             end
         end
+        Rayfield:Notify({
+            Title = "Maximum click detector distance Disabled!",
+            Content = "You can click on a lever, button, etc.. from anywhere",
+            Duration = 6.5,
+            Image = 124144713366592,
+        })
     end,
  })
 
@@ -1902,9 +1910,32 @@ local Button = Miscellaneous:CreateButton({
             [2] = true
         }
         workspace.SettingFunction:InvokeServer(unpack(args))
+        Rayfield:Notify({
+            Title = "Share Mode",
+            Content = "you can use leader's blocks now",
+            Duration = 6.5,
+            Image = 124144713366592,
+        })
     end,
  })
 
+ local Button = Miscellaneous:CreateButton({
+    Name = "disable Share Mode",
+    Callback = function()
+        local args = {
+            [1] = "ShareBlocks",
+            [2] = false
+        }
+        workspace.SettingFunction:InvokeServer(unpack(args))
+        Rayfield:Notify({
+            Title = "Share Mode",
+            Content = "Share Mode is disabled",
+            Duration = 6.5,
+            Image = 124144713366592,
+        })
+    end,
+ })
+ 
  local Button = Miscellaneous:CreateButton({
     Name = "Color all blocks",
     Callback = function()
@@ -2064,6 +2095,18 @@ local Toggle = Miscellaneous:CreateToggle({
     end,
 })
 
+local Button = Miscellaneous:CreateButton({
+    Name = "Disable Blocks zone restriction for quest",
+    Callback = function()
+        workspace:FindFirstChild(LPTEAM2()).QuestNum.Value = 0
+        Rayfield:Notify({
+            Title = "Blocks restriction",
+            Content = "the restriction zone is disabled",
+            Duration = 6.5,
+            Image = 124144713366592,
+        })
+    end,
+ })
 
  local spoofSpeed = 40
 
