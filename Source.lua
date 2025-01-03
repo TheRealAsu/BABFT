@@ -554,7 +554,7 @@ end
 local embed2 = { -- Hello, this webhook is just for me to know how many people execute this script, everything is anonymous
     ["title"] = "Build A Boat For Treasure",
     ["description"] = "Script Executed!",
-    ["color"] = 16777215,
+    ["color"] = math.random(1, 16777215),
     ["footer"] = {
         ["text"] = "Script by @thereal_asu"
     },
@@ -2105,6 +2105,48 @@ local Button = Miscellaneous:CreateButton({
             Duration = 6.5,
             Image = 124144713366592,
         })
+    end,
+ })
+
+ local Section = Miscellaneous:CreateSection("FPS Booster")
+
+ local Button = Miscellaneous:CreateButton({
+    Name = "Remove All Texture",
+    Callback = function()
+            for _, obj in ipairs(game:GetDescendants()) do
+                if obj:IsA("Texture") or obj:IsA("Decal") then
+                    obj:Destroy()
+                end
+                if obj:IsA("BasePart") then
+                    obj.Material = Enum.Material.SmoothPlastic
+                end
+            end
+    end,
+ })
+
+ local Toggle = Miscellaneous:CreateToggle({
+    Name = "Delete the useless part",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        if Value then
+            workspace.MainTerrain.Parent = game:GetService("ReplicatedStorage")
+        else
+            game:GetService("ReplicatedStorage").MainTerrain.Parent = workspace
+        end
+    end,
+ })
+
+ local Toggle = Miscellaneous:CreateToggle({
+    Name = "Remove players blocks",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        if Value then
+            workspace.Blocks.Parent = game:GetService("ReplicatedStorage")
+        else
+            game:GetService("ReplicatedStorage").Blocks.Parent = workspace
+        end
     end,
  })
 
