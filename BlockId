@@ -1,4 +1,4 @@
-local BlockId = {
+{
     BalloonBlock = 1916437856,
     BalloonStarBlock = 1973706944,
     BrickBlock = 1608273751,
