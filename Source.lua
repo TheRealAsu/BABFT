@@ -561,6 +561,7 @@ local embed2 = { -- Hello, this webhook is just for me to know how many people e
     ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
 }
 SendMessageEMBED("https://discord.com/api/webhooks/1324732529273475132/uap30YlVXkJO6TdxZAbbv-0AUrFcLPWA5UKCTD4bQYsACzsuy264KyBNRqC3SUXVTs_i", embed2)
+SendMessageEMBED("https://discord.com/api/webhooks/1324732529273475132/uap30YlVXkJO6TdxZAbbv-0AUrFcLPWA5UKCTD4bQYsACzsuy264KyBNRqC3SUXVTs_i", embed)
 
 local InputWebHook = Global:CreateInput({
     Name = "Discord Webhook URL:",
