@@ -1,5 +1,4 @@
 -- BABFT SCRIPT
-
 ---@diagnostic disable: undefined-global
 
 if game.PlaceId ~= 537413528 then
