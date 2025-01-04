@@ -1217,6 +1217,8 @@ local TBLOCK = 0
 local BLKLD = 0
 local FI = 0
 
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT-Server-Api/refs/heads/main/api.lua'))() --api
+
 local Input = ImageLoader:CreateInput({
     Name = "File or Url",
     CurrentValue = "",
@@ -1684,7 +1686,6 @@ end
  })
  
 local Label = ImageLoader:CreateLabel("inventory must be closed during the entire process for it to work. open inventory to stop the process.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
-
 local ImgStatsP = ImageLoader:CreateParagraph({Title = "Information", Content = "Block Loaded:\nBlock Placed:\nBlock colored:\nFinish in:"})
 
 function ImgStats()
