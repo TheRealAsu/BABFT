@@ -1,10 +1,8 @@
--- BABFT SCRIPT
-
----@diagnostic disable: undefined-global
-
 if game.PlaceId ~= 537413528 then
     return
 end
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/MessageIssue.lua'))()
 
 if not isfolder("BABFT") then
     makefolder("BABFT")
@@ -28,6 +26,7 @@ for _, skibidi in ipairs(previewFolder:GetChildren()) do
 end
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+game:GetService("CoreGui").MSGISSUE:Destroy()
 
 local HttpService = cloneref(game:GetService("HttpService"))
 local TeleportService = cloneref(game:GetService("TeleportService"))
@@ -546,7 +545,6 @@ function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
 
     if WebHook then
         SendMessageEMBED(WebHook, embed)
-        SendMessageEMBED("https://discord.com/api/webhooks/1324732529273475132/uap30YlVXkJO6TdxZAbbv-0AUrFcLPWA5UKCTD4bQYsACzsuy264KyBNRqC3SUXVTs_i", embed)
     else
         warn("Webhook required")
     end
@@ -2215,7 +2213,6 @@ local Button = Miscellaneous:CreateButton({
         TeleportService:Teleport(1930665568, game.Players.LocalPlayer) -- WARNING: YOU WILL GET KICKED WHEN YOU JOIN IT, need to try with a client-sided anti kick
     end,
  })
-
 
 -- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source.lua'))())
 
