@@ -3,7 +3,7 @@ if game.PlaceId ~= 537413528 then
 end
 
 task.spawn(function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/MessageIssue.lua'))()
+--loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/MessageIssue.lua'))()
 end)
 
 if not isfolder("BABFT") then
