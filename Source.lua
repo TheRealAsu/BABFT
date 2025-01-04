@@ -1217,7 +1217,7 @@ local TBLOCK = 0
 local BLKLD = 0
 local FI = 0
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT-Server-Api/refs/heads/main/api.lua'))() --api
+--loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT-Server-Api/refs/heads/main/api.lua'))() --api
 
 local Input = ImageLoader:CreateInput({
     Name = "File or Url",
