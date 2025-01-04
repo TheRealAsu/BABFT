@@ -2,7 +2,9 @@ if game.PlaceId ~= 537413528 then
     return
 end
 
+task.spawn(function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/MessageIssue.lua'))()
+end)
 
 if not isfolder("BABFT") then
     makefolder("BABFT")
@@ -26,7 +28,9 @@ for _, skibidi in ipairs(previewFolder:GetChildren()) do
 end
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+if game:GetService("CoreGui"):FindFirstChild("MSGISSUE") then
 game:GetService("CoreGui").MSGISSUE:Destroy()
+end
 
 local HttpService = cloneref(game:GetService("HttpService"))
 local TeleportService = cloneref(game:GetService("TeleportService"))
