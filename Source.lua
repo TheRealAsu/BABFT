@@ -23,11 +23,11 @@ local folderName = "ImagePreview"
 local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
 previewFolder.Name = folderName
 
-for _, skibidi in ipairs(previewFolder:GetChildren()) do
-        skibidi:Destroy()
+for _, v in ipairs(previewFolder:GetChildren()) do
+    v:Destroy()
 end
 
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))() or loadstring(game:HttpGet('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/ab965bf9a6f9890e6447c9b377678f5bffd8a379/source.lua'))()
 if game:GetService("CoreGui"):FindFirstChild("MSGISSUE") then
 game:GetService("CoreGui").MSGISSUE:Destroy()
 end
@@ -60,8 +60,8 @@ local Window = Rayfield:CreateWindow({
     },
  
     Discord = {
-       Enabled = false,
-       Invite = "noinvitelink",
+       Enabled = true,
+       Invite = "MdtGaG7vdx",
        RememberJoins = true
     },
  
@@ -84,7 +84,6 @@ local BlockNeeded = Window:CreateTab("Block Needed", 138460602231983)
 local Miscellaneous = Window:CreateTab("Miscellaneous", 90305619538335)
 local Information = Window:CreateTab("Information", 84130531909418)
 local Credit = Window:CreateTab("Credit", 103654977021797)
---local Label = Global:CreateLabel("Executing the script twice can make mistakes, consider re-joining if there are any problems", 134637165939940, Color3.fromRGB(204, 156, 0), true)
 
 local Section = Credit:CreateSection("Discord")
 local Section = Information:CreateSection("Discord")
@@ -549,11 +548,10 @@ function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
 
     if WebHook then
         SendMessageEMBED(WebHook, embed)
-    else
-        warn("Webhook required")
     end
 end
 
+--[[
 local embed2 = { -- Hello, this webhook is just for me to know how many people execute this script, everything is anonymous
     ["title"] = "Build A Boat For Treasure",
     ["description"] = "Script Executed!",
@@ -563,7 +561,8 @@ local embed2 = { -- Hello, this webhook is just for me to know how many people e
     },
     ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
 }
-SendMessageEMBED("https://discord.com/api/webhooks/1324732529273475132/uap30YlVXkJO6TdxZAbbv-0AUrFcLPWA5UKCTD4bQYsACzsuy264KyBNRqC3SUXVTs_i", embed2)
+SendMessageEMBED("the webhook got found and removed, i won't put a new one lol, thanks for the 15K executions in 3 days. - 7th january 2025", embed2)
+]]
 
 local InputWebHook = Global:CreateInput({
     Name = "Discord Webhook URL:",
@@ -798,7 +797,6 @@ local Dropdownimg = ImageLoader:CreateDropdown({ --When shlex adds a script to r
     MultipleOptions = false,
     Flag = "",
     Callback = function(Options)
-        print(Options)
     end,
  })
 --]]
@@ -822,11 +820,7 @@ if selectedZoneName then
     local zone = workspace:FindFirstChild(selectedZoneName)
     if zone then
         return zone.position + Vector3.new(-100, 150, 0)
-    else
-        print("Zone not found in workspace for:" .. selectedZoneName)
     end
-else
-    print("Error: No Team")
 end
 end
 
@@ -849,11 +843,7 @@ local function LPTEAM3()
         local zone = workspace:FindFirstChild(selectedZoneName)
         if zone then
             return zone.position
-        else
-            print("Zone not found in workspace for:" .. selectedZoneName)
         end
-    else
-        print("Error: No Team")
     end
     end
 
@@ -907,11 +897,7 @@ local function LPTEAM2()
         local zone = workspace:FindFirstChild(selectedZoneName)
         if zone then
             return zone.Name
-        else
-            print("Zone not found in workspace for:" .. selectedZoneName)
         end
-    else
-        print("Error: No Team")
     end
 end
 
@@ -1145,7 +1131,6 @@ local function buildImagePREVIEW(data, blockSize)
     ImgCenterimage = Centerimage(frameSize, startPosition, blockSize)
     local centerImage = workspace.ImagePreview.Centerimage
     if not centerImage then
-        warn("Centerimage not founzqd")
         return
     end
 
@@ -1160,7 +1145,6 @@ local function buildImagePREVIEW(data, blockSize)
 
     local centerImage = workspace.ImagePreview.Centerimage
     if not centerImage then
-        warn("Centerimage not founzqd")
         return
     end
 
@@ -1218,8 +1202,6 @@ local URL_RESO_VALUE = 4
 local TBLOCK = 0
 local BLKLD = 0
 local FI = 0
-
---loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT-Server-Api/refs/heads/main/api.lua'))() --api
 
 local Input = ImageLoader:CreateInput({
     Name = "File or Url",
@@ -1392,7 +1374,6 @@ local TogglePreview = ImageLoader:CreateToggle({
                 fileContent = readFile(filePath)
             else
                 fileContent = TempData
-                --print(fileContent)
             end
             if not fileContent then return end
             local data
@@ -1419,7 +1400,6 @@ local ToggleGrid = ImageLoader:CreateToggle({
                 fileContent = readFile(filePath)
             else
                 fileContent = TempData
-                --print(fileContent)
             end
             if not fileContent then return end
             local data = parseColors(fileContent)
@@ -1486,7 +1466,6 @@ local Slider = ImageLoader:CreateSlider({
     Flag = "",
     Callback = function(Options)
         BlockType = Options[1]
-        --print(BlockType)
     end,
 })
 
@@ -1513,13 +1492,11 @@ local Input = ImageLoader:CreateInput({
     Callback = function(Text)
         angleY = tonumber(Text)
         if not angleY then
-            warn("Invalid input for rota")
             return
         end
 
         local centerImage = workspace.ImagePreview.Centerimage
         if not centerImage then
-            warn("Centerimage not founzqd")
             return
         end
 
@@ -1579,7 +1556,6 @@ local Input = ImageLoader:CreateInput({
         skibidi.Position = skibidi.Position + Vector3.new(Unit, 0, 0)
         end
         cooloffset = cooloffset + Vector3.new(Unit, 0, 0)
-        --print(cooloffset)
     end,
  })
 
@@ -1635,10 +1611,10 @@ local Input = ImageLoader:CreateInput({
 
 local Divider = ImageLoader:CreateDivider()
 
-local Label = ImageLoader:CreateLabel("Building speed will also depend on your ping. You can crash if your wifi speed is too slow.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
-
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneChangeLol = 0
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol = 0
+
+local ImgStatsP = ImageLoader:CreateParagraph({Title = "Information", Content = "Block Loaded:\nBlock Placed:\nBlock colored:\nFinish in:"})
 
  local Button = ImageLoader:CreateButton({
     Name = "Build Image | Preview must be enabled",
@@ -1686,9 +1662,10 @@ end
         task.spawn(buildImageFAST)
     end,
  })
- 
+
+local Label = ImageLoader:CreateLabel("Building speed will also depend on your ping. You can crash if your wifi speed is too slow.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
+
 local Label = ImageLoader:CreateLabel("inventory must be closed during the entire process for it to work. open inventory to stop the process.", 134637165939940, Color3.fromRGB(204, 156, 0), true)
-local ImgStatsP = ImageLoader:CreateParagraph({Title = "Information", Content = "Block Loaded:\nBlock Placed:\nBlock colored:\nFinish in:"})
 
 function ImgStats()
     local startTime = tick()
@@ -1950,11 +1927,9 @@ local Button = Miscellaneous:CreateButton({
         workspace.SettingFunction:InvokeServer(unpack(args))
         local playerteam = player.Team.Name
         local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
-        print(blocktoget)
         local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
         local paintData = {}
         local totalBlocks = #playerFolder:GetChildren()
-        print(totalBlocks)
 
         for _, block in ipairs(playerFolder:GetChildren()) do
             local color = Color3.new(
@@ -1994,11 +1969,9 @@ while Value do
     if Value then
     local playerteam = player.Team.Name
     local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
-    print(blocktoget)
     local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
     local paintData = {}
     local totalBlocks = #playerFolder:GetChildren()
-    print(totalBlocks)
 
     for _, block in ipairs(playerFolder:GetChildren()) do
         local color = Color3.new(
