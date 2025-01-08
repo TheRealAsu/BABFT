@@ -104,11 +104,39 @@ local Button = Credit:CreateButton({
 local yjdtjf = Global:CreateButton({
     Name = "Unload Script",
     Callback = function()
-        for _, skibidi in ipairs(previewFolder:GetChildren()) do
-            skibidi:Destroy()
+        for _, v in ipairs(previewFolder:GetChildren()) do
+            v:Destroy()
     end
         FcMaster = false
         Rayfield:Destroy()
+        local GameStuff = {
+            "Blocks",
+            "Challenge",
+            "TempStuff",
+            "Teams",
+            "MainTerrain",
+            "OtherStages",
+            "BlackZone",
+            "CamoZone",
+            "MagentaZone",
+            "New YellerZone",
+            "Really blueZone",
+            "Really redZone",
+            "Sand",
+            "Water",
+            "WhiteZone",
+            "WaterMask"
+        }
+            for _, v in ipairs(GameStuff) do
+                local object = game:GetService("ReplicatedStorage"):FindFirstChild(v)
+                if object then
+                    if v == "OtherStages" then
+                        game:GetService("ReplicatedStorage").OtherStages.Parent = workspace.BoatStages
+                    else
+                        object.Parent = workspace
+                    end
+                end
+            end
     end,
  })
 
@@ -600,10 +628,10 @@ coroutine.wrap(function()
         if getgenv().WBhook and getgenv().AF and not getgenv().intervalLock then
             getgenv().intervalLock = true
             SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
-            wait(interval)
+            task.wait(interval)
             getgenv().intervalLock = false
         end
-        wait(1)
+        task.wait(1)
     end
 end)()
 
@@ -2127,7 +2155,53 @@ local Button = Miscellaneous:CreateButton({
     end,
  })
 
- local spoofSpeed = 40
+ local Toggle = Miscellaneous:CreateToggle({
+    Name = "Hide All [Optimized for Auto Farm]",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        local Stuff = {
+            "Blocks",
+            "Challenge",
+            "TempStuff",
+            "Teams",
+            "MainTerrain",
+            "OtherStages",
+            "BlackZone",
+            "CamoZone",
+            "MagentaZone",
+            "New YellerZone",
+            "Really blueZone",
+            "Really redZone",
+            "Sand",
+            "Water",
+            "WhiteZone",
+            "WaterMask"
+        }
+
+        if Value then
+            for _, v in ipairs(Stuff) do
+                local object = workspace:FindFirstChild(v) or workspace.BoatStages:FindFirstChild("OtherStages")
+                if object then
+                    object.Parent = game:GetService("ReplicatedStorage")
+                end
+            end
+        else
+            for _, v in ipairs(Stuff) do
+                local object = game:GetService("ReplicatedStorage"):FindFirstChild(v)
+                if object then
+                    if v == "OtherStages" then
+                        game:GetService("ReplicatedStorage").OtherStages.Parent = workspace.BoatStages
+                    else
+                        object.Parent = workspace
+                    end
+                end
+            end
+        end
+    end,
+})
+
+local spoofSpeed = 40
 
  local Section = Miscellaneous:CreateSection("Spoofer")
  local Slider = Miscellaneous:CreateSlider({
