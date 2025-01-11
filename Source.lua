@@ -85,7 +85,7 @@ local Window = Rayfield:CreateWindow({
  
     KeySystem = true,
     KeySettings = {
-       Title = "Build A Boat For Treasure",
+       Title = "discord.gg/uGhnBu89SM",
        Subtitle = "Key System",
        Note = "Key available in discord, link copied to clipboard",
        FileName = "ASUBABFTKey",
@@ -95,7 +95,10 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
-setclipboard("https://discord.gg/zrAB2m5gvz")
+local everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
+if everyClipboard then 
+everyClipboard("https://discord.gg/uGhnBu89SM")
+end
 
 local Global = Window:CreateTab("Global", 125428076789049)
 local ImageLoader = Window:CreateTab("Image Loader", 91865122737183)
@@ -2184,7 +2187,7 @@ end
     end,
  })
 
- local Button = Miscellaneous:CreateButton({
+Button = Miscellaneous:CreateButton({
     Name = "Christmas",
     Callback = function()
         TeleportService:Teleport(1930866268, game.Players.LocalPlayer)
