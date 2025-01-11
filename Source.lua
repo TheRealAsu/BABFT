@@ -89,7 +89,7 @@ local Window = Rayfield:CreateWindow({
        Subtitle = "Key System",
        Note = "Key available in discord, link copied to clipboard",
        FileName = "ASUBABFTKey",
-       SaveKey = false,
+       SaveKey = true,
        GrabKeyFromSite = false,
        Key = {"terraria"} -- yes there is a keysystem but my script is not obfuscated lol
     }
