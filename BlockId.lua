@@ -1,4 +1,4 @@
-{
+local BlockId = { -- block name -> block decal ID
     BalloonBlock = 1916437856,
     BalloonStarBlock = 1973706944,
     BrickBlock = 1608273751,
@@ -160,3 +160,5 @@
     Bar = 16088076429,
     Rope = 16088186920
 }
+
+return BlockId
