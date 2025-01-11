@@ -87,18 +87,13 @@ local Window = Rayfield:CreateWindow({
     KeySettings = {
        Title = "discord.gg/uGhnBu89SM",
        Subtitle = "Key System",
-       Note = "Key available in discord, link copied to clipboard",
+       Note = "Key available in discord :)",
        FileName = "ASUBABFTKey",
        SaveKey = true,
        GrabKeyFromSite = false,
        Key = {"terraria"} -- yes there is a keysystem but my script is not obfuscated lol
     }
 })
-
-local everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
-if everyClipboard then 
-everyClipboard("https://discord.gg/uGhnBu89SM")
-end
 
 local Global = Window:CreateTab("Global", 125428076789049)
 local ImageLoader = Window:CreateTab("Image Loader", 91865122737183)
