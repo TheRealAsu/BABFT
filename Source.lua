@@ -393,16 +393,25 @@ local AutoFarm1 = Global:CreateToggle({
                 if Value == false then return end
                 if iteration == 5 then
                     firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger, 0)
-                    wait(0.2)
+                    task.delay(0.8, function()
+                        workspace.ClaimRiverResultsGold:FireServer()
+                    end)
+
                     humanoidRootPart.CFrame = CFrame.new(-51, 65, 984 + (iteration - 1) * 770)
                 else
+                    if iteration == 1 then
+                        humanoidRootPart.CFrame = CFrame.new(160.16104125976562, 29.595888137817383, 973.813720703125)
+                    else
                     humanoidRootPart.CFrame = CFrame.new(-51, 65, 984 + (iteration - 1) * 770)
+                    end
                 end
                 newPart.Position = humanoidRootPart.Position - Vector3.new(0, 2, 0)
 
                 wait(2.3) -- if lower, it can't work every time
-
-                if iteration == 3 or iteration == 4 then
+                if iteration == 1 then
+                    wait(2.3)
+                end
+                if iteration == 4 then
                 else
                     workspace.ClaimRiverResultsGold:FireServer()
                 end
@@ -412,7 +421,10 @@ local AutoFarm1 = Global:CreateToggle({
                     humanoidRootPart.CFrame = CFrame.new(160.16104125976562, 29.595888137817383, 973.813720703125)
                 elseif iteration == 5 then
                     firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger, 0)
-                    wait(0.2)
+                    task.delay(0.8, function()
+                        workspace.ClaimRiverResultsGold:FireServer()
+                    end)
+                    
                     humanoidRootPart.CFrame = CFrame.new(70.02417755126953, 138.9026336669922, 1371.6341552734375 + (iteration - 2) * 770)
                 else
                     humanoidRootPart.CFrame = CFrame.new(70.02417755126953, 138.9026336669922, 1371.6341552734375 + (iteration - 2) * 770)
@@ -420,8 +432,11 @@ local AutoFarm1 = Global:CreateToggle({
                 newPart.Position = humanoidRootPart.Position - Vector3.new(0, 2, 0)
 
                 wait(2.3) -- if lower, it can't work every time
+                if iteration == 1 then
+                    wait(2.3)
 
-                if iteration == 3 or iteration == 4 then
+                end
+                if iteration == 4 then
                 else
                     workspace.ClaimRiverResultsGold:FireServer()
                 end
@@ -440,6 +455,7 @@ local AutoFarm1 = Global:CreateToggle({
 
                 local function onCharacterRespawned()
                     if getgenv().AF == true then
+                        if FcMaster == false then return end
                     local player = game.Players.LocalPlayer
                     local character = player.Character or player.CharacterAdded:Wait()
                     character:WaitForChild("HumanoidRootPart")
