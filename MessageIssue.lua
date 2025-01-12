@@ -33,7 +33,7 @@ G2L["5"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["5"]["BackgroundTransparency"] = 1;
 G2L["5"]["Size"] = UDim2.new(1, 0, 0, 21);
 G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5"]["Text"] = [[Hello, it seems that the rayfield library takes some time to load, please wait about 20 seconds. this message will disappear when the script is loaded]];
+G2L["5"]["Text"] = [[hello world!]];
 G2L["5"]["Position"] = UDim2.new(0, 0, 0.51163, -1);
 
 G2L["6"] = Instance.new("LocalScript", G2L["5"]);
@@ -41,7 +41,7 @@ G2L["6"] = Instance.new("LocalScript", G2L["5"]);
 local function C_6()
 local script = G2L["6"];
 	local textLabel = script.Parent
-	local fullText = "Hello, it seems that the rayfield library takes some time to load, please wait about 20 seconds. this message will disappear when the script is loaded"
+	local fullText = "This script is always updated, you can report bugs in the discord, the message will disappear in a few seconds"
 	textLabel.Text = ""
 	local delayTime = 0.05 
 	for i = 1, #fullText do
