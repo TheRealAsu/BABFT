@@ -3,7 +3,7 @@ if game.PlaceId ~= 537413528 then
 end
 
 task.spawn(function()
---loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/MessageIssue.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/MessageIssue.lua'))()
 end)
 
 if not isfolder("BABFT") then
@@ -27,6 +27,12 @@ for _, v in ipairs(previewFolder:GetChildren()) do
     v:Destroy()
 end
 
+task.delay(10, function()
+    if game:GetService("CoreGui"):FindFirstChild("MSGISSUE") then
+        game:GetService("CoreGui").MSGISSUE:Destroy()
+    end
+end)
+
 local Rayfield
 local success
 
@@ -44,10 +50,6 @@ if not success then
     success, Rayfield = pcall(function()
         return loadstring(game:HttpGet('https://github.com/SiriusSoftwareLtd/Rayfield/blob/28c7c270669c16a2ae1526eaaac1dbf927aa881e/source.lua'))()
     end)
-end
-
-if game:GetService("CoreGui"):FindFirstChild("MSGISSUE") then
-game:GetService("CoreGui").MSGISSUE:Destroy()
 end
 
 local HttpService = cloneref(game:GetService("HttpService"))
@@ -68,8 +70,8 @@ local Window = Rayfield:CreateWindow({
     LoadingSubtitle = "Made With ❤️ by @thereal_asu",
     Theme = "DarkBlue",
  
-    DisableRayfieldPrompts = false,
-    DisableBuildWarnings = false,
+    DisableRayfieldPrompts = true,
+    DisableBuildWarnings = true,
  
     ConfigurationSaving = {
        Enabled = false,
@@ -87,7 +89,7 @@ local Window = Rayfield:CreateWindow({
     KeySettings = {
        Title = "discord.gg/uGhnBu89SM",
        Subtitle = "Key System",
-       Note = "Key available in discord :)",
+       Note = "Key available in discord, link copied to clipboard",
        FileName = "ASUBABFTKey",
        SaveKey = true,
        GrabKeyFromSite = false,
@@ -104,7 +106,7 @@ local Information = Window:CreateTab("Information", 84130531909418)
 local Credit = Window:CreateTab("Credit", 103654977021797)
 
 local Section = Credit:CreateSection("Discord")
-local Section = Information:CreateSection("Discord")
+Section = Information:CreateSection("Discord")
 
 local Button = Credit:CreateButton({
     Name = "Join the Community!",
@@ -160,7 +162,7 @@ local yjdtjf = Global:CreateButton({
 
 local qzdqzd = Global:CreateDivider()
 
-local Section = Credit:CreateSection("Owner")
+Section = Credit:CreateSection("Owner")
 
 local Labeld = Credit:CreateLabel("Owner: @thereal_asu", 93981953300699, Color3.fromRGB(255, 255, 255), true)
 
@@ -179,9 +181,9 @@ local Paragraph = Credit:CreateParagraph({Title = "About this script", Content =
     end,
  })
 
-local Section = Information:CreateSection("Auto Farm")
+Section = Information:CreateSection("Auto Farm")
 local Paragraph = Information:CreateParagraph({Title = "Information", Content = "let me know if you've ever seen an auto farm more powerful than this one in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 20K/hour\n - With x1.25: 25K/hour\n - With x2: 40K/hour\n - With Both: 50k/hour"})
-local Section = Information:CreateSection("Image Loader")
+Section = Information:CreateSection("Image Loader")
 local Paragraph = Information:CreateParagraph({Title = "Requirement", Content = "Paste the image URL in the textbox and let the server convert the image, the server can't access certain images (it's not a coding problem) OR you can convert the image yourself: (more images are supported) Images are created from files that contain special data (RGB), to have these files or to create your own files from an image that you have chosen you must join the discord, you need an external script (open source) that converts the image into a file suitable for this script to be used, a tutorial is in the Discord Server.\n\n - Build Speed: You can choose the speed at which the image is built. If you have a slow internet connection, set the speed to low. Do not set it to max for large images\n\n- Preview: Displays a preview of the image, making it easier to use modifiers or to see how the image will look. It is also required to build the image.\n\n- Change Speed: Stop the current process by opening your inventory and checking if no more blocks are being placed. Change the speed and press 'Load Image' again. It should automatically resume from where it stopped.\n\n- Optimize Mode: Allows even the weakest PCs or those without a good connection to load images."})
 local Button = Information:CreateButton({
     Name = "copy the list of working sites",
@@ -195,7 +197,7 @@ local Button = Information:CreateButton({
          })
     end,
  })
-local Section = Information:CreateSection("Auto Build")
+Section = Information:CreateSection("Auto Build")
 local Paragraph = Information:CreateParagraph({Title = "Information - [AUTO BUILD IS IN WORK IN PROGRESS]", Content = "this feature does not require any external requirement, if you save a build with a name that already existed, it will overwrite it. You can download and shares files in the Discord Server.\n\n - Safe Mode: prevents crashes during loading if you have a poor internet connection, this toggle slows down build speed.\n\n - Preview: displays a preview of the build."})
 
 local player = game.Players.LocalPlayer
@@ -247,7 +249,7 @@ end
 
 spawn(loop)
 
-local Section = Global:CreateSection("Utilities")
+Section = Global:CreateSection("Utilities")
 local AFKToggle = Global:CreateToggle({
     Name = "Anti-Afk",
     CurrentValue = false,
@@ -358,7 +360,7 @@ local Button = Global:CreateButton({ -- From IY by IY devs and NoobSploit
 
 local Silent = false
 
-local Section = Global:CreateSection("Auto Farm - The most powerful one")
+Section = Global:CreateSection("Auto Farm - The most powerful one")
 local AutoFarm1 = Global:CreateToggle({
     Name = "Auto Farm",
     CurrentValue = false,
@@ -370,7 +372,6 @@ local AutoFarm1 = Global:CreateToggle({
         local function startAutoFarm()
             if Value == false then return end
 
-            local player = game.Players.LocalPlayer
             local character = player.Character or player.CharacterAdded:Wait()
             local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
@@ -454,7 +455,6 @@ local AutoFarm1 = Global:CreateToggle({
                 local function onCharacterRespawned()
                     if getgenv().AF == true then
                         if FcMaster == false then return end
-                    local player = game.Players.LocalPlayer
                     local character = player.Character or player.CharacterAdded:Wait()
                     character:WaitForChild("HumanoidRootPart")
                        -- wait(2)
@@ -626,6 +626,7 @@ function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
     }
 
     if WebHook then
+        print("send")
         SendMessageEMBED(WebHook, embed)
     end
 end
@@ -794,6 +795,8 @@ local batchSize = 700
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong = 0
 local USEURL = nil
 local TempData = {}
+local BlockLoaded = true
+local TASK1, TASK2, TASK3, TASK4, TASK5 = false, false, false, false, false
 getgenv().ImgLoaderStat = true
 
 local function LPTEAM2()
@@ -994,6 +997,7 @@ local function buildImageFAST()
         end)
     end
 
+    TASK1 = true
     local blocks = workspace.Blocks:FindFirstChild(LNplayer):GetChildren()
 
     while #blocks < #parts do
@@ -1031,6 +1035,7 @@ local function buildImageFAST()
         end)
     end
 
+    TASK2 = true
     ImgParts = workspace.ImagePreview:GetChildren()
     for i = 1, #parts + 1 do
         local color = ImgParts[i].Color
@@ -1047,11 +1052,12 @@ local function buildImageFAST()
         part:destroy()
     end
 
+    TASK3 = true
     if getgenv().ImgLoaderStat == false then
         task.delay(1, function()
             Rayfield:Notify({
                 Title = "Image aborted",
-                Content = "All unplaced blocks will be deleted”",
+                Content = "All unplaced blocks will be deleted",
                 Duration = 6.5,
                 Image = 124144713366592,
             })
@@ -1066,9 +1072,9 @@ local function buildImageFAST()
             })
         end)
     end
-
+    task.wait(0.15)
+    TASK4 = true
     local remote = player.Character:FindFirstChild("DeleteTool") or player.Backpack:FindFirstChild("DeleteTool")
-
     for i = 1, #blocks do
         task.spawn(function()
             local block = blocks[i]
@@ -1081,7 +1087,8 @@ local function buildImageFAST()
                     remote.RF:InvokeServer(blocks[i])
             end
         end)
-    end    
+    end 
+    TASK5 = true  
 end
 
 function onImgBlockSecChanged()
@@ -1160,7 +1167,7 @@ local function buildImagePREVIEW(data, blockSize)
     end)
 end
 
-local Section = ImageLoader:CreateSection("Import Image")
+Section = ImageLoader:CreateSection("Import Image")
 
 local ImageLoaderFile = ImageLoader:CreateLabel("Details will be displayed here", 72272740678757, Color3.fromRGB(121, 188, 226), false)
 
@@ -1325,7 +1332,7 @@ local Input = ImageLoader:CreateInput({
 
 local Divider = ImageLoader:CreateDivider()
 
-local Section = ImageLoader:CreateSection("Preview")
+Section = ImageLoader:CreateSection("Preview")
 
 local TogglePreview = ImageLoader:CreateToggle({
     Name = "Preview",
@@ -1402,7 +1409,7 @@ local Slider = ImageLoader:CreateSlider({
 
  local Divider = ImageLoader:CreateDivider()
 
- local Section = ImageLoader:CreateSection("modifiers")
+Section = ImageLoader:CreateSection("modifiers")
 
  local Dropdown = ImageLoader:CreateDropdown({
     Name = "Block Type",
@@ -1579,7 +1586,7 @@ local Divider = ImageLoader:CreateDivider()
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneChangeLol = 0
 local TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol = 0
 
-local ImgStatsP = ImageLoader:CreateParagraph({Title = "Information", Content = "Block Loaded:\nBlock Placed:\nBlock colored:\nFinish in:"})
+local ImgStatsP = ImageLoader:CreateParagraph({Title = "Information", Content = "Require PaintTool and ScalingTool"})
 
  local Button = ImageLoader:CreateButton({
     Name = "Build Image | Preview must be enabled",
@@ -1624,6 +1631,7 @@ else
             Image = 124144713366592,
          })
 end
+        BlockLoaded = false
         getgenv().ImgLoaderStat = true
         task.spawn(buildImageFAST)
     end,
@@ -1658,14 +1666,59 @@ function ImgStats()
         local blocksRemaining = TBLOCK - BLKLD
         local timeRemaining = blocksRemaining / blocksPerSecond
         local FI = math.max(timeRemaining, 0)
+        if not BlockLoaded then
         ImgStatsP:Set({
             Title = "Information",
-            Content = "Block Loaded: "..BLKLD.."/"..TBLOCK..
+            Content = "Blocks Loaded: "..BLKLD.."/"..TBLOCK..
                       "\nFinish in: " .. math.floor(FI) .. "s"
         })
+        if BLKLD >= TBLOCK then
+            BlockLoaded = true
+        end
+        end
         task.wait(1.2)
     end
 end
+
+function ImgStats2()
+    while true do
+        if BlockLoaded then
+    if TASK1  then
+        ImgStatsP:Set({
+            Title = "Information",
+            Content = "Blocks Loaded!\nPlacing Blocks..."
+        })
+        TASK1 = false
+    elseif TASK2  then
+        ImgStatsP:Set({
+            Title = "Information",
+            Content = "Blocks Loaded!\nPlacing Blocks..."
+        })
+        TASK2 = false
+    elseif TASK3  then
+        ImgStatsP:Set({
+            Title = "Information",
+            Content = "Blocks Loaded!\nBlocks Placed!\nColoring Blocks..."
+        })
+        TASK3 = false
+    elseif TASK4  then
+        ImgStatsP:Set({
+            Title = "Information",
+            Content = "Blocks Loaded!\nBlocks Placed!\nBlocks Colored!\ndeleting unplaced blocks..."
+        })
+        TASK4 = false
+    elseif TASK5  then
+        ImgStatsP:Set({
+            Title = "Information",
+            Content = "Blocks Loaded!\nBlocks Placed!\nBlocks Colored!\nUnplaced blocks deleted!\nProcess end"
+        })
+        TASK5 = false
+    end
+end
+    wait(0.2)
+end
+end
+
 
 local initimgfilesbool = false
  function initimgfiles()
@@ -1681,7 +1734,8 @@ local Label = AutoBuild:CreateLabel("THIS FEATURE IS IN WIP - it's not working r
 
 local Divider = AutoBuild:CreateDivider()
 
-local Section = AutoBuild:CreateSection("Steal Build")
+--[[
+Section = AutoBuild:CreateSection("Steal Build")
 
 local Dropdown = AutoBuild:CreateDropdown({
     Name = "Target Player",
@@ -1715,7 +1769,7 @@ local Dropdown = AutoBuild:CreateDropdown({
  })
 
  local Divider = AutoBuild:CreateDivider()
- local Section = AutoBuild:CreateSection("Auto Build")
+Section = AutoBuild:CreateSection("Auto Build")
 
  local Dropdown = AutoBuild:CreateDropdown({
     Name = "Build File",
@@ -1755,13 +1809,14 @@ local Dropdown = AutoBuild:CreateDropdown({
     -- The function that takes place when the button is pressed
     end,
  })
+]]
 
  local Paragraph = BlockNeeded:CreateParagraph({Title = "Important", Content = "Preview mode must be enabled to calculate the number of blocks required"})
  local Divider = BlockNeeded:CreateDivider()
- local Section = BlockNeeded:CreateSection("Image Loader")
+Section = BlockNeeded:CreateSection("Image Loader")
  local LblBlockNeeded = BlockNeeded:CreateLabel("No block found", 72272740678757, Color3.fromRGB(255, 255, 255), true)
  local Divider = BlockNeeded:CreateDivider()
- local Section = BlockNeeded:CreateSection("Auto Build")
+Section = BlockNeeded:CreateSection("Auto Build")
  local Label = BlockNeeded:CreateLabel("THIS FEATURE IS IN WIP", 134637165939940, Color3.fromRGB(204, 31, 0), true)
  local Divider = BlockNeeded:CreateDivider()
   local NbBlockneeded = 0
@@ -1793,7 +1848,7 @@ local Dropdown = AutoBuild:CreateDropdown({
       end,
   })
 
-local Section = Miscellaneous:CreateSection("Teleportation")
+Section = Miscellaneous:CreateSection("Teleportation")
 
 local Button = Miscellaneous:CreateButton({
     Name = "White",
@@ -1844,7 +1899,7 @@ local Button = Miscellaneous:CreateButton({
     end,
  })
 
-local Section = Miscellaneous:CreateSection("Troll")
+Section = Miscellaneous:CreateSection("Troll")
 local Button = Miscellaneous:CreateButton({
     Name = "Disable Maximum click detector distance",
     Callback = function()
@@ -2054,7 +2109,7 @@ local Button = Miscellaneous:CreateButton({
     end,
  })
 
- local Section = Miscellaneous:CreateSection("FPS Booster")
+Section = Miscellaneous:CreateSection("FPS Booster")
 
  local Button = Miscellaneous:CreateButton({
     Name = "Remove All Texture",
@@ -2144,7 +2199,7 @@ local Button = Miscellaneous:CreateButton({
 
 local spoofSpeed = 40
 
- local Section = Miscellaneous:CreateSection("Spoofer")
+Section = Miscellaneous:CreateSection("Spoofer")
  local Slider = Miscellaneous:CreateSlider({
     Name = "Wheel Speed",
     Range = {10, 1000},
@@ -2174,7 +2229,7 @@ end
     end,
  })
 
- local Section = Miscellaneous:CreateSection("Teleport to Place")
+Section = Miscellaneous:CreateSection("Teleport to Place")
  local Button = Miscellaneous:CreateButton({
     Name = "Inner Cloud",
     Callback = function()
@@ -2193,10 +2248,12 @@ local function Init()
 local initclock = coroutine.create(initclock)
 local ImgStats = coroutine.create(ImgStats)
 local initimgfiles = coroutine.create(initimgfiles)
+local ImgStats2 = coroutine.create(ImgStats2)
 
 coroutine.resume(initclock)
 coroutine.resume(ImgStats)
 coroutine.resume(initimgfiles)
+coroutine.resume(ImgStats2)
 end
 
 zdzddz = Miscellaneous:CreateButton({
