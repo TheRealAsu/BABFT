@@ -85,7 +85,7 @@ local Window = Rayfield:CreateWindow({
        RememberJoins = true
     },
  
-    KeySystem = true,
+    KeySystem = false,
     KeySettings = {
        Title = "discord.gg/uGhnBu89SM",
        Subtitle = "Key System",
