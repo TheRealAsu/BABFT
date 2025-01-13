@@ -1,5 +1,3 @@
--- if you want to make an auto build or whatever, here are all the blocks a little bit sorted
-
 local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Transparency
     blocks = { -- Size
         "BalloonBlock", "WoodBlock", "TitaniumBlock", "StoneBlock", 
@@ -38,3 +36,5 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
         "Rope", "Sign", "CandyRed", "CandyBlue", "bar", "Spring"
     }
 }
+
+return classes
