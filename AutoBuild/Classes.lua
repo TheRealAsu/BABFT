@@ -1,5 +1,7 @@
 -- Block classification by property, It took me a while
 
+-- Block classification by property, It took me a while
+
 local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Transparency
     blocks = { -- Size
         "BalloonBlock", "WoodBlock", "TitaniumBlock", "StoneBlock",  "SandBlock",
@@ -34,7 +36,7 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
         },
 
         -- MaxForce Path: BlockName.MaxForce.Value
-        -- MaxSpeed Path: BlockName.MaxSpeed.Value
+        -- MaxSpeed Path: BlockName.MaxSpeed.Value 
 
         Motors = { -- nothing ??
             "BoatMotor", "BoatMotorUltra", "BoatMotorWinter",
@@ -113,7 +115,7 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
         "Sign", -- Text
         "CandyRed", -- DepthScale, HeadScale, HeightScale, WidthScale
         "CandyBlue", -- DepthScale, HeadScale, HeightScale, WidthScale
-        "bar", -- Length, AngleLimit, MatchRotation, SecondaryPartRotation, SecondaryPartPosition
+        "Bar", -- Length, AngleLimit, MatchRotation, SecondaryPartRotation, SecondaryPartPosition
         "Spring" -- Damping, MaxLength, TargetLength, MinLength, Stiffness, SecondaryPartRotation, SecondaryPartPosition
     }
 
@@ -177,7 +179,6 @@ return classes
         "MaxLength": Value,
         "Stiffness": Value,
         "Damping": Value,
-        "TargetLength": Value,
         "MinLength": Value,
         "Torque": Value,
         "ServoSpeed": Value,
@@ -194,13 +195,14 @@ return classes
             "TargetAngle": Bool
         },
         "NumberValues": {
+            "TargetLength": Value,
             "MaxSpeed": Value,
             "MaxForce": Value,
             "FlightDistance": Value,
             "FuseTime": Value,
             "ExtendLength": Value,
             "Speed": Value,
-            "LastDirrection": Value,
+            "LastDirection": Value,
             "WaitDuration": Value,
             "SemitoneOffset": Value,
             "DepthScale": Value,
