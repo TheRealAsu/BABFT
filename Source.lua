@@ -373,7 +373,7 @@ local AutoFarm1 = Global:CreateToggle({
             if Value == false then return end
 
             local character = player.Character or player.CharacterAdded:Wait()
-            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart") -- What are you looking for, basket ? :) no skid ;)
 
             local newPart = Instance.new("Part")
             newPart.Size = Vector3.new(5, 1, 5)
