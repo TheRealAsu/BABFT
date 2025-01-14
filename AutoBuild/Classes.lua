@@ -1,21 +1,59 @@
+-- Block classification by property, It took me a while
+
 local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Transparency
     blocks = { -- Size
-        "BalloonBlock", "WoodBlock", "TitaniumBlock", "StoneBlock", 
-        "SandBlock", "PlasticBlock", "ObsidianBlock", "NeonBlock", 
-        "MarbleBlock", "RustedBlock", "GrassBlock", "GoldBlock", 
-        "GlassBlock", "BouncyBlock", "FabricBlock", "ConcreteBlock", 
-        "CoalBlock", "CaneBlock", "BrickBlock", "IceBlock", 
-        "ParachuteBlock", "ConcreteBlock", "BalloonStarBlock",
-        "ToyBlock", "SmoothWoodBlock"
+        "BalloonBlock", "WoodBlock", "TitaniumBlock", "StoneBlock",  "SandBlock",
+        "PlasticBlock", "ObsidianBlock", "NeonBlock", "MarbleBlock", "RustedBlock", 
+        "GrassBlock", "GoldBlock", "GlassBlock", "BouncyBlock", "FabricBlock", 
+        "ConcreteBlock", "CoalBlock", "CaneBlock", "BrickBlock", "IceBlock", 
+        "ParachuteBlock", "ConcreteBlock", "BalloonStarBlock","ToyBlock", 
+        "SmoothWoodBlock"
     },
 
-    Bindable = { -- BoolValues + ...
-        "JetTurbine", "Harpoon", "HarpoonGold", "WinterThruster", "UltraThruster", "FireworkD", "BoatMotor", "Thruster", 
-        "SticksOfTNT", "SonicJetTurbine", "ShieldGenerator", "Servo", "PilotSeat", "Motor", "MegaThruster", "Magnet", 
-        "JetTurbineWinter", "Piston", "FireworkB", "FireworkA", "Delay", "HugeMotor", "HalloweenThruster", "Firework", 
-        "CarSeat", "FrontWheelMint", "BoxingGlove", "Lever", "BackWheel", "DualCaneHarpoon", "BoatMotorUltra", "BoatMotorWinter", 
-        "CameraDome", "FireworkC", "FrontWheel", "Camera", "Switch", "Note", "SwitchBig", "HugeFrontWheel", "HugeBackWheel", 
-        "BackWheelCookie", "BackWheelMint", "FrontWheelCookie", "HarpoonDragon", "MiniGun" , "LightBulb", "Cannon"
+    Bindable = { -- BoolValues, NumberValues
+        Wheels = { -- MaxSpeed, ReverseSpin, Torque
+            "BackWheelCookie", "BackWheelMint", "FrontWheelCookie", "HugeMotor",
+            "FrontWheelMint", "Motor", "BackWheel", "FrontWheel", "HugeFrontWheel",
+            "HugeBackWheel",
+        },
+
+        FireWorks = { -- FlightDistance, FuseTime
+            "FireworkA", "FireworkB", "FireworkC", "FireworkD"
+        },
+
+        Jets = { -- MaxForce, MaxSpeed
+            "JetTurbine", "SonicJetTurbine", "JetTurbineWinter"
+        },
+
+        Motors = { -- nothing ??
+            "BoatMotor", "BoatMotorUltra", "BoatMotorWinter",
+        },
+
+        Aim = { --Aim
+            "Harpoon", "HarpoonGold", "DualCaneHarpoon", "HarpoonDragon", "MiniGun",
+            "Cannon"
+        },
+
+        Cameras = { -- ShowCrosshairs
+            "CameraDome", "Camera"
+        },
+
+        Activators = { -- On
+            "Lever", "Switch", "SwitchBig", 
+        },
+
+        Specials = {
+             "Servo", -- Torque, ServoSpeed, ReverseRotation, TargetAngle
+             "Piston", -- ExtendLength, Speed, LastDirrection (-1 or 1)
+             "Delay", -- WaitDuration
+             "Note", -- SemitoneOffset (0 - 24)
+        },
+
+        Others = {
+            "WinterThruster", "MegaThruster", "UltraThruster", "Thruster", "HalloweenThruster",
+            "ShieldGenerator", "SticksOfTNT", "Firework", "PilotSeat", "Magnet", "CarSeat",
+            "BoxingGlove", "LightBulb"
+        }
     },
 
     Other = { -- Nothing
@@ -32,9 +70,67 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
         "CandyCaneSwordMount", "SnowballTurret", "SpikeTrap", "LaserTurret", "Helm" 
     },
     
-    Special = { -- ...
-        "Rope", "Sign", "CandyRed", "CandyBlue", "bar", "Spring"
+    Special = {
+        "Rope", -- Length, MatchRotation, SecondaryPartRotation, SecondaryPartPosition
+        "Sign", -- Text
+        "CandyRed", -- DepthScale, HeadScale, HeightScale, WidthScale
+        "CandyBlue", -- DepthScale, HeadScale, HeightScale, WidthScale
+        "bar", -- Length, AngleLimit, MatchRotation, SecondaryPartRotation, SecondaryPartPosition
+        "Spring" -- Damping, MaxLength, TargetLength, MinLength, Stiffness, SecondaryPartRotation, SecondaryPartPosition
     }
 }
 
 return classes
+
+--[[
+-- .Build file Data Structure Example:
+
+{
+    "BlockName": [{
+        "ShowShadow": Bool,
+        "CanCollide": Bool,
+        "Anchored": Bool,
+        "Color": "Color3.new",
+        "Position": "CFrame",
+        "Rotation": "CFrame",
+        "SecondaryPartPosition": "CFrame",
+        "SecondaryPartRotation": "CFrame",
+        "MaxLength": Value,
+        "Stiffness": Value,
+        "Damping": Value,
+        "TargetLength": Value,
+        "MinLength": Value,
+        "Torque": Value,
+        "ServoSpeed": Value,
+        "Length" Value,         -- (Only for Rope and Bar)
+        "MatchRotation" Value,  -- (Only for Rope and Bar)
+        "Text":"String",
+        "AngleLimit": Value,    -- (Only for Bar)
+        "BoolValues": {
+            "ReverseSpin": Bool,
+            "Aim": Bool,
+            "ShowCrosshairs": Bool,
+            "On": Bool,
+            "ReverseRotation": Bool,
+            "TargetAngle": Bool
+        },
+        "NumberValues": {
+            "MaxSpeed": Value,
+            "MaxForce": Value,
+            "FlightDistance": Value,
+            "FuseTime": Value,
+            "ExtendLength": Value,
+            "Speed": Value,
+            "LastDirrection": Value,
+            "WaitDuration": Value,
+            "SemitoneOffset": Value,
+            "DepthScale": Value,
+            "HeadScale": Value,
+            "HeightScale": Value,
+            "WidthScale": Value,
+
+        },
+    }]
+}
+
+--]]
