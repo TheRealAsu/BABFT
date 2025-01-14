@@ -17,13 +17,24 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
             "HugeBackWheel",
         },
 
+        -- MaxSpeed Path: BlockName.MaxSpeed.Value
+        -- Reverspeed Path: BlockName.ReverseSpin.Value
+        -- Torque Path:  BlockName.PPart.HingeConstraint.MotorMaxTorque
+
+
         FireWorks = { -- FlightDistance, FuseTime
             "FireworkA", "FireworkB", "FireworkC", "FireworkD"
         },
 
+        -- FlightDistance Path: BlockName.FlightDistance.Value
+        -- FuseTime Path: BlockName.FuseTime.Value
+
         Jets = { -- MaxForce, MaxSpeed
             "JetTurbine", "SonicJetTurbine", "JetTurbineWinter"
         },
+
+        -- MaxForce Path: BlockName.MaxForce.Value
+        -- MaxSpeed Path: BlockName.MaxSpeed.Value
 
         Motors = { -- nothing ??
             "BoatMotor", "BoatMotorUltra", "BoatMotorWinter",
@@ -34,13 +45,19 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
             "Cannon"
         },
 
+        -- Aim Path: BlockName.Aim.Value
+
         Cameras = { -- ShowCrosshairs
             "CameraDome", "Camera"
         },
 
+        -- Aim Path: BlockName.ShowCrosshairs.Value
+
         Activators = { -- On
             "Lever", "Switch", "SwitchBig", 
         },
+
+        -- On Path: BlockName.On.Value
 
         Specials = {
              "Servo", -- Torque, ServoSpeed, ReverseRotation, TargetAngle
@@ -48,6 +65,27 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
              "Delay", -- WaitDuration
              "Note", -- SemitoneOffset (0 - 24)
         },
+
+        --[[
+
+        Servo:
+        Torque Path: BlockName.PPart.HingeConstraint.ServoMaxTorque
+        ServoSpeed Path: BlockName.PPart.HingeConstraint.AngularSpeed
+        ReverseRotation Path: BlockName.ReverseRotation.Value
+        TargetAngle Path: BlockName.TargetAngle.Value
+
+        Piston:
+        ExtendLength Path: BlockName.ExtendLength.Value
+        Speed Path: BlockName.Speed.Value
+        LastDirrection Path: BlockName.LastDirrection.Value
+
+        Delay:
+        WaitDuration Path: BlockName.WaitDuration.Value
+
+        Note:
+        SemitoneOffset Path: BlockName.SemitoneOffset.Value
+        
+        --]]
 
         Others = {
             "WinterThruster", "MegaThruster", "UltraThruster", "Thruster", "HalloweenThruster",
@@ -78,6 +116,47 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
         "bar", -- Length, AngleLimit, MatchRotation, SecondaryPartRotation, SecondaryPartPosition
         "Spring" -- Damping, MaxLength, TargetLength, MinLength, Stiffness, SecondaryPartRotation, SecondaryPartPosition
     }
+
+    --[[
+
+    Rope:
+    Length path: BlockName.PPart.RopeConstraint.Length
+    MatchRotation path: BlockName.PPart.AlignOrientation.Enabled
+    SecondaryPartRotation path: BlockName.SecondaryPart.Part.CFrame
+    SecondaryPartPosition path: BlockName.SecondaryPart.Part.CFrame
+
+    Sign:
+    Textpath: BlockName.PPart.SurfaceGui.TextLabel.Text
+
+    CandyRed:
+    DepthScale path: BlockName.DepthScale.Value
+    HeadScale path: BlockName.HeadScale.Value
+    HeightScale path: BlockName.HeightScale.Value
+    WidthScale path: BlockName.WidthScale.Value
+
+    CandyBlue:
+    DepthScale path: BlockName.DepthScale.Value
+    HeadScale path: BlockName.HeadScale.Value
+    HeightScale path: BlockName.HeightScale.Value
+    WidthScale path: BlockName.WidthScale.Value
+
+    bar:
+    Length path: BlockName.PPart.RodConstraint.Length
+    AngleLimit path: BlockName.PPart.RodConstraint.LimitAngle0
+    MatchRotation path: BlockName.PPart.AlignOrientation.Enabled
+    SecondaryPartRotation path: BlockName.SecondaryPart.Part.CFrame
+    SecondaryPartPosition path: BlockName.SecondaryPart.Part.CFrame
+
+    Spring:
+    Damping path: BlockName.PPart.SpringConstraint.Damping
+    MaxLength path: BlockName.PPart.SpringConstraint.MaxLength
+    TargetLength path: BlockName.PPart.SpringConstraint.FreeLength
+    MinLength path: BlockName.PPart.SpringConstraint.MinLength
+    Stiffness path: BlockName.PPart.SpringConstraint.Stiffness
+    SecondaryPartRotation path: BlockName.SecondaryPart.Part.CFrame
+    SecondaryPartPosition path: BlockName.SecondaryPart.Part.CFrame
+
+    ]]
 }
 
 return classes
