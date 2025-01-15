@@ -65,11 +65,8 @@ local function GetBuildData()
                 local canCollide = PPart.CanCollide
                 local color = PPart.Color
                 local anchored = PPart.Anchored
-                local rotationX, rotationY, rotationZ = PPart.CFrame:ToEulerAnglesXYZ()
-                local degreeX = math.deg(rotationX)
-                local degreeY = math.deg(rotationY)
-                local degreeZ = math.deg(rotationZ)
-                local rotationtoString = string.format("%.3f, %.3f, %.3f", degreeX, degreeY, degreeZ)
+                local rotationX, rotationY, rotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z)
+                local rotationtoString = string.format("%.3f, %.3f, %.3f", math.deg(rotationX), math.deg(rotationY), math.deg(rotationZ))
                 local position = TeamCF:pointToObjectSpace(PPart.Position)
                 local transparency = v:FindFirstChild("TransparencyModifier") and v.TransparencyModifier.Value or 0
                 local colortoString = string.format("%.6f, %.6f, %.6f", color.R, color.G, color.B)
@@ -189,11 +186,9 @@ local function GetBuildData()
                     if v.Name == "Rope" then
                         blockInfo.Length = v.PPart.RopeConstraint.Length
                         blockInfo.MatchRotation = v.PPart.AlignOrientation.Enabled
-                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = v.SecondaryPart.Part.CFrame:ToEulerAnglesXYZ()
-                        local degreeX, degreeY, degreeZ = math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ)
-                        local rotationtoString = string.format("%.3f, %.3f, %.3f", degreeX, degreeY, degreeZ)
-                        blockInfo.SecondaryPartRotation = rotationtoString
+                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z)
                         local SecondaryPartPosition = TeamCF:pointToObjectSpace(v.SecondaryPart.Part.Position)
+                        blockInfo.SecondaryPartRotation = string.format("%.3f, %.3f, %.3f", math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ))
                         blockInfo.SecondaryPartPosition = string.format("%.6f, %.6f, %.6f", SecondaryPartPosition.X, SecondaryPartPosition.Y, SecondaryPartPosition.Z)
                     elseif v.Name == "Sign" then
                         blockInfo.Text = v.PPart.SurfaceGui.TextLabel.Text
@@ -211,11 +206,9 @@ local function GetBuildData()
                         blockInfo.Length = v.PPart.RodConstraint.Length
                         blockInfo.AngleLimit = v.PPart.RodConstraint.LimitAngle0
                         blockInfo.MatchRotation = v.PPart.AlignOrientation.Enabled
-                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = v.SecondaryPart.Part.CFrame:ToEulerAnglesXYZ()
-                        local degreeX, degreeY, degreeZ = math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ)
-                        local rotationtoString = string.format("%.3f, %.3f, %.3f", degreeX, degreeY, degreeZ)
-                        blockInfo.SecondaryPartRotation = rotationtoString
+                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z)
                         local SecondaryPartPosition = TeamCF:pointToObjectSpace(v.SecondaryPart.Part.Position)
+                        blockInfo.SecondaryPartRotation = string.format("%.3f, %.3f, %.3f", math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ))
                         blockInfo.SecondaryPartPosition = string.format("%.6f, %.6f, %.6f", SecondaryPartPosition.X, SecondaryPartPosition.Y, SecondaryPartPosition.Z)
                     elseif v.Name == "Spring" then
                         blockInfo.Damping = v.PPart.SpringConstraint.Damping
@@ -223,11 +216,9 @@ local function GetBuildData()
                         blockInfo.TargetLength = v.PPart.SpringConstraint.FreeLength
                         blockInfo.MinLength = v.PPart.SpringConstraint.MinLength
                         blockInfo.Stiffness = v.PPart.SpringConstraint.Stiffness
-                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = v.SecondaryPart.Part.CFrame:ToEulerAnglesXYZ()
-                        local degreeX, degreeY, degreeZ = math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ)
-                        local rotationtoString = string.format("%.3f, %.3f, %.3f", degreeX, degreeY, degreeZ)
-                        blockInfo.SecondaryPartRotation = rotationtoString
+                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z)
                         local SecondaryPartPosition = TeamCF:pointToObjectSpace(v.SecondaryPart.Part.Position)
+                        blockInfo.SecondaryPartRotation = string.format("%.3f, %.3f, %.3f", math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ))
                         blockInfo.SecondaryPartPosition = string.format("%.6f, %.6f, %.6f", SecondaryPartPosition.X, SecondaryPartPosition.Y, SecondaryPartPosition.Z)
                     end
                 end
@@ -396,9 +387,10 @@ if next(blockData) then
 
     local jsonString = HttpService:JSONEncode(jsonData)
 
-    --print(jsonString)
-    --setclipboard(jsonString)
-    writefile("BABFT/Build/Output_"..math.random(1, 99999)..".txt", jsonString)
+    -- disable/enable this
+    print(jsonString)
+    setclipboard(jsonString)
+    --writefile("BABFT/Build/Output_"..math.random(1, 99999)..".txt", jsonString)
 else
     print("no blocks lol")
 end
