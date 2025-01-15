@@ -1,4 +1,4 @@
-Local NormalColorBlock = {
+local NormalColorBlock = {
     ["WoodDoor"] = (0.835294, 0.450980, 0.239216),
     ["Plushie1"] = (0.458824, 0.000000, 0.000000),
     ["Star"] = (1.000000, 0.690196, 0.000000),
