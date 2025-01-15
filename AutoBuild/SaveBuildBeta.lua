@@ -1,10 +1,12 @@
 -- Auto Build save build
 -- Only Store your blocks or Leader's blocks in sharemode because it is for testing only and it's on BETA
+-- current and probably last issue a fix, rotation only works in white teams
 
 local Players = game:GetService("Players")
 local Teams = game:GetService("Teams")
 local player = game.Players.LocalPlayer
 local HttpService = game:GetService("HttpService")
+
 if not isfolder("BABFT") then
     makefolder("BABFT")
 end
@@ -14,6 +16,7 @@ if not isfolder("BABFT/Build") then
 end
 
 local classes = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/AutoBuild/Classes.lua'))()
+local NormalColorBlock = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/AutoBuild/NormalColorBlock.lua'))()
 
 function GetFolder()
     local Folder
@@ -61,15 +64,29 @@ local function GetBuildData()
             local PPart = v:FindFirstChild("PPart")
             if PPart then
 
-                local showShadow = PPart:FindFirstChild("ShowShadow") and PPart.ShowShadow.Value or true
+                local showShadow = PPart.CastShadow or true
                 local canCollide = PPart.CanCollide
-                local color = PPart.Color
                 local anchored = PPart.Anchored
-                local rotationX, rotationY, rotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z)
+                local rotationX, rotationY, rotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z) -- WARNING: FIX OTHER TEAM HERE
+                local cframeRotation = CFrame.Angles(rotationX, rotationY, rotationZ)
                 local rotationtoString = string.format("%.3f, %.3f, %.3f", math.deg(rotationX), math.deg(rotationY), math.deg(rotationZ))
                 local position = TeamCF:pointToObjectSpace(PPart.Position)
                 local transparency = v:FindFirstChild("TransparencyModifier") and v.TransparencyModifier.Value or 0
-                local colortoString = string.format("%.6f, %.6f, %.6f", color.R, color.G, color.B)
+
+                local color = PPart.Color
+                if NormalColorBlock[v.Name] then
+                    local normalColor = NormalColorBlock[v.Name]
+
+                    if math.abs(color.R - normalColor[1]) < 0.0001 and
+                       math.abs(color.G - normalColor[2]) < 0.0001 and
+                       math.abs(color.B - normalColor[3]) < 0.0001 then
+                        colortoString = nil
+                    else
+                        colortoString = string.format("%.6f, %.6f, %.6f", color.R, color.G, color.B)
+                    end
+                else
+                    colortoString = nil
+                end
 
                 local size = nil
                 if table.find(classes.blocks, v.Name) then
@@ -389,7 +406,7 @@ if next(blockData) then
 
     -- disable/enable this
     print(jsonString)
-    setclipboard(jsonString)
+    --setclipboard(jsonString)
     --writefile("BABFT/Build/Output_"..math.random(1, 99999)..".txt", jsonString)
 else
     print("no blocks lol")
