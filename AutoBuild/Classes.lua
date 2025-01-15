@@ -1,7 +1,5 @@
 -- Block classification by property, It took me a while
 
--- Block classification by property, It took me a while
-
 local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Transparency
     blocks = { -- Size
         "BalloonBlock", "WoodBlock", "TitaniumBlock", "StoneBlock",  "SandBlock",
