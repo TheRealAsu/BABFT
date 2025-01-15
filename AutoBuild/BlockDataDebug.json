@@ -1,71 +1,66 @@
+“Color” is not stored on this list due to a script check, it will be stored if you execute it (SaveBuildBeta.lua)
+
 {
-    "BoxingGlove": [{
+    "WoodDoor": [{
         "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
+        "CanCollide": false,
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "2.500015, 5.400002, -106.900024",
+        "Position": "-693.543213, 8.700214, 229.534195",
         "NumberValues": []
     }],
-    "Plushie1": [{
+    "CoalBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.458824, 0.000000, 0.000000",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-8.126457, 7.477235, -66.481445",
-        "NumberValues": []
+        "Position": "-748.500061, 6.100000, 237.300018",
+        "NumberValues": [],
+        "Size": "2.000000, 2.000000, 2.000000"
     }],
     "Star": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "1.000000, 0.690196, 0.000000",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "21.599991, 5.600000, -78.000000",
+        "Position": "-713.000061, 5.600000, 253.800018",
         "NumberValues": []
     }],
-    "GlassBlock": [{
+    "CaneBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.501961, 0.733333, 0.858824",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "36.299988, 6.100000, -87.700012",
+        "Position": "-655.093262, 6.100050, 278.234314",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
-    "SwitchBig": [{
+    "Candle": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.352941, 0.396078, 0.411765",
         "Anchored": true,
-        "BoolValues": {
-            "On": false
-        },
-        "Rotation": "-0.000, -90.000, 0.000",
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-37.900040, 5.300010, -63.499969",
+        "Position": "-680.494751, 5.664244, 292.158569",
         "NumberValues": []
     }],
     "JetTurbine": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "14.565662, 7.565577, -17.370239",
+        "Position": "-652.370300, 7.565577, 260.834351",
         "NumberValues": {
             "MaxSpeed": 100,
             "MaxForce": 10000000000
@@ -74,134 +69,121 @@
     "ConcreteRod": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.803922, 0.803922, 0.803922",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "62.575684, 7.800007, -140.893066",
+        "Position": "-775.893127, 7.800007, 212.824326",
         "NumberValues": []
     }],
     "Lever": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.411765, 0.400000, 0.360784",
         "Anchored": true,
         "BoolValues": {
             "On": false
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "3.899994, 6.200004, -75.399994",
+        "Position": "-710.400024, 6.200004, 271.500000",
         "NumberValues": []
     }],
     "HarpoonDragon": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "Aim": true
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "6.599689, 5.987988, -67.283142",
+        "Position": "-702.283203, 5.987988, 268.800323",
         "NumberValues": []
     }],
     "FireworkC": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "1.000000, 0.800000, 0.600000",
         "Anchored": true,
         "BoolValues": [],
         "Rotation": "-90.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "5.900089, 5.850000, -111.350006",
+        "Position": "-746.350098, 5.850000, 269.499908",
         "NumberValues": {
             "FuseTime": 0,
             "FlightDistance": 200
         }
     }],
-    "FrontWheelMint": [{
+    "Note": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
-        "BoolValues": {
-            "ReverseSpin": false
-        },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "25.592690, 10.081992, -51.330139",
-        "Torque": 1000000,
+        "Position": "-777.901855, 6.473575, 271.440674",
         "NumberValues": {
-            "MaxSpeed": 40
+            "SemitoneOffset": 0
         }
     }],
     "Spring": [{
         "Damping": 100,
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "NumberValues": {
             "TargetLength": 4
         },
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "SecondaryPartRotation": "-0.000, 0.000, -0.000",
-        "Position": "36.565689, 5.600015, -30.493134",
+        "SecondaryPartRotation": "0.000, 0.000, 0.000",
+        "Position": "-665.493164, 5.600015, 238.834320",
         "Stiffness": 1000,
-        "SecondaryPartPosition": "36.565689, 8.599993, -30.493134",
+        "SecondaryPartPosition": "-665.493164, 8.599993, 238.834320",
         "MaxLength": 9,
         "MinLength": 1
     }],
     "TNT": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-1.021107, 9.961603, -71.323151",
+        "Position": "-706.323242, 9.961603, 276.421112",
         "NumberValues": []
     }],
     "BoatMotor": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "18.871883, 9.341387, -91.489929",
+        "Position": "-726.489990, 9.341387, 256.528137",
         "NumberValues": []
     }],
     "StoneBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "58.165688, 7.300009, -143.093201",
+        "Position": "-778.093262, 7.300009, 217.234314",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "FrontWheel": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "ReverseSpin": false
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-5.434189, 8.010056, -99.693329",
+        "Position": "-734.693359, 8.010056, 280.834198",
         "Torque": 1000000,
         "NumberValues": {
             "MaxSpeed": 40
@@ -210,69 +192,61 @@
     "JackOLantern": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.756863, 0.376471, 0.000000",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "11.124527, 6.680354, -93.780243",
+        "Position": "-728.780273, 6.680354, 264.275482",
         "NumberValues": []
     }],
     "HalloweenThruster": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "30.767660, 9.063329, -36.567871",
+        "Position": "-671.567932, 9.063329, 244.632355",
         "NumberValues": []
     }],
     "SnowballTurret": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.929412, 0.917647, 0.917647",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "20.359688, 5.200036, -105.683136",
+        "Position": "-740.683228, 5.200036, 255.040314",
         "NumberValues": []
     }],
-    "Cannon": [{
+    "Wedge": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
-        "BoolValues": {
-            "Aim": true
-        },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "21.999996, 7.500012, -132.200012",
+        "Position": "-766.700073, 6.099998, 245.500000",
         "NumberValues": []
     }],
     "ChestUncommon": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.384314, 0.282353, 0.196078",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-89.900009, 6.900005, -38.500000",
+        "Position": "-673.500061, 6.900005, 365.300018",
         "NumberValues": []
     }],
     "JetTurbineWinter": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "51.565659, 7.565577, -16.370239",
+        "Position": "-651.370300, 7.565577, 223.834351",
         "NumberValues": {
             "MaxSpeed": 150,
             "MaxForce": 10000000000
@@ -281,27 +255,25 @@
     "IceBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.501961, 0.733333, 0.858824",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-11.900009, 6.100000, -46.500000",
+        "Position": "-681.500061, 6.100000, 287.300018",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "Bar": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "AngleLimit": 90,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "SecondaryPartRotation": "-0.000, 0.000, -0.000",
-        "Position": "33.565689, 5.600015, -30.493134",
-        "SecondaryPartPosition": "33.565689, 8.599993, -30.493134",
+        "SecondaryPartRotation": "0.000, 0.000, 0.000",
+        "Position": "-665.493164, 5.600015, 241.834320",
+        "SecondaryPartPosition": "-665.493164, 8.599993, 241.834320",
         "Length": 2,
         "NumberValues": [],
         "MatchRotation": true
@@ -309,140 +281,128 @@
     "UltraThruster": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.066667, 0.066667, 0.066667",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "8.715710, 7.134741, -37.042053",
+        "Position": "-672.042114, 7.134741, 266.684296",
         "NumberValues": []
     }],
     "ChestCommon": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.384314, 0.282353, 0.196078",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-89.900009, 6.900005, -46.500000",
+        "Position": "-681.500061, 6.900005, 365.300018",
         "NumberValues": []
     }],
     "SmoothWoodBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.458824, 0.227451, 0.058824",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-1.900009, 6.100000, -103.500000",
+        "Position": "-738.500061, 6.100000, 277.300018",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "Thruster": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "22.565706, 7.103498, -37.042053",
+        "Position": "-672.042114, 7.103498, 252.834305",
         "NumberValues": []
     }],
     "MegaThruster": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.066667, 0.066667, 0.066667",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "14.365711, 7.103498, -37.042053",
+        "Position": "-672.042114, 7.103498, 261.034302",
         "NumberValues": []
     }],
     "Trophy2nd": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.247059, 0.239216, 0.239216",
         "Anchored": true,
         "BoolValues": [],
         "Rotation": "0.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "57.565689, 5.602345, -91.493164",
+        "Position": "-726.493225, 5.602345, 217.834320",
         "NumberValues": []
     }],
     "CandyOrange": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "1.000000, 0.690196, 0.000000",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-19.694031, 5.471128, -46.422607",
+        "Position": "-681.422668, 5.471128, 295.094055",
         "NumberValues": []
     }],
     "MiniGun": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "Aim": true
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "4.293690, 7.023993, -123.306122",
+        "Position": "-758.306152, 7.023993, 271.106323",
         "NumberValues": []
     }],
-    "ChestLegendary": [{
+    "LifePreserver": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.384314, 0.282353, 0.196078",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-89.900009, 6.900005, -16.500000",
+        "Position": "-728.799988, 5.659982, 278.200409",
         "NumberValues": []
     }],
     "Camera": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.494118, 0.490196, 0.498039",
         "Anchored": true,
         "BoolValues": {
             "ShowCrosshairs": true
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "30.574997, 6.841435, -73.554565",
+        "Position": "-708.554626, 6.841435, 244.825012",
         "NumberValues": []
     }],
     "CandyPink": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "1.000000, 0.400000, 0.800000",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-19.694031, 5.471128, -46.422607",
+        "Position": "-681.422668, 5.471128, 295.094055",
         "NumberValues": []
     }],
     "Rope": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "SecondaryPartRotation": "-0.000, 0.000, -0.000",
-        "Position": "30.565689, 5.600015, -30.493134",
-        "SecondaryPartPosition": "30.565689, 8.599993, -30.493134",
+        "SecondaryPartRotation": "0.000, 0.000, 0.000",
+        "Position": "-665.493164, 5.600015, 244.834320",
+        "SecondaryPartPosition": "-665.493164, 8.599993, 244.834320",
         "Length": 3,
         "NumberValues": [],
         "MatchRotation": true
@@ -450,91 +410,83 @@
     "WoodRod": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.666667, 0.333333, 0.000000",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "54.565689, 7.800014, -140.893036",
+        "Position": "-775.893066, 7.800014, 220.834320",
         "NumberValues": []
     }],
     "ObsidianBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "56.299988, 6.100000, -87.700012",
+        "Position": "-722.700073, 6.100000, 219.100021",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "Window": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "49.099991, 7.200018, -143.000000",
+        "Position": "-778.000061, 7.200018, 226.300018",
         "NumberValues": []
     }],
     "DragonEgg": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.349020, 0.258824, 0.156863",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-21.126915, 5.066942, -61.502991",
+        "Position": "-696.503052, 5.066942, 296.526917",
         "NumberValues": []
     }],
     "WoodBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.886275, 0.607843, 0.250980",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-1.834312, 23.700010, -93.293152",
+        "Position": "-728.293213, 23.700010, 277.234314",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "WoodTrapDoor": [{
         "ShowShadow": true,
         "CanCollide": false,
-        "Color": "0.835294, 0.450980, 0.239216",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "29.700005, 6.800033, -57.899994",
+        "Position": "-692.900024, 6.800033, 245.700012",
         "NumberValues": []
     }],
-    "Bread": [{
+    "CannonTurret": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.835294, 0.450980, 0.239216",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-2.099998, 6.100010, -72.350128",
+        "Position": "-741.152832, 5.247528, 238.120209",
         "NumberValues": []
     }],
     "FireworkD": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "1.000000, 0.800000, 0.600000",
         "Anchored": true,
         "BoolValues": [],
         "Rotation": "-90.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "5.900455, 5.850000, -114.149323",
+        "Position": "-749.149414, 5.850000, 269.499542",
         "NumberValues": {
             "FuseTime": 0,
             "FlightDistance": 200
@@ -543,212 +495,195 @@
     "JetPackEaster": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.501961, 0.733333, 0.858824",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-2.099987, 52.025021, -110.787506",
+        "Position": "-745.787598, 52.025021, 277.500000",
         "NumberValues": []
     }],
     "JetPackSteampunk": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.486275, 0.419608, 0.262745",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "8.100014, 7.895022, -111.512177",
+        "Position": "-746.512207, 7.895022, 267.299988",
         "NumberValues": []
     }],
     "SticksOfTNT": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.670588, 0.133333, 0.094118",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "3.313931, 7.770766, -135.394958",
+        "Position": "-770.395020, 7.770766, 272.086090",
         "NumberValues": []
     }],
     "Plushie4": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.050980, 0.411765, 0.674510",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-8.861652, 6.889259, -66.676666",
+        "Position": "-701.676758, 6.889259, 284.261658",
         "NumberValues": []
     }],
     "Lamp": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-30.289963, 6.939956, -46.489960",
+        "Position": "-681.489990, 6.939956, 305.689972",
         "NumberValues": []
     }],
-    "Trophy3rd": [{
+    "Harpoon": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.560784, 0.352941, 0.301961",
         "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "0.000, 90.000, 0.000",
+        "BoolValues": {
+            "Aim": true
+        },
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "61.565689, 5.602345, -91.493164",
+        "Position": "-702.283203, 5.987988, 283.800323",
         "NumberValues": []
     }],
     "KnightSwordMount": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
+        "Rotation": "0.000, -90.000, 0.000",
         "Transparency": 0,
-        "Position": "33.491516, 8.599982, -126.528717",
+        "Position": "-761.528809, 8.599982, 241.908493",
         "NumberValues": []
     }],
     "ChestEpic": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.384314, 0.282353, 0.196078",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-89.900009, 6.900005, -24.500000",
+        "Position": "-659.500061, 6.900005, 365.300018",
         "NumberValues": []
     }],
     "Trophy1st": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.843137, 0.772549, 0.603922",
         "Anchored": true,
         "BoolValues": [],
         "Rotation": "0.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "53.565689, 5.602345, -91.493164",
+        "Position": "-726.493225, 5.602345, 221.834320",
         "NumberValues": []
     }],
     "BowMount": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "23.373795, 7.099996, -123.060944",
+        "Position": "-758.061035, 7.099996, 252.026215",
         "NumberValues": []
     }],
     "ConcreteBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "67.165688, 7.300035, -143.093201",
+        "Position": "-778.093262, 7.300035, 208.234314",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "MetalBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.584314, 0.474510, 0.466667",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "64.165688, 7.300020, -143.093201",
+        "Position": "-778.093262, 7.300020, 211.234314",
         "NumberValues": []
     }],
     "BoatMotorUltra": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "28.871933, 10.341388, -90.528656",
+        "Position": "-725.528687, 10.341388, 246.528076",
         "NumberValues": []
     }],
     "BouncyBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "1.000000, 0.596078, 0.862745",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-43.300011, 6.100000, -37.300018",
+        "Position": "-672.300049, 6.100000, 318.700012",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "Seat": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "18.299969, 5.600040, -142.900085",
+        "Position": "-777.900146, 5.600040, 257.100037",
         "NumberValues": []
     }],
     "MysteryBox": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.070588, 0.933333, 0.831373",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-8.000008, 6.100000, -70.000000",
+        "Position": "-705.000061, 6.100000, 283.400024",
         "NumberValues": []
     }],
     "LockedDoor": [{
         "ShowShadow": true,
         "CanCollide": false,
-        "Color": "0.803922, 0.803922, 0.803922",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "52.865810, 8.700214, -58.543152",
+        "Position": "-693.543213, 8.700214, 222.534195",
         "NumberValues": []
     }],
     "LightningStaffMount": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
+        "Rotation": "0.000, -90.000, 0.000",
         "Transparency": 0,
-        "Position": "22.441668, 8.599996, -125.675751",
+        "Position": "-760.675781, 8.599996, 252.958344",
         "NumberValues": []
     }],
     "Delay": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-0.800003, 5.800000, -125.000000",
+        "Position": "-760.000061, 5.800000, 276.200012",
         "NumberValues": {
             "WaitDuration": 1
         }
@@ -756,475 +691,432 @@
     "Steel I-Beam": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.388235, 0.372549, 0.384314",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "56.089989, 7.299999, -134.449982",
+        "Position": "-769.450073, 7.299999, 219.310013",
         "NumberValues": []
     }],
-    "Sign": [{
+    "Hinge": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.541176, 0.470588, 0.329412",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-1.400009, 7.100006, -66.000000",
-        "Text": "",
+        "Position": "-681.500061, 5.600000, 312.300018",
         "NumberValues": []
     }],
-    "CannonMount": [{
+    "LaserTurret": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "21.591782, 7.900003, -116.775726",
+        "Position": "-767.455200, 5.249992, 251.446320",
         "NumberValues": []
     }],
     "TitaniumBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.913725, 0.854902, 0.854902",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "73.435684, 7.300007, -143.093201",
+        "Position": "-778.093262, 7.300007, 201.964325",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "Cake": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.337255, 0.258824, 0.211765",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "10.249989, 5.500034, -81.500092",
+        "Position": "-716.500122, 5.500034, 265.150024",
         "NumberValues": []
     }],
     "Flag": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
+        "Rotation": "0.000, -90.000, 0.000",
         "Transparency": 0,
-        "Position": "42.372684, 10.900038, -134.658905",
+        "Position": "-769.658936, 10.900038, 233.027328",
         "NumberValues": []
     }],
     "BackWheelCookie": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "ReverseSpin": false
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "10.815689, 12.700993, -91.894012",
+        "Position": "-726.894043, 12.700993, 264.584320",
         "Torque": 3000000,
         "NumberValues": {
             "MaxSpeed": 40
         }
     }],
-    "Step": [{
+    "SoccerBall": [{
         "ShowShadow": true,
-        "CanCollide": false,
-        "Color": "0.854902, 0.521569, 0.254902",
+        "CanCollide": true,
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "-90.000, 0.000, -90.000",
         "Transparency": 0,
-        "Position": "19.699989, 5.599998, -139.700012",
+        "Position": "-766.000061, 8.100000, 229.800018",
         "NumberValues": []
     }],
     "JetPack": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "3.837093, 35.848869, -110.848022",
+        "Position": "-745.848083, 35.848869, 271.562927",
         "NumberValues": []
     }],
     "Piston": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.937255, 0.721569, 0.219608",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-47.400009, 5.325044, -47.000000",
+        "Position": "-682.000061, 5.325044, 322.800018",
         "NumberValues": {
             "Speed": 5,
             "LastDirection": 0,
             "ExtendLength": 10.3
         }
     }],
-    "BalloonBlock": [{
+    "ChestRare": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.929412, 0.917647, 0.917647",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-36.400009, 5.600000, -47.000000",
-        "NumberValues": [],
-        "Size": "1.000000, 1.000000, 1.000000"
+        "Position": "-666.500061, 6.900005, 365.300018",
+        "NumberValues": []
     }],
     "ToyBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.960784, 0.803922, 0.188235",
         "Anchored": true,
         "BoolValues": [],
         "Rotation": "0.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "6.900009, 6.100000, -143.500000",
+        "Position": "-778.500061, 6.100000, 268.500000",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "TreasureSmall": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-22.392311, 6.735994, -126.462128",
+        "Position": "-761.462158, 6.735994, 297.792328",
         "NumberValues": []
     }],
     "Button": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
         "Rotation": "-90.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "58.399994, 5.500001, -72.300049",
+        "Position": "-707.300110, 5.500001, 217.000015",
         "NumberValues": []
     }],
     "Throne": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "9.549992, 5.999998, -94.299835",
+        "Position": "-729.299927, 5.999998, 265.850006",
         "NumberValues": []
     }],
     "GoldBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "1.000000, 1.000000, 0.000000",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "36.299988, 6.100000, -87.700012",
+        "Position": "-722.700073, 6.100000, 239.100021",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
-    "Gameboard": [{
+    "FrontWheelCookie": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.078431, 0.137255, 0.203922",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
-        "Transparency": 0,
-        "Position": "-29.500038, 5.600000, -28.099854",
-        "NumberValues": []
-    }],
-    "Hinge": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.929412, 0.917647, 0.917647",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "-36.900009, 5.600000, -46.500000",
-        "NumberValues": []
-    }],
-    "Candle": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.780392, 0.674510, 0.470588",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "-16.758545, 5.664244, -45.494720",
-        "NumberValues": []
-    }],
-    "CaneBlock": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.949020, 0.952941, 0.952941",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "-2.834312, 6.100050, -20.093201",
-        "NumberValues": [],
-        "Size": "2.000000, 2.000000, 2.000000"
-    }],
-    "FireworkB": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "1.000000, 0.800000, 0.600000",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-90.000, 90.000, 0.000",
-        "Transparency": 0,
-        "Position": "5.900089, 5.850000, -108.350006",
-        "NumberValues": {
-            "FuseTime": 0,
-            "FlightDistance": 200
-        }
-    }],
-    "Servo": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
-        "Anchored": true,
-        "BoolValues": {
-            "ReverseRotation": false
-        },
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "ServoSpeed": 5,
-        "Position": "19.565689, 5.600015, -42.493134",
-        "Torque": 1000000,
-        "NumberValues": {
-            "TargetAngle": 45
-        }
-    }],
-    "WoodDoor": [{
-        "ShowShadow": true,
-        "CanCollide": false,
-        "Color": "0.835294, 0.450980, 0.239216",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "45.865810, 8.700214, -58.543152",
-        "NumberValues": []
-    }],
-    "PlasticBlock": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.654902, 0.368627, 0.607843",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "10.099991, 6.100000, -45.500000",
-        "NumberValues": [],
-        "Size": "2.000000, 2.000000, 2.000000"
-    }],
-    "BackWheel": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "ReverseSpin": false
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "2.565811, 8.010056, -99.693329",
-        "Torque": 1000000,
+        "Position": "-726.894043, 12.749996, 278.584320",
+        "Torque": 3000000,
         "NumberValues": {
             "MaxSpeed": 40
-        }
-    }],
-    "TitaniumRod": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.913725, 0.854902, 0.854902",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "73.435684, 7.300007, -143.093201",
-        "NumberValues": []
-    }],
-    "PineTree": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.337255, 0.258824, 0.211765",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "-21.067665, 6.111369, -105.419189",
-        "NumberValues": []
-    }],
-    "WinterThruster": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
-        "Transparency": 0,
-        "Position": "40.365681, 7.100992, -37.041931",
-        "NumberValues": []
-    }],
-    "HugeMotor": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
-        "Anchored": true,
-        "BoolValues": {
-            "ReverseSpin": false
-        },
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "26.565689, 13.110017, -36.293121",
-        "Torque": 1000000,
-        "NumberValues": {
-            "MaxSpeed": 50
-        }
-    }],
-    "JetPackStar": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.501961, 0.733333, 0.858824",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "27.900013, 6.650017, 16.212494",
-        "NumberValues": []
-    }],
-    "JetPackUltra": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.501961, 0.733333, 0.858824",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "2.863243, 7.209848, -116.196747",
-        "NumberValues": []
-    }],
-    "Plushie3": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.792157, 0.796078, 0.819608",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
-        "Transparency": 0,
-        "Position": "0.255783, 6.888906, -65.696075",
-        "NumberValues": []
-    }],
-    "CarSeat": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
-        "Transparency": 0,
-        "Position": "41.599991, 7.600000, -30.000000",
-        "NumberValues": []
-    }],
-    "Torch": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.411765, 0.400000, 0.360784",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "0.000, 0.000, 90.000",
-        "Transparency": 0,
-        "Position": "-12.000008, 9.950007, -108.450043",
-        "NumberValues": []
-    }],
-    "Motor": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
-        "Anchored": true,
-        "BoolValues": {
-            "ReverseSpin": false
-        },
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "24.565689, 7.110017, -42.293121",
-        "Torque": 1000000,
-        "NumberValues": {
-            "MaxSpeed": 50
         }
     }],
     "HugeBackWheel": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "ReverseSpin": false
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-7.434311, 12.999992, 32.369354",
+        "Position": "-602.630737, 12.999992, 282.834320",
         "Torque": 10000000,
         "NumberValues": {
             "MaxSpeed": 40
         }
     }],
-    "Portal": [{
+    "Torch": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.937255, 0.721569, 0.219608",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 90.000",
         "Transparency": 0,
-        "Position": "-13.500015, 11.700005, -115.299988",
+        "Position": "-743.450073, 9.950007, 287.400024",
+        "NumberValues": []
+    }],
+    "BalloonStarBlock": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-682.000061, 5.600000, 311.800018",
+        "NumberValues": [],
+        "Size": "1.000000, 1.000000, 1.000000"
+    }],
+    "SwitchBig": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": {
+            "On": false
+        },
+        "Rotation": "0.000, -90.000, 0.000",
+        "Transparency": 0,
+        "Position": "-698.500000, 5.300010, 313.300049",
+        "NumberValues": []
+    }],
+    "HugeMotor": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": {
+            "ReverseSpin": false
+        },
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-671.293213, 13.110017, 248.834320",
+        "Torque": 1000000,
+        "NumberValues": {
+            "MaxSpeed": 50
+        }
+    }],
+    "Bread": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-707.350220, 6.100010, 277.500000",
+        "NumberValues": []
+    }],
+    "CannonEgg": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-740.670288, 5.200014, 246.312744",
+        "NumberValues": []
+    }],
+    "Servo": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": {
+            "ReverseRotation": false
+        },
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "ServoSpeed": 5,
+        "Position": "-677.493164, 5.600015, 255.834320",
+        "Torque": 1000000,
+        "NumberValues": {
+            "TargetAngle": 45
+        }
+    }],
+    "BackWheel": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": {
+            "ReverseSpin": false
+        },
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-734.693359, 8.010056, 272.834198",
+        "Torque": 1000000,
+        "NumberValues": {
+            "MaxSpeed": 40
+        }
+    }],
+    "PineTree": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-740.419250, 6.111369, 296.467682",
+        "NumberValues": []
+    }],
+    "BoxingGlove": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-741.900085, 5.400002, 272.899994",
+        "NumberValues": []
+    }],
+    "Step": [{
+        "ShowShadow": true,
+        "CanCollide": false,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-774.700073, 5.599998, 255.700012",
+        "NumberValues": []
+    }],
+    "JetPackStar": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-618.787598, 6.650017, 247.500000",
+        "NumberValues": []
+    }],
+    "Truss": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-760.700073, 7.099998, 262.100037",
+        "NumberValues": []
+    }],
+    "Plushie3": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, -90.000, 0.000",
+        "Transparency": 0,
+        "Position": "-700.696167, 6.888906, 275.144226",
+        "NumberValues": []
+    }],
+    "ChestLegendary": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-651.500061, 6.900005, 365.300018",
+        "NumberValues": []
+    }],
+    "Pumpkin": [{
+        "ShowShadow": true,
+        "CanCollide": false,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-705.500061, 5.599998, 244.300018",
+        "NumberValues": []
+    }],
+    "CandyCaneSwordMount": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-752.700012, 7.799999, 231.900009",
+        "NumberValues": []
+    }],
+    "TitaniumRod": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-775.893127, 7.800014, 208.824356",
+        "NumberValues": []
+    }],
+    "Potions": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, -90.000, 0.000",
+        "Transparency": 0,
+        "Position": "-775.199158, 6.700046, 271.241577",
         "NumberValues": []
     }],
     "PilotSeat": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "46.960033, 7.640048, -48.839996",
+        "Position": "-683.840088, 7.640048, 228.439972",
         "NumberValues": []
     }],
     "CandyRed": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.768627, 0.156863, 0.109804",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-22.694031, 5.471128, -46.422607",
+        "Position": "-681.422668, 5.471128, 298.094055",
         "NumberValues": {
             "HeadScale": 2,
             "HeightScale": 2,
@@ -1232,151 +1124,142 @@
             "WidthScale": 2
         }
     }],
-    "Potions": [{
+    "Cannon": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.525490, 0.525490, 0.525490",
         "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
+        "BoolValues": {
+            "Aim": true
+        },
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "4.158421, 6.700046, -140.199097",
+        "Position": "-767.200073, 7.500012, 253.400009",
         "NumberValues": []
     }],
-    "BalloonStarBlock": [{
+    "RustedBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.929412, 0.917647, 0.917647",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-36.400009, 5.600000, -47.000000",
+        "Position": "-778.093262, 7.300020, 214.234314",
+        "NumberValues": [],
+        "Size": "2.000000, 2.000000, 2.000000"
+    }],
+    "Switch": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": {
+            "On": false
+        },
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-710.843750, 5.440461, 268.194672",
+        "NumberValues": []
+    }],
+    "BalloonBlock": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-682.000061, 5.600000, 311.800018",
         "NumberValues": [],
         "Size": "1.000000, 1.000000, 1.000000"
     }],
-    "Wedge": [{
+    "Portal": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.835294, 0.450980, 0.239216",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "29.900002, 6.099998, -131.700012",
-        "NumberValues": []
-    }],
-    "Firework": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.992157, 0.917647, 0.552941",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "12.199989, 9.100002, -58.000000",
-        "NumberValues": []
-    }],
-    "Truss": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.666667, 0.333333, 0.000000",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "13.299988, 7.099998, -125.700012",
+        "Position": "-750.300049, 11.700005, 288.900024",
         "NumberValues": []
     }],
     "CandyPurple": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.482353, 0.000000, 0.482353",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-20.694031, 5.471128, -46.422607",
+        "Position": "-681.422668, 5.471128, 296.094055",
         "NumberValues": []
     }],
     "TreasureLarge": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-7.442310, 6.735994, -126.462128",
+        "Position": "-761.462158, 6.735994, 282.842316",
         "NumberValues": []
     }],
     "GunMount": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
+        "Rotation": "0.000, -90.000, 0.000",
         "Transparency": 0,
-        "Position": "28.889490, 7.500001, -117.580566",
+        "Position": "-752.580627, 7.500001, 246.510513",
         "NumberValues": []
     }],
     "LightBulb": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -90.000",
+        "Rotation": "180.000, 0.000, -90.000",
         "Transparency": 0,
-        "Position": "2.600006, 5.150001, -103.000000",
+        "Position": "-738.000061, 5.150001, 272.799988",
         "NumberValues": []
     }],
     "HarpoonGold": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "Aim": true
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-1.400311, 5.987988, -67.283142",
+        "Position": "-702.283203, 5.987988, 276.800323",
         "NumberValues": []
     }],
     "SpikeTrap": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.972549, 0.858824, 0.192157",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "12.500011, 6.150001, -126.750000",
+        "Position": "-761.750061, 6.150001, 262.899994",
         "NumberValues": []
     }],
-    "ParachuteBlock": [{
+    "Gameboard": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "27.400009, 5.600000, -107.000000",
-        "NumberValues": [],
-        "Size": "1.000000, 1.000000, 1.000000"
+        "Position": "-663.099915, 5.600000, 304.900055",
+        "NumberValues": []
     }],
     "CandyBlue": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.050980, 0.411765, 0.674510",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-21.694031, 5.471128, -46.422607",
+        "Position": "-681.422668, 5.471128, 297.094055",
         "NumberValues": {
             "HeadScale": 0.5,
             "HeightScale": 0.5,
@@ -1384,304 +1267,280 @@
             "WidthScale": 0.5
         }
     }],
-    "Note": [{
+    "Firework": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.654902, 0.368627, 0.607843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "3.959351, 6.473575, -142.901825",
-        "NumberValues": {
-            "SemitoneOffset": 0
-        }
+        "Position": "-693.000061, 9.100002, 263.200012",
+        "NumberValues": []
     }],
     "MetalRod": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.388235, 0.372549, 0.384314",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "60.575687, 7.800000, -140.893066",
+        "Position": "-775.893127, 7.800000, 214.824326",
         "NumberValues": []
     }],
-    "Chair": [{
+    "PlasticBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "13.099983, 7.210005, -96.099976",
-        "NumberValues": []
-    }],
-    "NeonBlock": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.768627, 0.156863, 0.109804",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "38.099991, 6.100000, -18.500000",
+        "Position": "-680.500061, 6.100000, 265.300018",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
+    }],
+    "Motor": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": {
+            "ReverseSpin": false
+        },
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-677.293213, 7.110017, 250.834320",
+        "Torque": 1000000,
+        "NumberValues": {
+            "MaxSpeed": 50
+        }
     }],
     "Glue": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.996078, 0.952941, 0.733333",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "4.099991, 6.100000, -27.500000",
+        "Position": "-662.500061, 6.100000, 271.300018",
         "NumberValues": []
     }],
     "SonicJetTurbine": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "71.565659, 7.565577, -17.370239",
+        "Position": "-652.370300, 7.565577, 203.834351",
         "NumberValues": {
             "MaxSpeed": 200,
             "MaxForce": 10000000000
         }
     }],
-    "CandyCaneSwordMount": [{
+    "Trophy3rd": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.094118, 0.047059, 0.003922",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "43.500004, 7.799999, -117.699951",
+        "Position": "-726.493225, 5.602345, 213.834320",
         "NumberValues": []
     }],
     "BoatMotorWinter": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-180.000, 0.000, -180.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "23.903151, 8.941387, -91.071350",
+        "Position": "-726.071411, 8.941387, 251.496857",
         "NumberValues": []
     }],
     "GrassBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.156863, 0.498039, 0.278431",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-35.900009, 6.100000, -46.500000",
+        "Position": "-681.500061, 6.100000, 311.300018",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "DualCaneHarpoon": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "Aim": true
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "13.599689, 5.987988, -67.283142",
+        "Position": "-702.283203, 5.987988, 261.800323",
         "NumberValues": []
     }],
-    "Harpoon": [{
+    "MarbleBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
-        "BoolValues": {
-            "Aim": true
-        },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-8.400311, 5.987988, -67.283142",
-        "NumberValues": []
+        "Position": "-778.093262, 7.300011, 205.074310",
+        "NumberValues": [],
+        "Size": "2.000000, 2.000000, 2.000000"
     }],
     "HugeFrontWheel": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "ReverseSpin": false
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "18.565689, 12.999992, 32.369354",
+        "Position": "-602.630737, 12.999992, 256.834320",
         "Torque": 10000000,
         "NumberValues": {
             "MaxSpeed": 40
         }
     }],
-    "MarbleBlock": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.929412, 0.917647, 0.917647",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "70.325691, 7.300011, -143.093201",
-        "NumberValues": [],
-        "Size": "2.000000, 2.000000, 2.000000"
-    }],
     "YellowChest": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, -0.000, -90.000",
+        "Rotation": "0.000, 0.000, -90.000",
         "Transparency": 0,
-        "Position": "26.599991, 6.599998, -93.000000",
+        "Position": "-728.000061, 6.599998, 248.800018",
+        "NumberValues": []
+    }],
+    "Chair": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "180.000, 0.000, 180.000",
+        "Transparency": 0,
+        "Position": "-731.100037, 7.210005, 262.300018",
         "NumberValues": []
     }],
     "SandBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.992157, 0.917647, 0.552941",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-39.900009, 6.100000, -46.500000",
+        "Position": "-681.500061, 6.100000, 315.300018",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "SwordMount": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.411765, 0.250980, 0.156863",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
+        "Rotation": "0.000, -90.000, 0.000",
         "Transparency": 0,
-        "Position": "34.118927, 7.700000, -117.405334",
+        "Position": "-752.405396, 7.700000, 241.281082",
         "NumberValues": []
     }],
-    "ChestRare": [{
+    "ParachuteBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.384314, 0.282353, 0.196078",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-89.900009, 6.900005, -31.500000",
-        "NumberValues": []
-    }],
-    "CoalBlock": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "38.099991, 6.100000, -113.500000",
+        "Position": "-742.000061, 5.600000, 248.000000",
         "NumberValues": [],
-        "Size": "2.000000, 2.000000, 2.000000"
+        "Size": "1.000000, 1.000000, 1.000000"
     }],
-    "TreasureMedium": [{
+    "FrontWheelMint": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "-15.392311, 6.735994, -126.462128",
-        "NumberValues": []
-    }],
-    "FrontWheelCookie": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "ReverseSpin": false
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-3.184311, 12.749996, -91.894012",
-        "Torque": 3000000,
+        "Position": "-686.330200, 10.081992, 249.807312",
+        "Torque": 1000000,
         "NumberValues": {
             "MaxSpeed": 40
         }
     }],
+    "TreasureMedium": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-761.462158, 6.735994, 290.792328",
+        "NumberValues": []
+    }],
+    "Plushie1": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-701.481506, 7.477235, 283.526459",
+        "NumberValues": []
+    }],
     "Plushie2": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.843137, 0.772549, 0.603922",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "7.316345, 6.753467, -65.880524",
+        "Position": "-700.880615, 6.753467, 268.083679",
         "NumberValues": []
     }],
-    "LifePreserver": [{
+    "WinterThruster": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "180.000, 0.000, 180.000",
         "Transparency": 0,
-        "Position": "-2.800400, 5.659982, -93.799927",
+        "Position": "-672.041992, 7.100992, 235.034332",
         "NumberValues": []
     }],
-    "RustedBlock": [{
+    "GlassBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "61.165688, 7.300020, -143.093201",
+        "Position": "-722.700073, 6.100000, 239.100021",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "ShieldGenerator": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.050980, 0.411765, 0.674510",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-34.000015, 7.800014, -18.500000",
+        "Position": "-653.500061, 7.800014, 309.400024",
         "NumberValues": []
     }],
     "FireworkA": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "1.000000, 0.800000, 0.600000",
         "Anchored": true,
         "BoolValues": [],
         "Rotation": "-90.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "5.900211, 5.850000, -105.100006",
+        "Position": "-740.100098, 5.850000, 269.499786",
         "NumberValues": {
             "FuseTime": 0,
             "FlightDistance": 200
@@ -1690,232 +1549,215 @@
     "TrophyMaster": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.290196, 0.498039, 0.694118",
         "Anchored": true,
         "BoolValues": [],
         "Rotation": "0.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "48.565689, 5.880632, -91.493164",
+        "Position": "-726.493225, 5.880632, 226.834320",
         "NumberValues": []
     }],
-    "BrickBlock": [{
+    "NeonBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.592157, 0.000000, 0.000000",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-35.900009, 6.100000, -46.500000",
+        "Position": "-653.500061, 6.100000, 237.300018",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "Magnet": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-72.299309, 13.025992, 36.943878",
+        "Position": "-598.056152, 13.025992, 347.699310",
         "NumberValues": []
     }],
     "MarbleRod": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.803922, 0.803922, 0.803922",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "64.575653, 7.800011, -140.893066",
+        "Position": "-775.893127, 7.800011, 210.824356",
         "NumberValues": []
     }],
-    "Pumpkin": [{
+    "JetPackUltra": [{
         "ShowShadow": true,
-        "CanCollide": false,
-        "Color": "0.639216, 0.635294, 0.647059",
+        "CanCollide": true,
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "31.099991, 5.599998, -70.500000",
+        "Position": "-751.196777, 7.209848, 272.536774",
         "NumberValues": []
     }],
     "CornerWedge": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.835294, 0.450980, 0.239216",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "29.099991, 6.099998, -133.700012",
+        "Position": "-768.700073, 6.099998, 246.300018",
         "NumberValues": []
     }],
     "FabricBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.482353, 0.000000, 0.482353",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "30.099991, 6.100000, -46.500000",
+        "Position": "-681.500061, 6.100000, 245.300018",
         "NumberValues": [],
         "Size": "2.000000, 2.000000, 2.000000"
     }],
     "BackWheelMint": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": {
             "ReverseSpin": false
         },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "25.592690, 10.081992, -51.330139",
+        "Position": "-686.330200, 10.081992, 249.807312",
         "Torque": 1000000,
         "NumberValues": {
             "MaxSpeed": 40
         }
     }],
-    "Switch": [{
+    "Sign": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
-        "BoolValues": {
-            "On": true
-        },
-        "Rotation": "-0.000, 0.000, -0.000",
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "7.205341, 5.440461, -75.843658",
+        "Position": "-701.000061, 7.100006, 276.800018",
+        "Text": "",
         "NumberValues": []
     }],
     "Helm": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.639216, 0.635294, 0.647059",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "15.099991, 7.650041, -79.299957",
+        "Position": "-714.300049, 7.650041, 260.300018",
         "NumberValues": []
     }],
-    "CannonEgg": [{
+    "BrickBlock": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "29.087265, 5.200014, -105.670197",
-        "NumberValues": []
+        "Position": "-681.500061, 6.100000, 311.300018",
+        "NumberValues": [],
+        "Size": "2.000000, 2.000000, 2.000000"
     }],
     "CameraDome": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.313726, 0.419608, 0.498039",
         "Anchored": true,
         "BoolValues": {
             "ShowCrosshairs": true
         },
         "Rotation": "90.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "32.700005, 5.325002, -74.250000",
+        "Position": "-709.250061, 5.325002, 242.700012",
         "NumberValues": []
     }],
     "RustedRod": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "58.575687, 7.800000, -140.893188",
+        "Position": "-775.893250, 7.800000, 216.824326",
         "NumberValues": []
     }],
     "CaneRod": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.949020, 0.952941, 0.952941",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "-7.424316, 6.600022, -17.893066",
-        "NumberValues": []
-    }],
-    "SoccerBall": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.972549, 0.972549, 0.972549",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-90.000, 0.000, -90.000",
-        "Transparency": 0,
-        "Position": "45.599991, 8.100000, -131.000000",
-        "NumberValues": []
-    }],
-    "Heart": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "1.000000, 0.000000, 0.000000",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "-23.900009, 8.499998, -53.900024",
-        "NumberValues": []
-    }],
-    "LaserTurret": [{
-        "ShowShadow": true,
-        "CanCollide": true,
-        "Color": "0.929412, 0.917647, 0.917647",
-        "Anchored": true,
-        "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
-        "Transparency": 0,
-        "Position": "23.953690, 5.249992, -132.455139",
+        "Position": "-652.893127, 6.600022, 282.824341",
         "NumberValues": []
     }],
     "StoneRod": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.388235, 0.372549, 0.384314",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "0.000, 0.000, 0.000",
         "Transparency": 0,
-        "Position": "56.575687, 7.800007, -140.893066",
+        "Position": "-775.893127, 7.800007, 218.824326",
+        "NumberValues": []
+    }],
+    "Heart": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, 0.000, 0.000",
+        "Transparency": 0,
+        "Position": "-688.900085, 8.499998, 299.300018",
+        "NumberValues": []
+    }],
+    "CannonMount": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "0.000, -90.000, 0.000",
+        "Transparency": 0,
+        "Position": "-751.775757, 7.900003, 253.808228",
+        "NumberValues": []
+    }],
+    "CarSeat": [{
+        "ShowShadow": true,
+        "CanCollide": true,
+        "Anchored": true,
+        "BoolValues": [],
+        "Rotation": "180.000, 0.000, 180.000",
+        "Transparency": 0,
+        "Position": "-665.000061, 7.600000, 233.800018",
         "NumberValues": []
     }],
     "Mast": [{
         "ShowShadow": true,
         "CanCollide": false,
-        "Color": "0.835294, 0.450980, 0.239216",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, -90.000, 0.000",
+        "Rotation": "0.000, -90.000, 0.000",
         "Transparency": 0,
-        "Position": "18.926907, 21.961559, -79.616669",
+        "Position": "-714.616699, 21.961559, 256.473114",
         "NumberValues": []
     }],
-    "CannonTurret": [{
+    "FireworkB": [{
         "ShowShadow": true,
         "CanCollide": true,
-        "Color": "0.105882, 0.164706, 0.207843",
         "Anchored": true,
         "BoolValues": [],
-        "Rotation": "-0.000, 0.000, -0.000",
+        "Rotation": "-90.000, 90.000, 0.000",
         "Transparency": 0,
-        "Position": "37.279808, 5.247528, -106.152771",
-        "NumberValues": []
+        "Position": "-743.350098, 5.850000, 269.499908",
+        "NumberValues": {
+            "FuseTime": 0,
+            "FlightDistance": 200
+        }
     }]
 }
