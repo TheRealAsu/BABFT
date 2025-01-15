@@ -171,30 +171,26 @@ WARNING: you need to execute this first: DebugBlock.lua
 local buildingParts = workspace:FindFirstChild("BuildingParts")
 
 if buildingParts then
-    local colorTable = {}  -- Tableau pour stocker les noms et couleurs
-
+    local colorTable = {}
     for _, model in ipairs(buildingParts:GetChildren()) do
         if model:IsA("Model") then
             local pPart = model:FindFirstChild("PPart")
             if pPart and pPart:IsA("BasePart") then
                 local color = pPart.Color
-                -- Stocke le nom du modèle et la couleur de PPart
                 colorTable[model.Name] = string.format("(%f, %f, %f)", color.R, color.G, color.B)
             end
         end
     end
 
-    -- Crée une chaîne avec toutes les données pour un seul print
-    local result = "Tableau des couleurs :\n"
+    local result = ""
     for modelName, color in pairs(colorTable) do
         result = result .. string.format("[\"%s\"] = %s,\n", modelName, color)
     end
 
-    -- Affiche tout en une seule fois
     print(result)
-	setclipboard(result)
+    -- setclipboard(result)
 else
-    print("Le dossier BuildingParts n'existe pas dans Workspace.")
+    print("Folder not found")
 end
 
 --]]
