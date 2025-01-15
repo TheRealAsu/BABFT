@@ -203,9 +203,10 @@ local function GetBuildData()
                     if v.Name == "Rope" then
                         blockInfo.Length = v.PPart.RopeConstraint.Length
                         blockInfo.MatchRotation = v.PPart.AlignOrientation.Enabled
-                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z)
-                        local SecondaryPartPosition = TeamCF:pointToObjectSpace(v.SecondaryPart.Part.Position)
-                        blockInfo.SecondaryPartRotation = string.format("%.3f, %.3f, %.3f", math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ))
+                        local rotationCF = ToObjectSpace(TeamCF, PPart.CFrame)
+                        local rx, ry, rz = rotationCF:ToEulerAnglesXYZ()
+                        local rotationtoString = string.format("%.3f, %.3f, %.3f", math.deg(rx), math.deg(ry), math.deg(rz))
+                        blockInfo.SecondaryPartRotation = rotationtoString
                         blockInfo.SecondaryPartPosition = string.format("%.6f, %.6f, %.6f", SecondaryPartPosition.X, SecondaryPartPosition.Y, SecondaryPartPosition.Z)
                     elseif v.Name == "Sign" then
                         blockInfo.Text = v.PPart.SurfaceGui.TextLabel.Text
@@ -223,9 +224,10 @@ local function GetBuildData()
                         blockInfo.Length = v.PPart.RodConstraint.Length
                         blockInfo.AngleLimit = v.PPart.RodConstraint.LimitAngle0
                         blockInfo.MatchRotation = v.PPart.AlignOrientation.Enabled
-                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z)
-                        local SecondaryPartPosition = TeamCF:pointToObjectSpace(v.SecondaryPart.Part.Position)
-                        blockInfo.SecondaryPartRotation = string.format("%.3f, %.3f, %.3f", math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ))
+                        local rotationCF = ToObjectSpace(TeamCF, PPart.CFrame)
+                        local rx, ry, rz = rotationCF:ToEulerAnglesXYZ()
+                        local rotationtoString = string.format("%.3f, %.3f, %.3f", math.deg(rx), math.deg(ry), math.deg(rz))
+                        blockInfo.SecondaryPartRotation = rotationtoString
                         blockInfo.SecondaryPartPosition = string.format("%.6f, %.6f, %.6f", SecondaryPartPosition.X, SecondaryPartPosition.Y, SecondaryPartPosition.Z)
                     elseif v.Name == "Spring" then
                         blockInfo.Damping = v.PPart.SpringConstraint.Damping
@@ -233,9 +235,10 @@ local function GetBuildData()
                         blockInfo.TargetLength = v.PPart.SpringConstraint.FreeLength
                         blockInfo.MinLength = v.PPart.SpringConstraint.MinLength
                         blockInfo.Stiffness = v.PPart.SpringConstraint.Stiffness
-                        local SecondaryPartrotationX, SecondaryPartrotationY, SecondaryPartrotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z)
-                        local SecondaryPartPosition = TeamCF:pointToObjectSpace(v.SecondaryPart.Part.Position)
-                        blockInfo.SecondaryPartRotation = string.format("%.3f, %.3f, %.3f", math.deg(SecondaryPartrotationX), math.deg(SecondaryPartrotationY), math.deg(SecondaryPartrotationZ))
+                        local rotationCF = ToObjectSpace(TeamCF, PPart.CFrame)
+                        local rx, ry, rz = rotationCF:ToEulerAnglesXYZ()
+                        local rotationtoString = string.format("%.3f, %.3f, %.3f", math.deg(rx), math.deg(ry), math.deg(rz))
+                        blockInfo.SecondaryPartRotation = rotationtoString
                         blockInfo.SecondaryPartPosition = string.format("%.6f, %.6f, %.6f", SecondaryPartPosition.X, SecondaryPartPosition.Y, SecondaryPartPosition.Z)
                     end
                 end
