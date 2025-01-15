@@ -22,6 +22,9 @@ if BP then
                name:find("BlockY") or name:find("BlockYZ") or name:find("BlockZ") then
                 descendant:Destroy()
             end
+            if descendant:IsA("Tool") then
+                descendant:Destroy()
+            end
         end
     end
 end
