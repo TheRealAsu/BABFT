@@ -1,6 +1,5 @@
 -- Auto Build save build
 -- Only Store your blocks or Leader's blocks in sharemode because it is for testing only and it's on BETA
--- current and probably last issue a fix, rotation only works in white teams
 
 local Players = game:GetService("Players")
 local Teams = game:GetService("Teams")
@@ -54,6 +53,7 @@ end
 local BlocksFolder = GetFolder()
 local TeamRef = LPTEAM_POSITION()
 local TeamCF = workspace:FindFirstChild(tostring(TeamRef)).CFrame
+local ToObjectSpace = CFrame.new().ToObjectSpace
 
 local function GetBuildData()
     local blockData = {}
@@ -67,9 +67,9 @@ local function GetBuildData()
                 local showShadow = PPart.CastShadow or true
                 local canCollide = PPart.CanCollide
                 local anchored = PPart.Anchored
-                local rotationX, rotationY, rotationZ = math.rad(PPart.Rotation.X), math.rad(PPart.Rotation.Y), math.rad(PPart.Rotation.Z) -- WARNING: FIX OTHER TEAM HERE
-                local cframeRotation = CFrame.Angles(rotationX, rotationY, rotationZ)
-                local rotationtoString = string.format("%.3f, %.3f, %.3f", math.deg(rotationX), math.deg(rotationY), math.deg(rotationZ))
+                local rotationCF = ToObjectSpace(TeamCF, PPart.CFrame)
+                local rx, ry, rz = rotationCF:ToEulerAnglesXYZ()
+                local rotationtoString = string.format("%.3f, %.3f, %.3f", math.deg(rx), math.deg(ry), math.deg(rz))
                 local position = TeamCF:pointToObjectSpace(PPart.Position)
                 local transparency = v:FindFirstChild("TransparencyModifier") and v.TransparencyModifier.Value or 0
 
