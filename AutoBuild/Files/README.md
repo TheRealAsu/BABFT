@@ -1,3 +1,3 @@
-# RedBlueAndPlayerBuildFiles2
-## Note, some are duplicates and some may not work depending on the version of the autobuilder you're using, new formatted (ones with brackets) cannot be used with the old autobuilder.
-### BUILD FOLDER MADE BY REDBLUE (!    ! redblue.#4424)
+# 2.3K files (1gb)
+## files can be duplicated and some may not work
+### Credit to all of you who create and publish them on various server discord <3
