@@ -207,8 +207,8 @@ return classes
             "HeadScale": Value,
             "HeightScale": Value,
             "WidthScale": Value,
-
         },
+        -- Binding data still under development
     }]
 }
 
