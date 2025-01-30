@@ -41,7 +41,7 @@ G2L["6"] = Instance.new("LocalScript", G2L["5"]);
 local function C_6()
 local script = G2L["6"];
 	local textLabel = script.Parent
-	local fullText = "This script is always updated, you can report bugs in the discord, the message will disappear in a few seconds"
+	local fullText = "New script is available on the discord. This one is outdated."
 	textLabel.Text = ""
 	local delayTime = 0.05 
 	for i = 1, #fullText do
