@@ -121,6 +121,12 @@ local Button = Credit:CreateButton({
     end,
  })
 
+local Paragraph = Global:CreateParagraph({Title = "Script Outdated", Content = "Get the new one in the discord server or replace 'Source.lua' by 'Jan25_Source.lua' in the loadstring."})
+
+
+Global:CreateDivider()
+
+
 local yjdtjf = Global:CreateButton({
     Name = "Unload Script",
     Callback = function()
