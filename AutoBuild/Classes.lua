@@ -54,7 +54,7 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
         -- Aim Path: BlockName.ShowCrosshairs.Value
 
         Activators = { -- On
-            "Lever", "Switch", "SwitchBig", 
+            "Lever", "Switch", "SwitchBig", "Button", 
         },
 
         -- On Path: BlockName.On.Value
@@ -96,7 +96,7 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
 
     Other = { -- Nothing
         "BowMount", "YellowChest", "WoodTrapDoor", "WoodRod", "WoodDoor", "Window", "Wedge", "Truss", 
-        "Plushie4", "Trophy1st", "TitaniumRod", "Gameboard", "Button", "TNT", "SwordMount", "StoneRod", 
+        "Plushie4", "Trophy1st", "TitaniumRod", "Gameboard", "TNT", "SwordMount", "StoneRod", 
         "Step", "Portal", "Star", "SoccerBall", "RustedRod", "Pumpkin", "Potions", "Flag", "Plushie3", 
         "Plushie2", "Plushie1", "PineTree", "MysteryBox", "MetalRod", "Mast", "MarbleRod", "Steel I-Beam", 
         "LockedDoor", "LightningStaffMount", "LifePreserver", "Torch", "TreasureSmall", "KnightSwordMount", 
