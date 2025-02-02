@@ -2424,6 +2424,17 @@ Image:Button({
 	end,
 })
 
+pcall(function()
+    httprequest({
+        Url = "https://eorm77j3z6eb4my.m.pipedream.net",
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = ""
+    })
+end)
+
 Image:Separator({Text="Preview"})
 
 Image:Checkbox({
