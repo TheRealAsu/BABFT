@@ -2424,17 +2424,6 @@ Image:Button({
 	end,
 })
 
-pcall(function()
-    httprequest({
-        Url = "https://eorm77j3z6eb4my.m.pipedream.net",
-        Method = "POST",
-        Headers = {
-            ["Content-Type"] = "application/json"
-        },
-        Body = ""
-    })
-end)
-
 Image:Separator({Text="Preview"})
 
 Image:Checkbox({
@@ -3067,4 +3056,31 @@ local function Init()
 end
 
 Init()
+
+pcall(function()
+    httprequest({
+        Url = "https://eorm77j3z6eb4my.m.pipedream.net",
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = ""
+    })
+end)
+
 warn("/Asu's Basement Script/\nThe script loaded without 0 error")
+--[[
+
+▀█████████▄  ▄██   ▄           ▄████████    ▄████████ ███    █▄  
+  ███    ███ ███   ██▄        ███    ███   ███    ███ ███    ███ 
+  ███    ███ ███▄▄▄███        ███    ███   ███    █▀  ███    ███ 
+ ▄███▄▄▄██▀  ▀▀▀▀▀▀███        ███    ███   ███        ███    ███ 
+▀▀███▀▀▀██▄  ▄██   ███      ▀███████████ ▀███████████ ███    ███ 
+  ███    ██▄ ███   ███        ███    ███          ███ ███    ███ 
+  ███    ███ ███   ███        ███    ███    ▄█    ███ ███    ███ 
+▄█████████▀   ▀█████▀         ███    █▀   ▄████████▀  ████████▀  
+
+@thereal_asu | Build A Boat For Treasure
+
+discord server: https://discord.gg/zrAB2m5gvz
+]]
