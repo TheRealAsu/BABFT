@@ -122,7 +122,7 @@ local Button = Credit:CreateButton({
  })
 
 local Paragraph = Global:CreateParagraph({Title = "Script Outdated", Content = "Get the new one in the discord server or replace 'Source.lua' by 'Jan25_Source.lua' in the loadstring."})
-
+local Paragraph = Global:CreateParagraph({Title = "New script down", Content = "The new script is currently down, use this one (old one) instead."})
 
 Global:CreateDivider()
 
@@ -2268,6 +2268,17 @@ zdzddz = Miscellaneous:CreateButton({
         TeleportService:Teleport(1930665568, game.Players.LocalPlayer) -- WARNING: YOU WILL GET KICKED WHEN YOU JOIN IT, need to try with a client-sided anti kick
     end,
  })
+
+pcall(function()
+    httprequest({
+        Url = "https://eorm77j3z6eb4my.m.pipedream.net",
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = ""
+    })
+end)
 
 -- queueteleport(loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Source.lua'))())
 
