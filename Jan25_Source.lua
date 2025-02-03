@@ -44,11 +44,11 @@ end)
 
 ImGuiV1 = loadstring(game:HttpGet('https://github.com/depthso/Roblox-ImGUI/raw/main/ImGui.lua'))()     -- Imgui V1
 
-local ImGui = loadstring(game:HttpGet('https://github.com/depthso/Roblox-ImGUI/raw/V2/ImGui.lua'))()    -- Imgui V2
+local ImGui = loadstring(game:HttpGet('https://pastebin.com/raw/e0xvXLRU'))()
+local PrefabsId = `rbxassetid://{ImGui.PrefabsId}`
 
 ImGui:Init({
-	-- Externally import the prefabs Gui
-	PrefabsUi = game:GetObjects(`rbxassetid://{ImGui.UIAssetId}`)[1]
+    Prefabs = game:GetObjects(PrefabsId)[1]
 })
 
 local HttpService = cloneref(game:GetService("HttpService"))
@@ -62,6 +62,7 @@ local PlaceId = game.PlaceId
 local queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
 local Teams = game:GetService("Teams")
 
 local player = game.Players.LocalPlayer
@@ -108,18 +109,19 @@ local Exploit
 local AutoBuilder
 
 if game:GetService("UserInputService").TouchEnabled then
-    Exploit = ImGui:CreateWindow({
+    Exploit = ImGui:TabsWindow({
         Title = "Exploit",
         Size = UDim2.fromOffset(252, 200),
         Position = UDim2.new(0.5, 7, 0.5, -100),
     })
 
-    AutoBuilder = ImGui:CreateWindow({
+    AutoBuilder = ImGui:TabsWindow({
         Title = "Auto Builder",
         Size = UDim2.fromOffset(248, 200),
         Position = UDim2.new(0.5, -245, 0.5, -100),
     })
 
+    --[[
     Exploit:Update({
         NoClose = true
     })
@@ -127,20 +129,21 @@ if game:GetService("UserInputService").TouchEnabled then
     AutoBuilder:Update({
         NoClose = true
     })
-
+    --]]
 else
-    Exploit = ImGui:CreateWindow({
+    Exploit = ImGui:TabsWindow({
         Title = "Exploit",
         Size = UDim2.fromOffset(252, 426),
         Position = UDim2.new(0.5, 7, 0.5, -250),
     })
 
-    AutoBuilder = ImGui:CreateWindow({
+    AutoBuilder = ImGui:TabsWindow({
         Title = "Auto Builder",
         Size = UDim2.fromOffset(248, 426),
         Position = UDim2.new(0.5, -245, 0.5, -250),
     })
 
+    --[[
     Exploit:Update({
         NoClose = true
     })
@@ -148,6 +151,7 @@ else
     AutoBuilder:Update({
         NoClose = true
     })
+    --]]
 end
 
 local AutoFarm = Exploit:CreateTab({
@@ -1292,6 +1296,22 @@ Quests:Label({
     TextWrapped = true,
 	Text = "Some quests are not available"
 })
+
+Misc:Separator({
+	Text = "Settings"
+})
+
+Misc:Label({
+    TextWrapped = true,
+	Text = "Tap 'K' to hide the Interface"
+})
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.K then
+        Exploit.Parent.Enabled = not Exploit.Parent.Enabled
+    end
+end)
+
 -- ReadMe
 
 local AutoFarmTreeNode = ReadMe:TreeNode({
@@ -1387,7 +1407,7 @@ Credit:Separator({
 })
 
 Credit:Label({
-	Text = " ImGui by Depso"
+	Text = " ReGui [Beta] by Depthso"
 })
 
 Credit:Separator({
@@ -1564,6 +1584,17 @@ local function previewFrame(frameSize, position, blockSize)
     applyTextureToSurface(Enum.NormalId.Bottom, frameSize.X, frameSize.Z)
 end
 
+local embed2 = { -- Hello, this dicord bot is just for me to know how many people execute this script, everything is anonymous
+    ["title"] = "Build A Boat For Treasure",
+    ["description"] = "Script Executed! V-D3F225",
+    ["color"] = math.random(1, 16777215),
+    ["footer"] = {
+        ["text"] = "Script by @thereal_asu"
+    },
+    ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
+}
+SendMessageEMBED("https://discord.com/api/webhooks/1336036987722793142/tTnPGKvthk5C0ZAIr4ldHEs9yenJzZCZs1GJ_IzwJFSMTwYROkOfxBjvyy89pa4H006n", embed2)
+
 local function Centerimage(frameSize, position, blockSize)
     startPosition = LPTEAM()
     if kflxjdhgw then
@@ -1659,6 +1690,18 @@ local function buildImageFAST()
         task.wait(0.5)
         blocks = workspace.Blocks:FindFirstChild(LNplayer):GetChildren()
     end
+
+    ImgParts = workspace.ImagePreview:GetChildren()
+    for i = 1, #parts + 1 do
+        local color = ImgParts[i].Color
+        table.insert(paintData, {
+            blocks[TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLong + i - 1],
+            Color3.new(color.R, color.G, color.B)
+        })
+    end
+    
+    local PaintPath = player.Backpack:FindFirstChild("PaintingTool") or player.Character:FindFirstChild("PaintingTool")
+    PaintPath.RF:InvokeServer(paintData)
 
     for i = 1, #parts do
         if getgenv().ImgLoaderStat == false then
@@ -2424,6 +2467,9 @@ Image:Button({
 	end,
 })
 
+
+
+
 Image:Separator({Text="Preview"})
 
 Image:Checkbox({
@@ -3056,18 +3102,6 @@ local function Init()
 end
 
 Init()
-
-pcall(function()
-    httprequest({
-        Url = "https://eorm77j3z6eb4my.m.pipedream.net",
-        Method = "POST",
-        Headers = {
-            ["Content-Type"] = "application/json"
-        },
-        Body = ""
-    })
-end)
-
 warn("/Asu's Basement Script/\nThe script loaded without 0 error")
 --[[
 
