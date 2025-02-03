@@ -122,7 +122,7 @@ local Button = Credit:CreateButton({
  })
 
 local Paragraph = Global:CreateParagraph({Title = "Script Outdated", Content = "Get the new one in the discord server or replace 'Source.lua' by 'Jan25_Source.lua' in the loadstring."})
-local Paragraph = Global:CreateParagraph({Title = "New script down", Content = "The new script is currently down, use this one (old one) instead."})
+--local Paragraph = Global:CreateParagraph({Title = "New script down", Content = "The new script is currently down, use this one (old one) instead."})
 
 Global:CreateDivider()
 
