@@ -1,3 +1,5 @@
+-- PASTBIN ONE
+
 --BABFT NEWSOURCE
 if game.PlaceId ~= 537413528 then
     return
@@ -254,15 +256,7 @@ local AntiAfkToggle = AutoFarm:Checkbox({
 
 local Silent = false
 local AutoFarmBool
-
-
-local TriggerClone = workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger:clone()
-local TriggerClone2 = workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger:clone()
-TriggerClone.Parent = workspace 
-TriggerClone2.Parent = workspace
-TriggerClone.CFrame = CFrame.new(70.02417755126953, 138.9026336669922, 1371.6341552734375 + 3 * 770)
-TriggerClone2.CFrame = CFrame.new(-51, 65, 984 + 4 * 770)
-
+local TriggerChest = workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger
 
 local AutoFarmToggle = AutoFarm:Checkbox({
 	Label = "AutoFarm",
@@ -272,11 +266,20 @@ local AutoFarmToggle = AutoFarm:Checkbox({
         getgenv().AF = Value
         local isFarming = false
 
+        if not Value then
+            TriggerChest.CFrame = CFrame.new(-55.7065125, -358.739624, 9492.35645, 0, 0, -1, 0, 1, 0, 1, 0, 0) 
+        end
+
+        character = player.Character or player.CharacterAdded:Wait()
+        humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+        humanoid = character:FindFirstChildOfClass("Humanoid") or character:WaitForChild("Humanoid")
+
         local function startAutoFarm()
             if Value == false then return end
 
             local character = player.Character or player.CharacterAdded:Wait()
             local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+            local humanoid = character:FindFirstChildOfClass("Humanoid") or character:WaitForChild("Humanoid")
 
             local newPart = Instance.new("Part")
             newPart.Size = Vector3.new(5, 1, 5)
@@ -291,16 +294,14 @@ local AutoFarmToggle = AutoFarm:Checkbox({
             decal.Parent = newPart
 
             local function TPAF(iteration)
+
             if not Silent then
                 if Value == false or getgenv().AF == false then return end
                 if iteration == 5 then
-                    if firetouchinterest then
-                        firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger, 0)
-                    end
+                    TriggerChest.CFrame = CFrame.new(-51, 65, 984 + 4 * 770)
                     task.delay(0.8, function()
                         workspace.ClaimRiverResultsGold:FireServer()
                     end)
-
                     humanoidRootPart.CFrame = CFrame.new(-51, 65, 984 + (iteration - 1) * 770)
                 else
                     if iteration == 1 then
@@ -320,8 +321,15 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                     workspace.ClaimRiverResultsGold:FireServer()
                 end
                 if iteration == 10 then
-                    if not game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(113, 119, 208) then
-                        game.Players.LocalPlayer.Character:BreakJoints()
+                    if game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(200, 200, 200) or game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(255 , 255, 255) then
+                        wait(0.1)
+                        print(humanoidRootPart.Position.Z)
+                        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z > 7529.08984 then  
+                            print(humanoidRootPart.Position.Z)
+                            print("GOTTA KILL THE PLAYER")               
+                            wait(2.3)
+                            game.Players.LocalPlayer.Character:BreakJoints()
+                        end
                     end
                 end
             else
@@ -329,10 +337,7 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                 if iteration == 1 then
                     humanoidRootPart.CFrame = CFrame.new(160.16104125976562, 29.595888137817383, 973.813720703125)
                 elseif iteration == 5 then
-                    if firetouchinterest then
-                        firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), workspace.BoatStages.NormalStages.TheEnd.GoldenChest.Trigger, 0)
-                    end
-
+                    TriggerChest.CFrame = CFrame.new(70.02417755126953, 138.9026336669922, 1371.6341552734375 + 3 * 770)
                     task.delay(0.8, function()
                         workspace.ClaimRiverResultsGold:FireServer()
                     end)
@@ -341,6 +346,7 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                 else
                     humanoidRootPart.CFrame = CFrame.new(70.02417755126953, 138.9026336669922, 1371.6341552734375 + (iteration - 2) * 770)
                 end
+
                 newPart.Position = humanoidRootPart.Position - Vector3.new(0, 2, 0)
 
                 wait(2.3) -- if lower, it can't work every time
@@ -353,8 +359,13 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                     workspace.ClaimRiverResultsGold:FireServer()
                 end
                 if iteration == 10 then
-                    if not game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(113, 119, 208) then
-                        game.Players.LocalPlayer.Character:BreakJoints()
+                    if game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(200, 200, 200) or game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(255 , 255, 255) then
+                        wait(0.1)
+                        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z > 7529.08984 then
+                            print("GOTTA KILL THE PLAYER")               
+                            wait(2.3)
+                            game.Players.LocalPlayer.Character:BreakJoints()
+                        end
                     end
                 end
             end
@@ -622,6 +633,7 @@ Misc:Button({
     NoTheme = true,
     BackgroundColor3 = Color3.fromRGB(245, 60, 60),
 	Callback = function(self)
+        TriggerChest.CFrame = CFrame.new(-55.7065125, -358.739624, 9492.35645, 0, 0, -1, 0, 1, 0, 1, 0, 0) 
         for _, v in ipairs(previewFolder:GetChildren()) do
             v:Destroy()
     end
@@ -3102,7 +3114,7 @@ local function Init()
 end
 
 Init()
-warn("/Asu's Basement Script/\nThe script loaded without 0 error")
+warn("/Asu's Basement Script/ - The script loaded without any errors")
 --[[
 
 ▀█████████▄  ▄██   ▄           ▄████████    ▄████████ ███    █▄  
