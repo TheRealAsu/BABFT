@@ -755,6 +755,7 @@ ClientSide:Button({
 	end,
 })
 
+--[[
 ClientSide:ProgressSlider({
 	Label = "Speed",
 	Value = 16,
@@ -774,6 +775,7 @@ ClientSide:ProgressSlider({
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
     end,
 })
+--]]
 
 ClientSide:InputText({
     Placeholder = "number",
@@ -1184,12 +1186,14 @@ Spoofer:Separator({
 	Text = "Wheels"
 })
 
+--[[
 Spoofer:ProgressSlider({
 	Label = "Max speed",
 	Value = 40,
 	MinValue = 0,
 	MaxValue = 1200,
 })
+--]]
 
 Spoofer:Button({
 	Text = "Spoof speed",
@@ -2538,6 +2542,7 @@ Image:Checkbox({
 	end,
 })
 
+--[[
 Image:ProgressSlider({
     Label = "Loading Speed",
     Value = 750,
@@ -2548,6 +2553,7 @@ Image:ProgressSlider({
     batchSize = Value
 end,
 })
+--]]
 
 Image:Separator({Text="modifiers"})
 
