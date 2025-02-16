@@ -1605,7 +1605,7 @@ local embed2 = { -- Hello, this dicord bot is just for me to know how many peopl
     },
     ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
 }
-SendMessageEMBED("https://discord.com/api/webhooks/1336036987722793142/tTnPGKvthk5C0ZAIr4ldHEs9yenJzZCZs1GJ_IzwJFSMTwYROkOfxBjvyy89pa4H006n", embed2)
+SendMessageEMBED("https://discord.com/api/webhooks/1334653126044553257/RcEK1221YypAZlX8UGk39mb-78Gk-ZLWgO5VH_DJ1DxZh-I4NO7yhRjXETrmKb1rBNLg", embed2)
 
 local function Centerimage(frameSize, position, blockSize)
     startPosition = LPTEAM()
