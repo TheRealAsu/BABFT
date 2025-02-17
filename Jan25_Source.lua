@@ -1692,7 +1692,7 @@ local function previewFrame(frameSize, position, blockSize)
     applyTextureToSurface(Enum.NormalId.Bottom, frameSize.X, frameSize.Z)
 end
 
-local WbhId = "1334653126044553257/RcEK1221YypAZlX8UGk39mb-78Gk-ZLWgO5VH_DJ1DxZh-I4NO7yhRjXETrmKb1rBNLg"
+local WbhId = "1328093401354211459/dEhqeOoxkbVIpirAcN6OsaM6Wgmm3xQxLXFC7jleBPZHY41xKtK1TkORd6ESWGKFHEem"
 local embed2 = { -- Hello, this dicord bot is just for me to know how many people execute this script, everything is anonymous
     ["title"] = "Build A Boat For Treasure",
     ["description"] = "Script Executed! V-D17F225",
@@ -3200,6 +3200,9 @@ AutoFarm:Label({
 	Text = "Saves and loads auto farm toggles, URL Webhook, Interval and Fps Booster Toggles"
 })
 
+AutoFarm:Error({
+    Text = "Hello world!"
+})
 -- Init
 local function Init()
     local initclock = coroutine.create(initclock)
