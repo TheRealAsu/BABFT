@@ -1,6 +1,4 @@
--- PASTBIN ONE
-
---BABFT NEWSOURCE
+--BABFT FAB17Y2025
 if game.PlaceId ~= 537413528 then
     return
 end
@@ -46,11 +44,12 @@ end)
 
 ImGuiV1 = loadstring(game:HttpGet('https://github.com/depthso/Roblox-ImGUI/raw/main/ImGui.lua'))()     -- Imgui V1
 
-local ImGui = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Library'))()
+-- ReGui
+local ImGui = loadstring(game:HttpGet('https://raw.githubusercontent.com/depthso/Dear-ReGui/refs/heads/main/ReGui.lua'))()
 local PrefabsId = `rbxassetid://{ImGui.PrefabsId}`
 
 ImGui:Init({
-    Prefabs = game:GetObjects(PrefabsId)[1]
+	Prefabs = game:GetService("InsertService"):LoadLocalAsset(PrefabsId)
 })
 
 local HttpService = cloneref(game:GetService("HttpService"))
@@ -137,12 +136,14 @@ else
         Title = "Exploit",
         Size = UDim2.fromOffset(252, 426),
         Position = UDim2.new(0.5, 7, 0.5, -250),
+        NoClose = true,
     })
 
     AutoBuilder = ImGui:TabsWindow({
         Title = "Auto Builder",
         Size = UDim2.fromOffset(248, 426),
         Position = UDim2.new(0.5, -245, 0.5, -250),
+        NoClose = true,
     })
 
     --[[
@@ -155,6 +156,10 @@ else
     })
     --]]
 end
+
+--Exploit.Content.TitleBar.Right:Destroy()
+
+
 
 local AutoFarm = Exploit:CreateTab({
 	Name = "AutoFarm"
@@ -626,6 +631,66 @@ coroutine.wrap(function()
     end
 end)()
 
+local selectionBoxConnections = {}
+
+local function updateSB(selectionBox)
+    if selectionBox:IsA("SelectionBox") then
+        selectionBox.LineThickness = 0.02
+        selectionBox.SurfaceTransparency = 0.76
+        selectionBox.SurfaceColor3 = selectionBox.Color3
+
+        local connection = selectionBox:GetPropertyChangedSignal("Color3"):Connect(function()
+            selectionBox.SurfaceColor3 = selectionBox.Color3
+        end)
+        
+        selectionBoxConnections[selectionBox] = connection
+    end
+end
+
+local function enableSB()
+    for _, instance in ipairs(workspace:GetDescendants()) do
+        if instance:IsA("SelectionBox") then
+            updateSB(instance)
+        end
+    end
+
+    selectionBoxConnections["Workspace"] = workspace.DescendantAdded:Connect(function(instance)
+        if instance:IsA("SelectionBox") then
+            updateSB(instance)
+        end
+    end)
+    
+    local blocksFolder = workspace:FindFirstChild("Blocks")
+    if blocksFolder then
+        for _, instance in ipairs(blocksFolder:GetDescendants()) do
+            if instance:IsA("SelectionBox") then
+                updateSB(instance)
+            end
+        end
+        selectionBoxConnections["Blocks"] = blocksFolder.DescendantAdded:Connect(function(instance)
+            if instance:IsA("SelectionBox") then
+                updateSB(instance)
+            end
+        end)
+    end
+end
+
+local function disableSB()
+    for instance, connection in pairs(selectionBoxConnections) do
+        if connection then
+            connection:Disconnect()
+        end
+    end
+    selectionBoxConnections = {}
+
+    for _, instance in ipairs(workspace:GetDescendants()) do
+        if instance:IsA("SelectionBox") then
+            instance.LineThickness = 0.01
+            instance.SurfaceTransparency = 0.5
+        end
+    end
+end
+
 -- Misc
 Misc:Button({
 	Text = "UnLoad Script",
@@ -637,6 +702,7 @@ Misc:Button({
         for _, v in ipairs(previewFolder:GetChildren()) do
             v:Destroy()
     end
+        disableSB()
         FcMaster = false
         AutoBuilder:Remove()
         Exploit:Remove()
@@ -755,27 +821,25 @@ ClientSide:Button({
 	end,
 })
 
---[[
-ClientSide:ProgressSlider({
+ClientSide:SliderProgress({
 	Label = "Speed",
 	Value = 16,
-	MinValue = 1,
-	MaxValue = 200,
+	Minimum = 1,
+	Maximum = 250,
     Callback = function(self, Value)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
 	end,
 })
 
-ClientSide:ProgressSlider({
+ClientSide:SliderProgress({
     Label = "Jump Power",
     Value = 50,
-    MinValue = 1,
-    MaxValue = 250,
+    Minimum = 1,
+    Maximum = 450,
     Callback = function(self, Value)
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
     end,
 })
---]]
 
 ClientSide:InputText({
     Placeholder = "number",
@@ -796,6 +860,14 @@ ClientSide:Button({
 
 local Teleportation = Misc:CollapsingHeader({
 	Title = "Teleportation"
+})
+
+Teleportation:Button({
+	Text = "Stage 1",
+    Size = UDim2.fromScale(1, 0),
+	Callback = function(self)
+        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(189.234283, 163.600052 + 21.4 / 2 + 2.05, 1313.19214, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+	end,
 })
 
 Teleportation:Button({
@@ -1186,14 +1258,12 @@ Spoofer:Separator({
 	Text = "Wheels"
 })
 
---[[
-Spoofer:ProgressSlider({
+Spoofer:SliderProgress({
 	Label = "Max speed",
 	Value = 40,
-	MinValue = 0,
-	MaxValue = 1200,
+	Minimum = 0,
+	Maximum = 1200,
 })
---]]
 
 Spoofer:Button({
 	Text = "Spoof speed",
@@ -1328,6 +1398,28 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
     end
 end)
 
+local Settings = Misc:CollapsingHeader({
+	Title = "Settings"
+})
+
+local Bettersb = false
+if isfile("BABFT/Settings/BetterSB") then
+    Bettersb = true
+end
+
+Settings:Checkbox({
+    Label = "Better Tool Selection Box",
+    Value = Bettersb,
+    Callback = function(self, Value)
+        if Value then
+            enableSB()
+            writefile("BABFT/Settings/BetterSB", "true")
+        else
+            disableSB()
+            delfile("BABFT/Settings/BetterSB")
+        end
+    end,
+})
 -- ReadMe
 
 local AutoFarmTreeNode = ReadMe:TreeNode({
@@ -1423,7 +1515,7 @@ Credit:Separator({
 })
 
 Credit:Label({
-	Text = " ReGui [Beta] by Depthso"
+	Text = " Dear ReGui by Depthso <3"
 })
 
 Credit:Separator({
@@ -1600,16 +1692,17 @@ local function previewFrame(frameSize, position, blockSize)
     applyTextureToSurface(Enum.NormalId.Bottom, frameSize.X, frameSize.Z)
 end
 
+local WbhId = "1334653126044553257/RcEK1221YypAZlX8UGk39mb-78Gk-ZLWgO5VH_DJ1DxZh-I4NO7yhRjXETrmKb1rBNLg"
 local embed2 = { -- Hello, this dicord bot is just for me to know how many people execute this script, everything is anonymous
     ["title"] = "Build A Boat For Treasure",
-    ["description"] = "Script Executed! V-D3F225",
+    ["description"] = "Script Executed! V-D17F225",
     ["color"] = math.random(1, 16777215),
     ["footer"] = {
         ["text"] = "Script by @thereal_asu"
     },
     ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
 }
-SendMessageEMBED("https://discord.com/api/webhooks/1334653126044553257/RcEK1221YypAZlX8UGk39mb-78Gk-ZLWgO5VH_DJ1DxZh-I4NO7yhRjXETrmKb1rBNLg", embed2)
+SendMessageEMBED("https://discord.com/api/webhooks/"..WbhId, embed2)
 
 local function Centerimage(frameSize, position, blockSize)
     startPosition = LPTEAM()
@@ -2542,18 +2635,16 @@ Image:Checkbox({
 	end,
 })
 
---[[
-Image:ProgressSlider({
+Image:SliderProgress({
     Label = "Loading Speed",
     Value = 750,
-    Minium = 100,
-    Maxium = 4000,
-    Size = UDim2.fromScale(0.54, 0),
+    Minimum = 100,
+    Maximum = 4000,
+    Size = UDim2.fromScale(0.54, 0.04),
     Callback = function(self, Value)
     batchSize = Value
 end,
 })
---]]
 
 Image:Separator({Text="modifiers"})
 
@@ -2601,7 +2692,7 @@ Image:InputText({
 Image:InputInt({
     Label = "Move multiplier",
     Value = 40,
-    Size = UDim2.fromScale(0.7, 0),
+    Size = UDim2.new(0.7, 0, 0, 20),
     Callback = function(self, Value)
         Unit = tostring(Value)
 	end,
@@ -2611,7 +2702,7 @@ local originalCFrames = {}
 
 Image:InputInt({
     Label = "Rotate",
-    Size = UDim2.fromScale(0.7, 0),
+    Size = UDim2.new(0.7, 0, 0, 20),
     Value = 0,
     Callback = function(self, Value)
         angleY = tonumber(Value)
@@ -2649,7 +2740,7 @@ Image:InputInt({
 
 Image:InputInt({
     Label = "Block Depth",
-    Size = UDim2.fromScale(0.7, 0),
+    Size = UDim2.new(0.7, 0, 0, 20),
     Value = 2,
     Callback = function(self, Value)
         Bdepth = tonumber(Value)
@@ -2895,11 +2986,11 @@ local ImgTable = BlockNeeded:Table({
 })
 
 ImgTable:ClearRows()
-local ColName = ImgTable:CreateRow()
-local ImgName = ColName:CreateColumn()
-local BlockName = ColName:CreateColumn()
-local NeededName = ColName:CreateColumn()
-local MissingName = ColName:CreateColumn()
+local ColName = ImgTable:Row()
+local ImgName = ColName:Column()
+local BlockName = ColName:Column()
+local NeededName = ColName:Column()
+local MissingName = ColName:Column()
 
 ImgName:Label({
     Text = `Image`
@@ -2918,11 +3009,11 @@ MissingName:Label({
     Text = `Missing`
 })
 
-local Row = ImgTable:CreateRow()
-local Img = Row:CreateColumn()
-local Name = Row:CreateColumn()
-local Needed = Row:CreateColumn()
-local Missing = Row:CreateColumn()
+local Row = ImgTable:Row()
+local Img = Row:Column()
+local Name = Row:Column()
+local Needed = Row:Column()
+local Missing = Row:Column()
 
 BlockNeeded:Separator({Text="Button"})
 
@@ -2935,11 +3026,11 @@ BlockNeeded:Button({
 	Callback = function()
         NbBlockneeded = 0
         ImgTable:ClearRows()
-        local ColName = ImgTable:CreateRow()
-ImgName = ColName:CreateColumn()
-BlockName = ColName:CreateColumn()
-NeededName = ColName:CreateColumn()
-MissingName = ColName:CreateColumn()
+        local ColName = ImgTable:Row()
+ImgName = ColName:Column()
+BlockName = ColName:Column()
+NeededName = ColName:Column()
+MissingName = ColName:Column()
 
 for _, skibidi in ipairs(workspace.ImagePreview:GetChildren()) do
     if skibidi.Name == "Part" then
@@ -2979,10 +3070,10 @@ MissingName:Label({
 local blocktypeID = BlockId[BlockType]
 
          Row = ImgTable:CreateRow()
-         Img = Row:CreateColumn()
-       Name = Row:CreateColumn()
-        Needed = Row:CreateColumn()
-     Missing = Row:CreateColumn()
+         Img = Row:Column()
+       Name = Row:Column()
+        Needed = Row:Column()
+     Missing = Row:Column()
 
      Img:Image({
         Image = blocktypeID,
