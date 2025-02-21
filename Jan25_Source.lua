@@ -1,4 +1,4 @@
---BABFT FAB17Y2025
+--BABFT FAB21Y2025
 if game.PlaceId ~= 537413528 then
     return
 end
@@ -317,9 +317,14 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                 end
                 newPart.Position = humanoidRootPart.Position - Vector3.new(0, 2, 0)
 
-                wait(2.3) -- if lower, it can't work every time
                 if iteration == 1 then
                     wait(2.3)
+                    --workspace.ClaimRiverResultsGold:FireServer()
+                else
+                    repeat
+                        task.wait()
+                        
+                    until #tostring(game:GetService("Players").LocalPlayer.OtherData:FindFirstChild("Stage"..(iteration-1)).Value) > 2
                 end
                 if iteration == 4 then
                 else
@@ -328,11 +333,7 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                 if iteration == 10 then
                     if game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(200, 200, 200) or game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(255 , 255, 255) then
                         wait(0.1)
-                        print(humanoidRootPart.Position.Z)
-                        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z > 7529.08984 then  
-                            print(humanoidRootPart.Position.Z)
-                            print("GOTTA KILL THE PLAYER")               
-                            wait(2.3)
+                        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z > 7529.08984 then
                             game.Players.LocalPlayer.Character:BreakJoints()
                         end
                     end
@@ -354,10 +355,14 @@ local AutoFarmToggle = AutoFarm:Checkbox({
 
                 newPart.Position = humanoidRootPart.Position - Vector3.new(0, 2, 0)
 
-                wait(2.3) -- if lower, it can't work every time
                 if iteration == 1 then
                     wait(2.3)
-
+                    --workspace.ClaimRiverResultsGold:FireServer()
+                else
+                    repeat
+                        task.wait()
+                        
+                    until #tostring(game:GetService("Players").LocalPlayer.OtherData:FindFirstChild("Stage"..(iteration-1)).Value) > 2
                 end
                 if iteration == 4 then
                 else
@@ -367,8 +372,6 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                     if game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(200, 200, 200) or game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(255 , 255, 255) then
                         wait(0.1)
                         if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z > 7529.08984 then
-                            print("GOTTA KILL THE PLAYER")               
-                            wait(2.3)
                             game.Players.LocalPlayer.Character:BreakJoints()
                         end
                     end
@@ -1428,7 +1431,7 @@ local AutoFarmTreeNode = ReadMe:TreeNode({
 
 AutoFarmTreeNode:Label({
     TextWrapped = true,
-	Text = "This AutoFarm is already optimized, slider to set speed is useless, this configuration is already maxxed.\n\nlet me know if you've ever seen an auto farm more powerful than this one in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 22K/hour\n - With x1.25: 28K/hour\n - With x2: 45K/hour\n - With Both: 52k/hour\n\nBoost means gold multiplier, and you can get it either by joining the game's roblox group, or by buying the X2 gold gamepass."
+	Text = "This AutoFarm is already optimized, slider to set speed is useless, this configuration is already maxxed.\n\nlet me know if you've ever seen an auto farm more powerful than this one in terms of gold per hour, you can use a webhook to follow the auto farm stats when you're not in front of your screen.\n\n - With no boost: 25K/hour\n - With x1.25: 31K/hour\n - With x2: 50K/hour\n - With Both: 60k/hour\n\nBoost means gold multiplier, and you can get it either by joining the game's roblox group, or by buying the X2 gold gamepass."
 })
 
 local ImageLoaderTreeNode = ReadMe:TreeNode({
@@ -1695,7 +1698,7 @@ end
 local WbhId = "1328093401354211459/dEhqeOoxkbVIpirAcN6OsaM6Wgmm3xQxLXFC7jleBPZHY41xKtK1TkORd6ESWGKFHEem" -- also sxirbes, if you were looking for a webhook, you got it! Don't forget that my script doesn't send personal information about the account. it is ANONYMOUS
 local embed2 = { -- Hello, this dicord bot is just for me to know how many people execute this script, everything is anonymous
     ["title"] = "Build A Boat For Treasure",
-    ["description"] = "Script Executed! V-D17F225",
+    ["description"] = "Script Executed! V-D21F225",
     ["color"] = math.random(1, 16777215),
     ["footer"] = {
         ["text"] = "Script by @thereal_asu"
