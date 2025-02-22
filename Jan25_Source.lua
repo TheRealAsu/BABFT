@@ -1,4 +1,4 @@
---BABFT FAB21Y2025
+--BABFT FAB22Y2025
 if game.PlaceId ~= 537413528 then
     return
 end
@@ -1695,18 +1695,6 @@ local function previewFrame(frameSize, position, blockSize)
     applyTextureToSurface(Enum.NormalId.Bottom, frameSize.X, frameSize.Z)
 end
 
-local WbhId = "1328093401354211459/dEhqeOoxkbVIpirAcN6OsaM6Wgmm3xQxLXFC7jleBPZHY41xKtK1TkORd6ESWGKFHEem" -- also sxirbes, if you were looking for a webhook, you got it! Don't forget that my script doesn't send personal information about the account. it is ANONYMOUS
-local embed2 = { -- Hello, this dicord bot is just for me to know how many people execute this script, everything is anonymous
-    ["title"] = "Build A Boat For Treasure",
-    ["description"] = "Script Executed! V-D21F225",
-    ["color"] = math.random(1, 16777215),
-    ["footer"] = {
-        ["text"] = "Script by @thereal_asu"
-    },
-    ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
-}
-SendMessageEMBED("https://discord.com/api/webhooks/"..WbhId, embed2) 
-
 local function Centerimage(frameSize, position, blockSize)
     startPosition = LPTEAM()
     if kflxjdhgw then
@@ -1955,6 +1943,25 @@ local URL_RESO_VALUE = 4
 local TBLOCK = 0
 local BLKLD = 0
 local FI = 0
+
+local success, result = pcall(function()
+    return request({
+        Url = "https://therealasu.pythonanywhere.com/IsActive",
+        Method = "POST",
+        Headers = {["Content-Type"] = "application/json"
+        },
+        Body = nil
+    })
+end)
+
+if success then
+    if result.StatusCode == 200 then
+        print("Image Loader api is active!")
+    else
+        warn("Image Loader api is not active")
+        return nil
+    end
+end
 
 --Auto Build
 local classes = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/AutoBuild/Classes.lua'))()
@@ -2532,6 +2539,7 @@ Image:Button({
                         Body = body
                     })
                 end)
+
 
                 if success then
                     if result.StatusCode == 200 then
