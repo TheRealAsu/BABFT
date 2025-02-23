@@ -1,4 +1,5 @@
---old source
+-- This is the old source
+-- new source: loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua'))()
 
 if game.PlaceId ~= 537413528 then
     return
