@@ -1379,9 +1379,28 @@ local Input = ImageLoader:CreateInput({
     end,
 })
 
-local Divider = ImageLoader:CreateDivider()
+local success, result = pcall(function()
+    return request({
+        Url = "https://therealasu.pythonanywhere.com/IsActive",
+        Method = "POST",
+        Headers = {["Content-Type"] = "application/json"
+        },
+        Body = nil
+    })
+end)
 
-Section = ImageLoader:CreateSection("Preview")
+if success then
+    if result.StatusCode == 200 then
+        print("Image Loader api is active!")
+    else
+        warn("Image Loader api is not active")
+        return nil
+    end
+end
+
+ImageLoader:CreateDivider()
+
+ImageLoader:CreateSection("Preview")
 
 local TogglePreview = ImageLoader:CreateToggle({
     Name = "Preview",
