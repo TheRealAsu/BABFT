@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 --BABFT FAB22Y2025
 if game.PlaceId ~= 537413528 then
     return
@@ -42,9 +43,11 @@ task.delay(10, function()
     end
 end)
 
-ImGuiV1 = loadstring(game:HttpGet('https://github.com/depthso/Roblox-ImGUI/raw/main/ImGui.lua'))()     -- Imgui V1
+local BlockId = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/BlockId.lua'))()
+local classes = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/AutoBuild/Classes.lua'))()
+local NormalColorBlock = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/AutoBuild/NormalColorBlock.lua'))()
 
--- ReGui
+-- ReGui library
 local ImGui = loadstring(game:HttpGet('https://raw.githubusercontent.com/depthso/Dear-ReGui/refs/heads/main/ReGui.lua'))()
 local PrefabsId = `rbxassetid://{ImGui.PrefabsId}`
 
@@ -73,11 +76,12 @@ local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local connection
 
 if not isfile("BABFT/Settings/FirstTimePrompt") then
-    writefile("BABFT/Settings/FirstTimePrompt", "you have already executed this script once")
-local FirstTimeExec = ImGuiV1:CreateModal({
+local FirstTimeExec = ImGui:PopupModal({
 	Title = "Asu's Build A Boat For Treasure script",
 	AutoSize = "Y"
 })
+
+writefile("BABFT/Settings/FirstTimePrompt", "you have already executed this script once")
 
 FirstTimeExec:Label({
     TextWrapped = true,
@@ -101,7 +105,7 @@ FirstTimeExec:Button({
 	Text = "idc, cuh!",
 	Size = UDim2.fromScale(1, 0),
 	Callback = function()
-		FirstTimeExec:Close()
+		FirstTimeExec:ClosePopup()
 	end,
 })
 end
@@ -178,15 +182,15 @@ local Credit = Exploit:CreateTab({
 })
 
 local AutoBuild = AutoBuilder:CreateTab({
-	Name = "Auto Build"
+	Name = "Auto Builder"
 })
 
 local Image = AutoBuilder:CreateTab({
-	Name = "Image"
+	Name = "Image Loader"
 })
 
 local BlockNeeded = AutoBuilder:CreateTab({
-	Name = "Block Needed"
+	Name = "List"
 })
 
 local function LPTEAM2()
@@ -232,7 +236,7 @@ local function disableAntiAFK()
 end
 
 local function loop()
-    while true do
+    while FcMaster do
         if getgenv().afk6464 then
             enableAntiAFK()
         else
@@ -424,19 +428,19 @@ AutoFarm:Separator({
 })
 
 local ElapsedTime = AutoFarm:Label({
-	Text = "Elapsed time: 00:00:00"
+	Text = "Elapsed Time: 00:00:00"
 })
 
 local GoldBlockGained = AutoFarm:Label({
-	Text = "GoldBlock Gained: "
+	Text = "Gold Blocks Gained: 0"
 })
 
 local GoldGainedLabel = AutoFarm:Label({
-	Text = "Gold Gained: "
+	Text = "Gold Gained: 0"
 })
 
 local GoldPerHourLabel = AutoFarm:Label({
-	Text = "Gold per hour: "
+	Text = "Gold Per Hour: nan"
 })
 
 AutoFarm:Separator({
@@ -480,8 +484,8 @@ game:GetService("RunService").Stepped:Connect(function()
     end
 end)
 
-function initclock()
-while true do
+task.spawn(function()
+while FcMaster do
     local FinalGold = game:GetService("Players").LocalPlayer.Data.Gold.Value
     Ftime = formatTime(clockTime)
     local GoldGained = FinalGold - lastGoldValue
@@ -498,7 +502,7 @@ while true do
     lastGoldValue = FinalGold
     wait(1)
 end
-end
+end)
 
 GoldPerHour = 0
 
@@ -933,18 +937,6 @@ local Troll = Misc:CollapsingHeader({
 	Title = "Troll"
 })
 
-Troll:Button({
-	Text = "Max click detector distance",
-    Size = UDim2.fromScale(1, 0),
-	Callback = function(self)
-        for _, object in ipairs(game:GetDescendants()) do
-            if object:IsA("ClickDetector") then
-                object.MaxActivationDistance = 100069
-            end
-        end
-	end,
-})
-
 Troll:Checkbox({
 	Label = "Force Share Mode",
 	Value = false,
@@ -1015,6 +1007,18 @@ Troll:Button({
 	end,
 })
 
+Troll:Button({
+	Text = "Max click detector distance",
+    Size = UDim2.fromScale(1, 0),
+	Callback = function(self)
+        for _, object in ipairs(game:GetDescendants()) do
+            if object:IsA("ClickDetector") then
+                object.MaxActivationDistance = 100069
+            end
+        end
+	end,
+})
+
 local Destructive = Misc:CollapsingHeader({
 	Title = "Destructive"
 })
@@ -1069,7 +1073,6 @@ Destructive:Checkbox({
             end
             local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
             local paintData = {}
-            local totalBlocks = #playerFolder:GetChildren()
 
             for _, block in ipairs(playerFolder:GetChildren()) do
                 local color = Color3.new(
@@ -1411,7 +1414,7 @@ if isfile("BABFT/Settings/BetterSB") then
 end
 
 Settings:Checkbox({
-    Label = "Better Tool Selection Box",
+    Label = "Better Tools Selection Box",
     Value = Bettersb,
     Callback = function(self, Value)
         if Value then
@@ -1551,8 +1554,6 @@ Credit:Image({
 
 -- Auto Builder / Image / Block Needed
 
-local BlockId = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/BlockId.lua'))()
-
 local ImageFiles = {}
 
 local function LPTEAM()
@@ -1606,6 +1607,7 @@ local USEURL = nil
 local TempData = {}
 local BlockLoaded = true
 local TASK1, TASK2, TASK3, TASK4, TASK5 = false, false, false, false, false
+local ImageLoading = false
 getgenv().ImgLoaderStat = true
 
 local function UUserBlockList()
@@ -1715,6 +1717,7 @@ local function Centerimage(frameSize, position, blockSize)
 end
 
 local function buildImageFAST()
+    ImageLoading = true
     local folder = workspace:FindFirstChild("ImagePreview")
     if not folder then
         return
@@ -1799,9 +1802,13 @@ local function buildImageFAST()
             Color3.new(color.R, color.G, color.B)
         })
     end
-    
+
     local PaintPath = player.Backpack:FindFirstChild("PaintingTool") or player.Character:FindFirstChild("PaintingTool")
     PaintPath.RF:InvokeServer(paintData)
+
+    task.delay(1, function()
+        ImageLoading = false
+    end)
 
     for i = 1, #parts do
         if getgenv().ImgLoaderStat == false then
@@ -1964,8 +1971,6 @@ if success then
 end
 
 --Auto Build
-local classes = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/AutoBuild/Classes.lua'))()
-local NormalColorBlock = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/AutoBuild/NormalColorBlock.lua'))()
 
 local ToObjectSpace = CFrame.new().ToObjectSpace
 
@@ -2651,7 +2656,7 @@ Image:SliderProgress({
     Value = 750,
     Minimum = 100,
     Maximum = 4000,
-    Size = UDim2.fromScale(0.54, 0.04),
+    Size = UDim2.fromScale(0.54, 0.034),
     Callback = function(self, Value)
     batchSize = Value
 end,
@@ -2701,16 +2706,20 @@ Image:InputText({
 })
 
 Image:InputInt({
-    Label = "Move multiplier",
-    Value = 40,
-    Size = UDim2.new(0.7, 0, 0, 20),
+    Label = "Depth",
+    Size = UDim2.new(1, 0, 0, 20),
+    Value = 2,
     Callback = function(self, Value)
-        Unit = tostring(Value)
+        Bdepth = tonumber(Value)
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            skibidi.Size = Vector3.new(skibidi.Size.X, skibidi.Size.Y, Bdepth)
+            end
 	end,
 })
 
 local originalCFrames = {}
 
+--[[
 Image:InputInt({
     Label = "Rotate",
     Size = UDim2.new(0.7, 0, 0, 20),
@@ -2748,16 +2757,54 @@ Image:InputInt({
         end
 	end,
 })
+]]
+
+Image:InputCFrame({
+    Label = "Rotate",
+    Value = CFrame.new(),
+    Minimum = -360,
+    Maximum = 360,
+    Callback = function(self, Value)
+        local centerImage = workspace.ImagePreview:FindFirstChild("Centerimage")
+        if not centerImage then
+            return
+        end
+        local pos = Value.Position
+
+        local rotationCFrame = CFrame.Angles(math.rad(pos.X), math.rad(pos.Y), math.rad(pos.Z))
+
+        Brainrot = centerImage.CFrame * rotationCFrame
+
+        for _, skibidi in ipairs(previewFolder:GetChildren()) do
+            if skibidi:IsA("BasePart") and skibidi ~= centerImage then
+
+                local centerCFrame = centerImage.CFrame
+
+                if not originalCFrames[skibidi] then
+                    originalCFrames[skibidi] = skibidi.CFrame
+                end
+
+                local originalCFrame = originalCFrames[skibidi]
+                local relativeCFrame = centerCFrame:ToObjectSpace(originalCFrame)
+
+                local ghaaa = centerCFrame * rotationCFrame * relativeCFrame
+                skibidi.CFrame = ghaaa
+            end
+        end
+    end
+})
+
+local ImgStatsP = Image:Label({
+    TextWrapped = true,
+	Text = "Drag to rotate! Since it's a bit glitched you should rotate first, then move the image"
+})
 
 Image:InputInt({
-    Label = "Block Depth",
+    Label = "Move multiplier",
+    Value = 40,
     Size = UDim2.new(0.7, 0, 0, 20),
-    Value = 2,
     Callback = function(self, Value)
-        Bdepth = tonumber(Value)
-        for _, skibidi in ipairs(previewFolder:GetChildren()) do
-            skibidi.Size = Vector3.new(skibidi.Size.X, skibidi.Size.Y, Bdepth)
-            end
+        Unit = tostring(Value)
 	end,
 })
 
@@ -2886,6 +2933,7 @@ else
     ImgStatsP.Text = "Error: Disable Fps Booster"
 end
         BlockLoaded = false
+        ImageLoading = true
         getgenv().ImgLoaderStat = true
         ProgressBar:SetPercentage(0)
         task.spawn(buildImageFAST)
@@ -2904,6 +2952,7 @@ Image:Button({
             task.delay(1, function()
                 ImgStatsP.Text = "Unplaced Blocks deleted."
             end)
+            ImageLoading = false
 	end,
 })
 
@@ -2911,65 +2960,13 @@ Image:Separator({Text="Info"})
 
 Image:Label({
     TextWrapped = true,
-	Text = "Require painting and scaling tools. Do not place block when Building the Image."
+	Text = "Require to own all the blocks, require painting and scaling tools. Do not place block when building the image."
 })
 
-function ImgStats()
-    local startTime = tick()
-    while true do
-        local blockssFolder 
-        local blocksFolder = workspace:FindFirstChild("Blocks")
-        pcall(function()
-            blockssFolder = blocksFolder:FindFirstChild(Nplayer)
-        end)
-        local totalBlocks = #blockssFolder:GetChildren()
-        local BLKLD = totalBlocks - TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol
-        local elapsedTime = tick() - startTime
-        local blocksPerSecond = BLKLD / elapsedTime
-        local blocksRemaining = TBLOCK - BLKLD
-        local timeRemaining = blocksRemaining / blocksPerSecond
-        local FI = math.max(timeRemaining, 0)
-        if not BlockLoaded then
-        ImgStatsP.Text = "Blocks Loaded: "..BLKLD.."/"..TBLOCK.."\nFinish in: ~" .. math.floor(FI) .. "s"
-        local percentage = math.min((BLKLD / TBLOCK) * 100, 98)
-        ProgressBar:SetPercentage(percentage)
-
-        if BLKLD >= TBLOCK then
-            BlockLoaded = true
-        end
-        end
-        task.wait(1.2)
-    end
-end
-
-function ImgStats2()
-    while true do
-        if BlockLoaded then
-    if TASK1  then
-        ImgStatsP.Text = "Placing Blocks..."
-        TASK1 = false
-    elseif TASK2  then
-        ImgStatsP.Text = "Placing Blocks..."
-        TASK2 = false
-    elseif TASK3  then
-        ImgStatsP.Text = "Coloring Blocks..."
-        TASK3 = false
-    elseif TASK4  then
-        ImgStatsP.Text = "Deleting unplaced Blocks..."
-        TASK4 = false
-    elseif TASK5  then
-        ProgressBar:SetPercentage(100)
-        ImgStatsP.Text = "Success!"
-        ImgStatsP.TextColor3 = Color3.fromRGB(80, 200, 90)
-        TASK5 = false
-        task.wait(0.25)
-        ImgStatsP.Text = "Success! Proccess end"
-        ImgStatsP.TextColor3 = Color3.fromRGB(80, 200, 90)
-    end
-end
-    wait(0.2)
-end
-end
+Image:Label({
+    TextWrapped = true,
+	Text = "Re enable preview after changing the size, if the image get glitched, re enable preview.\n"
+})
 
 -- BlockNeeded
 
@@ -3208,20 +3205,68 @@ AutoFarm:Button({
 
 AutoFarm:Label({
     TextWrapped = true,
-	Text = "Saves and loads auto farm toggles, URL Webhook, Interval and Fps Booster Toggles"
+	Text = "Saves and loads auto farm toggles, URL Webhook, Interval and Fps Booster toggles"
 })
 
 -- Init
-local function Init()
-    local initclock = coroutine.create(initclock)
-    local ImgStats = coroutine.create(ImgStats)
-    local ImgStats2 = coroutine.create(ImgStats2)
-    coroutine.resume(initclock)
-    coroutine.resume(ImgStats)
-    coroutine.resume(ImgStats2)
-end
+task.spawn(function()
+    local startTime = tick()
+    while FcMaster do
+        if ImageLoading then
+        local blockssFolder
+        local blocksFolder = workspace:FindFirstChild("Blocks")
+        pcall(function()
+            blockssFolder = blocksFolder:FindFirstChild(Nplayer)
+        end)
+        local totalBlocks = #blockssFolder:GetChildren()
+        local BLKLD = totalBlocks - TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol
+        local elapsedTime = tick() - startTime
+        local blocksPerSecond = BLKLD / elapsedTime
+        local blocksRemaining = TBLOCK - BLKLD
+        local timeRemaining = blocksRemaining / blocksPerSecond
+        local FI = math.max(timeRemaining, 0)
+        if not BlockLoaded then
+        ImgStatsP.Text = "Blocks Loaded: "..BLKLD.."/"..TBLOCK.."\nFinish in: ~" .. math.floor(FI) .. "s"
+        local percentage = math.min((BLKLD / TBLOCK) * 100, 98)
+        ProgressBar:SetPercentage(percentage)
 
-Init()
+        if BLKLD >= TBLOCK then
+            BlockLoaded = true
+        end
+        end
+        end
+        task.wait(1.2)
+    end
+end)
+
+task.spawn(function ()
+    while FcMaster do
+        if BlockLoaded then
+    if TASK1  then
+        ImgStatsP.Text = "Placing Blocks..."
+        TASK1 = false
+    elseif TASK2  then
+        ImgStatsP.Text = "Placing Blocks..."
+        TASK2 = false
+    elseif TASK3  then
+        ImgStatsP.Text = "Coloring Blocks..."
+        TASK3 = false
+    elseif TASK4  then
+        ImgStatsP.Text = "Deleting unplaced Blocks..."
+        TASK4 = false
+    elseif TASK5  then
+        ProgressBar:SetPercentage(100)
+        ImgStatsP.Text = "Success!"
+        ImgStatsP.TextColor3 = Color3.fromRGB(80, 200, 90)
+        TASK5 = false
+        task.wait(0.25)
+        ImgStatsP.Text = "Success! Proccess end"
+        ImgStatsP.TextColor3 = Color3.fromRGB(80, 200, 90)
+    end
+end
+    wait(0.2)
+end
+end)
 warn("/Asu's Basement Script/ - The script loaded without any errors")
 --[[
 
