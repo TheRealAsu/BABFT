@@ -2762,8 +2762,8 @@ Image:InputInt({
 Image:InputCFrame({
     Label = "Rotate",
     Value = CFrame.new(),
-    Minimum = -360,
-    Maximum = 360,
+    Minimum = CFrame.new(-360, -360, -360),
+    Maximum = CFrame.new(360, 360, 360),
     Callback = function(self, Value)
         local centerImage = workspace.ImagePreview:FindFirstChild("Centerimage")
         if not centerImage then
@@ -3077,7 +3077,7 @@ MissingName:Label({
 })
 local blocktypeID = BlockId[BlockType]
 
-         Row = ImgTable:CreateRow()
+         Row = ImgTable:Row()
          Img = Row:Column()
        Name = Row:Column()
         Needed = Row:Column()
