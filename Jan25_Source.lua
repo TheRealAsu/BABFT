@@ -75,6 +75,7 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local connection
 
+--[[
 if not isfile("BABFT/Settings/FirstTimePrompt") then
 local FirstTimeExec = ImGui:PopupModal({
 	Title = "Asu's Build A Boat For Treasure script",
@@ -109,6 +110,8 @@ FirstTimeExec:Button({
 	end,
 })
 end
+]]
+
 
 local Exploit
 local AutoBuilder
@@ -576,19 +579,6 @@ function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
         SendMessageEMBED(WebHook, embed)
     end
 end
-
---[[
-local embed2 = { -- Hello, this webhook is just for me to know how many people execute this script, everything is anonymous
-    ["title"] = "Build A Boat For Treasure",
-    ["description"] = "Script Executed!",
-    ["color"] = math.random(1, 16777215),
-    ["footer"] = {
-        ["text"] = "Script by @thereal_asu"
-    },
-    ["thumbnail_url"] = "https://tr.rbxcdn.com/180DAY-5cc07c05652006d448479ae66212782d/768/432/Image/Webp/noFilter"
-}
-SendMessageEMBED("the webhook got found and removed, i won't put a new one lol, thanks for the 15K executions in 3 days. - 7th january 2025", embed2)
-]]
 
 local WebHookURLBool
 
