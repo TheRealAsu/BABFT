@@ -1,5 +1,6 @@
+--LATEST BABFT
 ---@diagnostic disable: undefined-global
---BABFT FAB22Y2025
+--BABFT MAR19Y2025
 if game.PlaceId ~= 537413528 then
     return
 end
@@ -33,9 +34,7 @@ local folderName = "ImagePreview"
 local previewFolder = Workspace:FindFirstChild(folderName) or Instance.new("Folder", Workspace)
 previewFolder.Name = folderName
 
-for _, v in ipairs(previewFolder:GetChildren()) do
-    v:Destroy()
-end
+previewFolder:ClearAllChildren()
 
 task.delay(10, function()
     if game:GetService("CoreGui"):FindFirstChild("MSGISSUE") then
@@ -68,13 +67,13 @@ local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local UserInputService = game:GetService("UserInputService")
 local Teams = game:GetService("Teams")
-
+local Lighting = game:GetService("Lighting")
 local player = game.Players.LocalPlayer
 local Nplayer = game.Players.LocalPlayer.Name
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local connection
-
+local SB = false
 --[[
 if not isfile("BABFT/Settings/FirstTimePrompt") then
 local FirstTimeExec = ImGui:PopupModal({
@@ -116,7 +115,7 @@ end
 local Exploit
 local AutoBuilder
 
-if game:GetService("UserInputService").TouchEnabled then
+if UserInputService.TouchEnabled then
     Exploit = ImGui:TabsWindow({
         Title = "Exploit",
         Size = UDim2.fromOffset(252, 200),
@@ -245,7 +244,7 @@ local function loop()
         else
             disableAntiAFK()
         end
-        wait(1)
+        wait(4)
     end
 end
 
@@ -331,14 +330,14 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                     repeat
                         task.wait()
                         
-                    until #tostring(game:GetService("Players").LocalPlayer.OtherData:FindFirstChild("Stage"..(iteration-1)).Value) > 2
+                    until #tostring(Players.LocalPlayer.OtherData:FindFirstChild("Stage"..(iteration-1)).Value) > 2
                 end
                 if iteration == 4 then
                 else
                     workspace.ClaimRiverResultsGold:FireServer()
                 end
                 if iteration == 10 then
-                    if game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(200, 200, 200) or game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(255 , 255, 255) then
+                    if Lighting.OutdoorAmbient == Color3.fromRGB(200, 200, 200) or Lighting.OutdoorAmbient == Color3.fromRGB(255 , 255, 255) then
                         wait(0.1)
                         if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z > 7529.08984 then
                             game.Players.LocalPlayer.Character:BreakJoints()
@@ -376,7 +375,7 @@ local AutoFarmToggle = AutoFarm:Checkbox({
                     workspace.ClaimRiverResultsGold:FireServer()
                 end
                 if iteration == 10 then
-                    if game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(200, 200, 200) or game:GetService("Lighting").OutdoorAmbient == Color3.fromRGB(255 , 255, 255) then
+                    if Lighting.OutdoorAmbient == Color3.fromRGB(200, 200, 200) or Lighting.OutdoorAmbient == Color3.fromRGB(255 , 255, 255) then
                         wait(0.1)
                         if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z > 7529.08984 then
                             game.Players.LocalPlayer.Character:BreakJoints()
@@ -456,8 +455,8 @@ local totalGoldGained = 0
 local Ftime = 0 
 local totalGoldBlock = 0
 local GoldPerHour = 0
-local lastGoldValue = game:GetService("Players").LocalPlayer.Data.Gold.Value
-local IGBLOCK = game:GetService("Players").LocalPlayer.Data.GoldBlock.Value
+local lastGoldValue = Players.LocalPlayer.Data.Gold.Value
+local IGBLOCK = Players.LocalPlayer.Data.GoldBlock.Value
 
 local function formatTime(seconds)
     local hours = math.floor(tonumber(seconds) / 3600)
@@ -480,7 +479,7 @@ local function startClock()
     end
 end
 
-game:GetService("RunService").Stepped:Connect(function()
+RunService.Stepped:Connect(function()
     if getgenv().AF and not running then
         wait(5)
         startClock()
@@ -489,11 +488,11 @@ end)
 
 task.spawn(function()
 while FcMaster do
-    local FinalGold = game:GetService("Players").LocalPlayer.Data.Gold.Value
+    local FinalGold = Players.LocalPlayer.Data.Gold.Value
     Ftime = formatTime(clockTime)
     local GoldGained = FinalGold - lastGoldValue
     totalGoldGained = totalGoldGained + GoldGained
-    local FGBLOCK = game:GetService("Players").LocalPlayer.Data.GoldBlock.Value
+    local FGBLOCK = Players.LocalPlayer.Data.GoldBlock.Value
     totalGoldBlock = FGBLOCK - IGBLOCK
     GoldPerHour = (totalGoldGained / clockTime) * 3600
 
@@ -510,7 +509,6 @@ end)
 GoldPerHour = 0
 
 function SendMessageEMBED(url, embed)
-    local http = game:GetService("HttpService")
     local headers = {
         ["Content-Type"] = "application/json"
     }
@@ -530,7 +528,7 @@ function SendMessageEMBED(url, embed)
             }
         }
     }
-    local body = http:JSONEncode(data)
+    local body = HttpService:JSONEncode(data)
     local response = request({
         Url = url,
         Method = "POST",
@@ -566,7 +564,7 @@ function SendAUTOFARMInfo(Ftime, totalGoldBlock, totalGoldGained, GoldPerHour)
             },
             {
                 ["name"] = "Total Gold:",
-                ["value"] = game:GetService("Players").LocalPlayer.Data.Gold.Value or 0
+                ["value"] = Players.LocalPlayer.Data.Gold.Value or 0
             },
         },
         ["footer"] = {
@@ -630,7 +628,10 @@ end)()
 
 local selectionBoxConnections = {}
 
+local Init = false
+
 local function updateSB(selectionBox)
+    if not Init then return end
     if selectionBox:IsA("SelectionBox") then
         selectionBox.LineThickness = 0.02
         selectionBox.SurfaceTransparency = 0.76
@@ -645,6 +646,7 @@ local function updateSB(selectionBox)
 end
 
 local function enableSB()
+    SB = true
     for _, instance in ipairs(workspace:GetDescendants()) do
         if instance:IsA("SelectionBox") then
             updateSB(instance)
@@ -673,6 +675,8 @@ local function enableSB()
 end
 
 local function disableSB()
+    SB = false
+    if not Init then return end
     for instance, connection in pairs(selectionBoxConnections) do
         if connection then
             connection:Disconnect()
@@ -696,10 +700,10 @@ Misc:Button({
     BackgroundColor3 = Color3.fromRGB(245, 60, 60),
 	Callback = function(self)
         TriggerChest.CFrame = CFrame.new(-55.7065125, -358.739624, 9492.35645, 0, 0, -1, 0, 1, 0, 1, 0, 0) 
-        for _, v in ipairs(previewFolder:GetChildren()) do
-            v:Destroy()
-    end
-        disableSB()
+        previewFolder:ClearAllChildren()
+        if SB then
+            disableSB()
+        end
         FcMaster = false
         AutoBuilder:Remove()
         Exploit:Remove()
@@ -722,10 +726,10 @@ Misc:Button({
             "WaterMask"
         }
             for _, v in ipairs(GameStuff) do
-                local object = game:GetService("ReplicatedStorage"):FindFirstChild(v)
+                local object = ReplicatedStorage:FindFirstChild(v)
                 if object then
                     if v == "OtherStages" then
-                        game:GetService("ReplicatedStorage").OtherStages.Parent = workspace.BoatStages
+                        ReplicatedStorage.OtherStages.Parent = workspace.BoatStages
                     else
                         object.Parent = workspace
                     end
@@ -843,7 +847,7 @@ ClientSide:InputText({
     Label = "Fake Gold",
     Value = "",
     Callback = function(self, Value)
-        game:GetService("Players").LocalPlayer.Data.Gold.Value = tonumber(Value)
+        Players.LocalPlayer.Data.Gold.Value = tonumber(Value)
 	end,
 })
 
@@ -1019,12 +1023,11 @@ Destructive:Button({
 	Callback = function(self)
         local playerteam = player.Team.Name
         local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
-        if not game:GetService("Players").LocalPlayer.Settings.ShareBlocks.Value then
+        if not Players.LocalPlayer.Settings.ShareBlocks.Value then
             blocktoget = player.Name
         end
         local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
         local paintData = {}
-        local totalBlocks = #playerFolder:GetChildren()
 
         for _, block in ipairs(playerFolder:GetChildren()) do
             local color = Color3.new(
@@ -1058,7 +1061,7 @@ Destructive:Checkbox({
             if Value then
             local playerteam = player.Team.Name
             local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
-            if not game:GetService("Players").LocalPlayer.Settings.ShareBlocks.Value then
+            if not Players.LocalPlayer.Settings.ShareBlocks.Value then
                 blocktoget = player.Name
             end
             local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
@@ -1077,13 +1080,13 @@ Destructive:Checkbox({
                 })
 
                 if #paintData >= 10000 then
-                    game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
+                    Players.LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
                     paintData = {}
                 end
             end
 
             if #paintData > 0 then
-                game:GetService("Players").LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
+                Players.LocalPlayer.Backpack.PaintingTool.RF:InvokeServer(paintData)
             end
         end
         task.wait()
@@ -1097,13 +1100,13 @@ Destructive:Button({
 	Callback = function(self)
         local playerteam = player.Team.Name
         local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
-        if not game:GetService("Players").LocalPlayer.Settings.ShareBlocks.Value then
+        if not Players.LocalPlayer.Settings.ShareBlocks.Value then
             blocktoget = player.Name
         end
 
         local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
         for _, block in ipairs(playerFolder:GetChildren()) do
-            local rf = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("DeleteTool") and game:GetService("Players").LocalPlayer.Backpack.DeleteTool:FindFirstChild("RF") 
+            local rf = Players.LocalPlayer.Backpack:FindFirstChild("DeleteTool") and Players.LocalPlayer.Backpack.DeleteTool:FindFirstChild("RF") 
             if not rf then
                 break
             end
@@ -1122,14 +1125,14 @@ Destructive:Checkbox({
             if Value then
                 local playerteam = player.Team.Name
                 local blocktoget = game:GetService("Teams"):FindFirstChild(playerteam).TeamLeader.Value
-                if not game:GetService("Players").LocalPlayer.Settings.ShareBlocks.Value then
+                if not Players.LocalPlayer.Settings.ShareBlocks.Value then
                     blocktoget = player.Name
                 end
 
                 local playerFolder = game.Workspace.Blocks:FindFirstChild(blocktoget)
                 for _, block in ipairs(playerFolder:GetChildren()) do
                     task.spawn(function()
-                        game:GetService("Players").LocalPlayer.Backpack.DeleteTool.RF:InvokeServer(block)
+                        Players.LocalPlayer.Backpack.DeleteTool.RF:InvokeServer(block)
                     end)
                 end
         end
@@ -1170,10 +1173,10 @@ local HideuselesspartsToggle = FpsBooster:Checkbox({
 	Callback = function(self, Value)
         HideuselesspartsBool = Value
         if Value then
-            workspace.MainTerrain.Parent = game:GetService("ReplicatedStorage")
+            workspace.MainTerrain.Parent = ReplicatedStorage
         else
             pcall(function()
-            game:GetService("ReplicatedStorage").MainTerrain.Parent = workspace
+                ReplicatedStorage.MainTerrain.Parent = workspace
             end)
         end
 	end,
@@ -1187,10 +1190,10 @@ local HideplayersblocksToggle = FpsBooster:Checkbox({
 	Callback = function(self, Value)
         HideplayersblocksBool = Value
         if Value then
-            workspace.Blocks.Parent = game:GetService("ReplicatedStorage")
+            workspace.Blocks.Parent = ReplicatedStorage
         else
             pcall(function()
-            game:GetService("ReplicatedStorage").Blocks.Parent = workspace
+                ReplicatedStorage.Blocks.Parent = workspace
             end)
         end
 	end,
@@ -1226,15 +1229,15 @@ local HideAllToggle = FpsBooster:Checkbox({
             for _, v in ipairs(Stuff) do
                 local object = workspace:FindFirstChild(v) or workspace.BoatStages:FindFirstChild("OtherStages")
                 if object then
-                    object.Parent = game:GetService("ReplicatedStorage")
+                    object.Parent = ReplicatedStorage
                 end
             end
         else
             for _, v in ipairs(Stuff) do
-                local object = game:GetService("ReplicatedStorage"):FindFirstChild(v)
+                local object = ReplicatedStorage:FindFirstChild(v)
                 if object then
                     if v == "OtherStages" then
-                        game:GetService("ReplicatedStorage").OtherStages.Parent = workspace.BoatStages
+                        ReplicatedStorage.OtherStages.Parent = workspace.BoatStages
                     else
                         object.Parent = workspace
                     end
@@ -1574,7 +1577,7 @@ imagePreviewFolder.Name = "ImagePreview"
 imagePreviewFolder.Parent = workspace
 
 local UserBlockList = {}
-local dataFolder = game:GetService("Players").LocalPlayer.Data
+local dataFolder = Players.LocalPlayer.Data
 local BlockType = "PlasticBlock"
 local LPBlockvalue = UserBlockList[BlockType]
 local blockSize = 2
@@ -1737,7 +1740,7 @@ local function buildImageFAST()
     local Zonesss = LPTEAM2()
 
     local LNplayer = nil
-    if game:GetService("Players").LocalPlayer.Settings.ShareBlocks.Value == false then
+    if Players.LocalPlayer.Settings.ShareBlocks.Value == false then
         LNplayer = Nplayer
     else
         local playerteam = player.Team.Name
@@ -1982,12 +1985,12 @@ AutoBuild:Combo({
 
 AutoBuild:Separator({Text="Export"})
 
-local TeamToSave = game:GetService("Players").LocalPlayer.Team
+local TeamToSave = Players.LocalPlayer.Team
 
 function GetFolder()
     local playersTeam = {}
 
-    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+    for _, player in ipairs(Players:GetPlayers()) do
         if player.Team and player.Team.Name == TeamToSave then
             table.insert(playersTeam, player.Name)
         end
@@ -2011,7 +2014,7 @@ AutoBuild:Combo({
     },
     Callback = function(self, Value)
         if Value == "My Team" then
-            Value = game:GetService("Players").LocalPlayer.Team.Name
+            Value = Players.LocalPlayer.Team.Name
         end
         TeamToSave = Value
         print(TeamToSave)
@@ -2697,7 +2700,6 @@ Image:InputText({
 
 Image:InputInt({
     Label = "Depth",
-    Size = UDim2.new(1, 0, 0, 20),
     Value = 2,
     Callback = function(self, Value)
         Bdepth = tonumber(Value)
@@ -2786,13 +2788,13 @@ Image:InputCFrame({
 
 local ImgStatsP = Image:Label({
     TextWrapped = true,
-	Text = "Drag to rotate! Since it's a bit glitched you should rotate first, then move the image"
+	Text = "Since it's a bit glitched you should rotate first, then move the image"
 })
 
 Image:InputInt({
     Label = "Move multiplier",
     Value = 40,
-    Size = UDim2.new(0.7, 0, 0, 20),
+    Size = UDim2.new(0.5, 0, 0, 20),
     Callback = function(self, Value)
         Unit = tostring(Value)
 	end,
@@ -2991,12 +2993,12 @@ local NeededName = ColName:Column()
 local MissingName = ColName:Column()
 
 ImgName:Label({
-    Text = `Image`
+    Text = `Block`,
 })
 
 BlockName:Label({
     TextWrapped = true,
-    Text = `Block Type`
+    Text = `Type`
 })
 
 NeededName:Label({
@@ -3050,20 +3052,20 @@ if NbBlockmissing < 0 then
 end
 
 ImgName:Label({
-    Text = `Image`
+    Text = `Block`,
 })
 
 BlockName:Label({
     TextWrapped = true,
-    Text = `Block Type`
+    Text = `Type`,
 })
 
 NeededName:Label({
-    Text = `Need`
+    Text = `Need`,
 })
 
 MissingName:Label({
-    Text = `Missing`
+    Text = `Missing`,
 })
 local blocktypeID = BlockId[BlockType]
 
@@ -3198,37 +3200,63 @@ AutoFarm:Label({
 	Text = "Saves and loads auto farm toggles, URL Webhook, Interval and Fps Booster toggles"
 })
 
--- Init
+local blocksFolder = workspace:FindFirstChild("Blocks")
+local blockssFolder
+pcall(function()
+    blockssFolder = blocksFolder:FindFirstChild(Nplayer)
+end)
+
+local childCount = #blockssFolder:GetChildren()
+local startTime = tick()
+
 task.spawn(function()
-    local startTime = tick()
     while FcMaster do
-        if ImageLoading then
-        local blockssFolder
-        local blocksFolder = workspace:FindFirstChild("Blocks")
         pcall(function()
-            blockssFolder = blocksFolder:FindFirstChild(Nplayer)
+            collectgarbage("collect")
         end)
-        local totalBlocks = #blockssFolder:GetChildren()
-        local BLKLD = totalBlocks - TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol
-        local elapsedTime = tick() - startTime
-        local blocksPerSecond = BLKLD / elapsedTime
-        local blocksRemaining = TBLOCK - BLKLD
-        local timeRemaining = blocksRemaining / blocksPerSecond
-        local FI = math.max(timeRemaining, 0)
-        if not BlockLoaded then
-        ImgStatsP.Text = "Blocks Loaded: "..BLKLD.."/"..TBLOCK.."\nFinish in: ~" .. math.floor(FI) .. "s"
+        wait(2)
+    end
+end)
+
+local function updateStats()
+    local BLKLD = childCount - TotalBlockInBlocksFolderBeforeBuildImageInitYesThisVarIsVeryLongButThisOneDoesntChangeLol
+    local elapsedTime = tick() - startTime
+    local blocksPerSecond = (elapsedTime > 0) and (BLKLD / elapsedTime) or 0
+    local blocksRemaining = TBLOCK - BLKLD
+    local timeRemaining = (blocksPerSecond > 0) and (blocksRemaining / blocksPerSecond) or 0
+    local FI = math.max(timeRemaining, 0)
+
+    if not BlockLoaded then
+        ImgStatsP.Text = "Blocks Loaded: " .. BLKLD .. "/" .. TBLOCK .. "\nFinish in: ~" .. math.floor(FI) .. "s"
         local percentage = math.min((BLKLD / TBLOCK) * 100, 98)
         ProgressBar:SetPercentage(percentage)
 
         if BLKLD >= TBLOCK then
             BlockLoaded = true
         end
-        end
-        end
-        task.wait(1.2)
     end
+end
+
+local connectionAdded = blockssFolder.ChildAdded:Connect(function()
+    childCount = childCount + 1
+    updateStats()
 end)
 
+local connectionRemoved = blockssFolder.ChildRemoved:Connect(function()
+    childCount = math.max(0, childCount - 1)
+    updateStats()
+end)
+
+task.spawn(function()
+    while FcMaster do
+        task.wait(1)
+    end
+
+    connectionAdded:Disconnect()
+    connectionRemoved:Disconnect()
+end)
+
+Init = true
 task.spawn(function ()
     while FcMaster do
         if BlockLoaded then
@@ -3257,6 +3285,7 @@ end
     wait(0.2)
 end
 end)
+
 warn("/Asu's Basement Script/ - The script loaded without any errors")
 --[[
 
