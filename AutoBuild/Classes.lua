@@ -7,7 +7,7 @@ local classes = { -- Rotation, ShowShadow, CanCollide, Position, Anchored, Trans
         "GrassBlock", "GoldBlock", "GlassBlock", "BouncyBlock", "FabricBlock", 
         "ConcreteBlock", "CoalBlock", "CaneBlock", "BrickBlock", "IceBlock", 
         "ParachuteBlock", "ConcreteBlock", "BalloonStarBlock","ToyBlock", 
-        "SmoothWoodBlock"
+        "SmoothWoodBlock", "MetalBlock"
     },
 
     Bindable = { -- BoolValues, NumberValues
