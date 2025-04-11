@@ -1,3 +1,9 @@
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Loader.lua'))()
+
+
+-- this is the old source that is deprecated, I know this is open source so don't come to me saying "hey i got your source"
+--[[
+
 --LATEST BABFT
 ---@diagnostic disable: undefined-global
 --BABFT MAR19Y2025
@@ -109,7 +115,7 @@ FirstTimeExec:Button({
 	end,
 })
 end
-]]
+
 
 
 local Exploit
@@ -136,7 +142,7 @@ if UserInputService.TouchEnabled then
     AutoBuilder:Update({
         NoClose = true
     })
-    --]]
+
 else
     Exploit = ImGui:TabsWindow({
         Title = "Exploit",
@@ -160,7 +166,7 @@ else
     AutoBuilder:Update({
         NoClose = true
     })
-    --]]
+
 end
 
 --Exploit.Content.TitleBar.Right:Destroy()
@@ -2749,7 +2755,7 @@ Image:InputInt({
         end
 	end,
 })
-]]
+
 
 Image:InputCFrame({
     Label = "Rotate",
@@ -3302,3 +3308,5 @@ warn("/Asu's Basement Script/ - The script loaded without any errors")
 
 discord server: https://discord.gg/zrAB2m5gvz
 ]]
+
+--]]
