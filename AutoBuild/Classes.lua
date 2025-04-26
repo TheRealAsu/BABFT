@@ -30,7 +30,7 @@ Text.TextColor3 = Color3.new(1, 1, 1)
 Text.TextScaled = true
 Text.Font = Enum.Font.GothamBold
 Text.TextSize = 30
-Text.ZIndex = 11
+Text.ZIndex = 11000
 Text.TextWrapped = true
 
 local function updateTextSize()
