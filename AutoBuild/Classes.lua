@@ -25,7 +25,7 @@ Text.Position = UDim2.new(0.5, 0, 0.5, 0)
 Text.Size = UDim2.new(0.8, 0, 0.5, 0)
 Text.BackgroundTransparency = 1
 Text.RichText = true
-Text.Text = 'If you see this, it means that the script owner has skidded Asu.<font color="#ffffff">\n\nJoin </font><font color="#00ff00">discord.gg/asu</font><font color="#ffffff">\nfor the original, and a better script :)</font>'
+Text.Text = 'If you see this, it means that the script owner has skidded Asu.<font color="#ffffff">\n\nJoin </font><font color="#00ff00">discord.gg/zrAB2m5gvz</font><font color="#ffffff">\nfor the original, and a better script :)</font>'
 Text.TextColor3 = Color3.new(1, 1, 1)
 Text.TextScaled = true
 Text.Font = Enum.Font.GothamBold
