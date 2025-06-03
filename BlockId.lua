@@ -160,7 +160,7 @@ local BlockId = { -- block name -> block decal ID
     Bar = 16088076429,
     Rope = 16088186920
 }
-
+--[[
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 
@@ -204,5 +204,5 @@ end
 
 updateTextSize()
 workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateTextSize)
-
+]]
 return BlockId
