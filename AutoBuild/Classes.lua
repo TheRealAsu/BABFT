@@ -1,3 +1,4 @@
+--[[
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 
@@ -41,3 +42,4 @@ end
 
 updateTextSize()
 workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateTextSize)
+--]]
