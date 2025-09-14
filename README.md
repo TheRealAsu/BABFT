@@ -12,7 +12,7 @@ Infinite blocks, instant weld, instant properties already included in the AutoBu
 - troll panel
 
 ```lua
-loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Jan25_Source.lua'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/Loader.lua'))()
 ```
 
 As I said: good luck finding a better script for this game
