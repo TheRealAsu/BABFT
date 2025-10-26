@@ -14,7 +14,7 @@
         October 2025 Halloween BABFT source 
            Thanks for using this script
 
-                    love you all <3
+                  love you all <3
 
 ]]
 
@@ -394,6 +394,8 @@ local PlaceId = game.PlaceId
 local HttpService = cloneref(game:GetService("HttpService"))
 local TeleportService = cloneref(game:GetService("TeleportService"))
 
+httprequest =  missing("function", request or http_request or (syn and syn.request) or (http and http.request) or (fluxus and fluxus.request))
+
 Credit:Button({
 	Text = "Server Hop", --// IY Shop script
     Size = UDim2.fromScale(1, 0),
@@ -401,7 +403,7 @@ Credit:Button({
 	Callback = function(self)
         wait(0.2)
         local servers = {}
-        local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", PlaceId)})
+        local req = httprequest({Url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", 537413528)})
         local body = HttpService:JSONDecode(req.Body)
 
         if body and body.data then
@@ -430,9 +432,7 @@ Method2:Button({
 	Callback = function(self)
             self.Text = "Started!"
             AutoFarm()
-
-
-
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/LoopCandyFarm.lua'))()
 	end,
 })
 
@@ -445,27 +445,6 @@ Method2:Label({
     Text = "This method claim houses and then change server. It is the most efficient way to farm candy. <b>Not all executors support it.</b> If you want to play babft while farming candy, use method 1.\n\nOnce you start it, the only way to stop it is to <b>close Roblox.</b> The interface will not appear in the next server, <b>but it will continue to farm.</b>",
     RichText = true
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Credit:Separator({
 	Text = "Owner"
