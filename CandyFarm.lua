@@ -18,6 +18,10 @@
 
 ]]
 
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+
 --// Services
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -89,11 +93,15 @@ local Exploit = ImGui:TabsWindow({
     
 --// tabs
 local Method1 = Exploit:CreateTab({
-	Name = "Candy Farm",
+	Name = "Method 1",
+})
+
+local Method2 = Exploit:CreateTab({
+	Name = "Method 2",
 })
 
 local Info = Exploit:CreateTab({
-	Name = "Information",
+	Name = "Info",
 })
 
 local Credit = Exploit:CreateTab({
@@ -133,6 +141,13 @@ local function enableAntiAFK()
         end)
     end
 end
+
+function missing(t, f, fallback)
+    if type(f) == t then return f end
+    return fallback
+end
+
+queueteleport =  missing("function", queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport) or queueonteleport)
 
 local function disableAntiAFK()
     if connection then
@@ -233,7 +248,7 @@ spawn(function()
     end
 end)
 
-Method1:Separator({Text="Candy Farm"})
+Method1:Separator({Text="Candy Farm [This server only]"})
 
 local AntiAfkToggle = Method1:Checkbox({
 	Label = "Anti-Afk",
@@ -396,12 +411,61 @@ Credit:Button({
                 end
             end
         end
-
+        
         if #servers > 0 then
+            queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/TheRealAsu/BABFT/refs/heads/main/CandyFarm.lua'))()")
             TeleportService:TeleportToPlaceInstance(PlaceId, servers[math.random(1, #servers)], Players.LocalPlayer)
         end
 	end,
 })
+
+
+Method2:Separator({Text="Candy Farm [Server Hop]"})
+
+Method2:Button({
+	Text = "Start Candy Farm [NOT WORKING RN]",
+    BackgroundColor3 = Color3.fromRGB(252, 100, 1), --// Color3.fromRGB(245, 60, 60) red
+    Size = UDim2.new(1, 0, 0, 40),
+    NoTheme = false,
+	Callback = function(self)
+            self.Text = "Started!"
+            AutoFarm()
+
+
+
+	end,
+})
+
+Method2:Separator({
+	Text = "Important:"
+})
+
+Method2:Label({
+    TextWrapped = true,
+    Text = "This method claim houses and then change server. It is the most efficient way to farm candy. <b>Not all executors support it.</b> If you want to play babft while farming candy, use method 1.\n\nOnce you start it, the only way to stop it is to <b>close Roblox.</b> The interface will not appear in the next server, <b>but it will continue to farm.</b>",
+    RichText = true
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Credit:Separator({
 	Text = "Owner"
