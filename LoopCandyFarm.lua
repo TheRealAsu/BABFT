@@ -102,7 +102,7 @@ end
 
 AutoFarm()
 StarterGui:SetCore("SendNotification", {
-    Title = "Candy Farm",
+    Title = "Candy Farm - Asu",
     Text = string.format("Claiming %d Houses...", a),
     Icon = "rbxassetid://7781284023", 
     Duration = 4
@@ -111,17 +111,30 @@ StarterGui:SetCore("SendNotification", {
 wait(0.2)
 
 if a ~= 0 then
-  repeat
-      task.wait()
-  until
-      player.Data.CandyBlue.Value ~= UserInventory["CandyBlue"] or player.Data.CandyOrange.Value ~= UserInventory["CandyOrange"] or player.Data.CandyPurple.Value ~= UserInventory["CandyPurple"]
-end
+    local to = 5
+    local st = tick()
 
+    repeat
+        task.wait()
+    until player.Data.CandyBlue.Value ~= UserInventory["CandyBlue"]
+       or player.Data.CandyOrange.Value ~= UserInventory["CandyOrange"]
+       or player.Data.CandyPurple.Value ~= UserInventory["CandyPurple"]
+       or (tick() - st) >= to
+
+    if (tick() - st) >= to then
+        StarterGui:SetCore("SendNotification", {
+            Title = "Candy Farm - Asu",
+            Text = "Something went wrong..",
+            Icon = "rbxassetid://7781288646", 
+            Duration = 3
+        })
+    end
+end
 wait(2)
 
 --// shop and handle shop error
 StarterGui:SetCore("SendNotification", {
-    Title = "Candy Farm",
+    Title = "Candy Farm - Asu",
     Text = "Server Hopping...",
     Icon = "rbxassetid://7781288646", 
     Duration = 3
@@ -159,7 +172,7 @@ local function Shop()
     local servers = getServers()
     if #servers == 0 then
         StarterGui:SetCore("SendNotification", {
-          Title = "Candy Farm",
+          Title = "Candy Farm - Asu",
           Text = "No server found, retry in 5 seconds",
           Icon = "rbxassetid://7781250539", 
           Duration = 4
@@ -177,7 +190,7 @@ local function Shop()
 
     if not success then
         StarterGui:SetCore("SendNotification", {
-          Title = "Candy Farm",
+          Title = "Candy Farm - Asu",
           Text = "Failed to Server Hop, retry in 5 seconds",
           Icon = "rbxassetid://7781250539", 
           Duration = 4
@@ -190,7 +203,7 @@ end
 TeleportService.TeleportInitFailed:Connect(function(player, errorMessage)
     if player == Players.LocalPlayer then
         StarterGui:SetCore("SendNotification", {
-            Title = "Candy Farm",
+            Title = "Candy Farm - Asu",
             Text = "Server full, retry in 5 seconds",
             Icon = "rbxassetid://7781250539",
             Duration = 4
