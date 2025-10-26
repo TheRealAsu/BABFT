@@ -425,7 +425,7 @@ Credit:Button({
 Method2:Separator({Text="Candy Farm [Server Hop]"})
 
 Method2:Button({
-	Text = "Start Candy Farm [NOT WORKING RN]",
+	Text = "Start Candy Farm",
     BackgroundColor3 = Color3.fromRGB(252, 100, 1), --// Color3.fromRGB(245, 60, 60) red
     Size = UDim2.new(1, 0, 0, 40),
     NoTheme = false,
