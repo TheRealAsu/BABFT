@@ -181,4 +181,17 @@ local function Shop()
     end
 end
 
+TeleportService.TeleportInitFailed:Connect(function(player, errorMessage)
+    if player == Players.LocalPlayer then
+        StarterGui:SetCore("SendNotification", {
+            Title = "Candy Farm",
+            Text = "Server full, retry in 5 seconds",
+            Icon = "rbxassetid://7781250539",
+            Duration = 4
+        })
+        task.wait(5)
+        Shop()
+    end
+end)
+
 Shop()
