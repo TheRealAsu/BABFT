@@ -22,6 +22,12 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
+if getgenv().CANDY_LOOP == true then --// anti run twice
+    return
+else
+    getgenv().CANDY_LOOP = true
+end
+
 --// Services
 local Players = game:GetService("Players")
 local player = game.Players.LocalPlayer
