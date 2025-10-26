@@ -111,7 +111,7 @@ StarterGui:SetCore("SendNotification", {
 wait(0.2)
 
 if a ~= 0 then
-    local to = 5
+    local to = 10
     local st = tick()
 
     repeat
