@@ -33,7 +33,21 @@ local RunService = game:GetService("RunService")
 --// vars
 local character = player.Character or player.CharacterAdded:Wait()
 local hrp = character:WaitForChild("HumanoidRootPart")
+
+if not workspace:FindFirstChild("Houses") then
+	local StarterGui = game:GetService("StarterGui")
+			StarterGui:SetCore("SendNotification", {
+			Title = "Candy Farm - Asu",
+			Text = "There is no Halloween event, or you may be on a server without the update",
+			Icon = "rbxassetid://7781250539", 
+			Duration = 4
+			})
+	return
+end
+
 local Houses = workspace:WaitForChild("Houses")
+
+
 local FarmBool = false
 local hidegui = true
 local a, b, c, d, e, f = 0, 0, 0, 0, 0, 0
